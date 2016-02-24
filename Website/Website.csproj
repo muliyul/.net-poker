@@ -71,9 +71,19 @@
   <ItemGroup>
     <Content Include="login.aspx" />
     <Content Include="packages.config" />
-    <None Include="Service References\Game\Game.xsd">
+    <None Include="Service References\GameReference\Game.wsdl" />
+    <None Include="Service References\GameReference\Game.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\GameReference\Game1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameReference\Game2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\GameReference\Website.GameReference.Player.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -88,25 +98,15 @@
       <LastGenOutput>DataClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Service References\Game\Game.disco" />
-    <None Include="Service References\Game\configuration91.svcinfo" />
-    <None Include="Service References\Game\configuration.svcinfo" />
-    <None Include="Service References\Game\Reference.svcmap">
+    <Content Include="index.aspx" />
+    <None Include="Service References\GameReference\Game.disco" />
+    <None Include="Service References\GameReference\configuration91.svcinfo" />
+    <None Include="Service References\GameReference\configuration.svcinfo" />
+    <None Include="Service References\GameReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="index.aspx" />
     <Content Include="Web.config" />
-    <None Include="Service References\Game\Game.wsdl" />
-    <None Include="Service References\Game\Game1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Game\Game2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Service References\Game\Website.Game.Player.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\DataClasses.designer.cs">
@@ -129,11 +129,6 @@
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\Game\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -141,14 +136,15 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\GameReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\Game\" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
@@ -156,6 +152,9 @@
     <None Include="App_Data\DataClasses.dbml.layout">
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GameReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

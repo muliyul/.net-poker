@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Website.Game {
+namespace Website.GameReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -91,7 +91,7 @@ namespace Website.Game {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Game.IGame", SessionMode=System.ServiceModel.SessionMode.Required)]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameReference.IGame", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IGame {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Register", ReplyAction="http://tempuri.org/IGame/RegisterResponse")]
@@ -101,25 +101,25 @@ namespace Website.Game {
         System.Threading.Tasks.Task RegisterAsync(string user, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        Website.Game.Player GetPlayerInfo(string user);
+        Website.GameReference.Player GetPlayerInfo(string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        System.Threading.Tasks.Task<Website.Game.Player> GetPlayerInfoAsync(string user);
+        System.Threading.Tasks.Task<Website.GameReference.Player> GetPlayerInfoAsync(string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetMyInfo", ReplyAction="http://tempuri.org/IGame/GetMyInfoResponse")]
-        Website.Game.Player GetMyInfo();
+        Website.GameReference.Player GetMyInfo();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetMyInfo", ReplyAction="http://tempuri.org/IGame/GetMyInfoResponse")]
-        System.Threading.Tasks.Task<Website.Game.Player> GetMyInfoAsync();
+        System.Threading.Tasks.Task<Website.GameReference.Player> GetMyInfoAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IGameChannel : Website.Game.IGame, System.ServiceModel.IClientChannel {
+    public interface IGameChannel : Website.GameReference.IGame, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GameClient : System.ServiceModel.ClientBase<Website.Game.IGame>, Website.Game.IGame {
+    public partial class GameClient : System.ServiceModel.ClientBase<Website.GameReference.IGame>, Website.GameReference.IGame {
         
         public GameClient() {
         }
@@ -148,19 +148,19 @@ namespace Website.Game {
             return base.Channel.RegisterAsync(user, pass);
         }
         
-        public Website.Game.Player GetPlayerInfo(string user) {
+        public Website.GameReference.Player GetPlayerInfo(string user) {
             return base.Channel.GetPlayerInfo(user);
         }
         
-        public System.Threading.Tasks.Task<Website.Game.Player> GetPlayerInfoAsync(string user) {
+        public System.Threading.Tasks.Task<Website.GameReference.Player> GetPlayerInfoAsync(string user) {
             return base.Channel.GetPlayerInfoAsync(user);
         }
         
-        public Website.Game.Player GetMyInfo() {
+        public Website.GameReference.Player GetMyInfo() {
             return base.Channel.GetMyInfo();
         }
         
-        public System.Threading.Tasks.Task<Website.Game.Player> GetMyInfoAsync() {
+        public System.Threading.Tasks.Task<Website.GameReference.Player> GetMyInfoAsync() {
             return base.Channel.GetMyInfoAsync();
         }
     }
