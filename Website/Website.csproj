@@ -69,8 +69,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Install\publish.htm" />
+    <Content Include="Install\setup.exe" />
     <Content Include="login.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Install\ConsoleClient.application" />
     <None Include="Service References\GameReference\Game.wsdl" />
     <None Include="Service References\GameReference\Game.xsd">
       <SubType>Designer</SubType>
@@ -81,6 +84,7 @@
     <None Include="Service References\GameReference\Game2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="register.aspx" />
     <Content Include="Service References\GameReference\Website.GameReference.Player.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -135,6 +139,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="register.aspx.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="register.aspx.designer.cs">
+      <DependentUpon>register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Service References\GameReference\Reference.cs">
       <AutoGen>True</AutoGen>
