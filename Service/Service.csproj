@@ -70,22 +70,23 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card.cs" />
     <Compile Include="CustomValidator.cs" />
     <Compile Include="DataClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Deck.cs" />
     <Compile Include="Game.svc.cs">
       <DependentUpon>Game.svc</DependentUpon>
     </Compile>
+    <Compile Include="Hand.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DataClasses.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
