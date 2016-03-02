@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Blackjack.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Claims;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Web;
 
 namespace Blackjack
 {
@@ -15,26 +18,25 @@ namespace Blackjack
     public class Game : IGame
     {
         DataClassesDataContext db = new DataClassesDataContext();
+        IDictionary<string, Player> sessions = new Dictionary<string, Player>();
 
-        public Player GetMyInfo()
+        public Player GetPlayerInfo(string username)
         {
-            string authenticatedUser = OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name;
-            if (authenticatedUser == null)
-                return null;
-
-            return db.Players.First(p => authenticatedUser.Equals(p.Username));
+            return db.Players.FirstOrDefault(p => p.Username.Equals(username));
         }
 
-        public Player GetPlayerInfo(string user)
+        public Player Login(string username, string pass)
         {
-            return db.Players.First(p => p.Username.Equals(user));
+            var user = db.Players.FirstOrDefault(p => p.Username.Equals(username) && p.Password.Equals(pass));
+            sessions[ServiceSecurityContext.Current.PrimaryIdentity.Name] = user;
+            return user;
         }
 
         public void Register(string user, string pass)
         {
             try
             {
-                db.Players.InsertOnSubmit(new Player { Username = user, Password = pass, Bank = 4000 });
+                db.Players.InsertOnSubmit(new Player { Username = user, Password = pass });
                 db.SubmitChanges();
             }
             catch (Exception e)

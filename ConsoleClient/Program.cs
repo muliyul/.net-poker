@@ -15,7 +15,7 @@ namespace ConsoleClient
         {
             client.ClientCredentials.UserName.UserName = "muli";
             client.ClientCredentials.UserName.Password = "1233";
-            
+
             var p = client.GetMyInfo();
             Console.WriteLine(p?.Username + p?.Password);
         }

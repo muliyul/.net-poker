@@ -1,24 +1,30 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="Website.register" %>
+﻿<%@ Page Title="Registration" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Website.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <h2 class="text-center">Register</h2>
+    <h2 class="text-center">Registration</h2>
 
     <div role="form" class="col-xs-6 col-xs-offset-3">
 
         <div class="form-group">
-            <input type="text" name="last_name" id="last_name" class="form-control input-md glowing border" placeholder="username" />
+            <asp:TextBox runat="server" ID="usernameTF" MaxLength="20" CssClass="form-control input-md glowing border" placeholder="username"></asp:TextBox>
         </div>
 
         <div class="form-group">
-            <input type="password" name="password" id="password" class="form-control input-md glowing border" placeholder="password" />
+            <asp:TextBox runat="server" ID="passwordTF" MaxLength="20" TextMode="Password" CssClass="form-control input-md glowing border" placeholder="password"></asp:TextBox>
         </div>
 
         <div class="form-group">
-            <input type="password" name="password2" id="password2" class="form-control input-md glowing border" placeholder="verify password" />
+            <asp:TextBox runat="server" ID="passwordTF2" MaxLength="20" TextMode="Password" CssClass="form-control input-md glowing border" placeholder="verify password"></asp:TextBox>
         </div>
 
-        <input type="submit" value="Register" class="btn btn-info btn-block"/>
+        <div>
+            <asp:Label runat="server" ID="errorLbl"></asp:Label>
+        </div>
+
+        <div class="text-center">
+            <asp:Button runat="server" OnClick="Submit" CssClass="btn btn-lg btn-primary" Text="Submit" />
+        </div>
     </div>
 </asp:Content>

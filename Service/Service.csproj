@@ -70,25 +70,32 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card.cs" />
+    <Compile Include="Objects\Card.cs" />
     <Compile Include="CustomValidator.cs" />
-    <Compile Include="DataClasses.designer.cs">
+    <Compile Include="Objects\DataClasses.cs">
+      <DependentUpon>DataClasses.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\DataClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Deck.cs" />
+    <Compile Include="Objects\Deck.cs" />
     <Compile Include="Game.svc.cs">
       <DependentUpon>Game.svc</DependentUpon>
     </Compile>
-    <Compile Include="Hand.cs" />
+    <Compile Include="Objects\Hand.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="DataClasses.dbml">
+    <None Include="Objects\DataClasses.dbml.layout">
+      <DependentUpon>DataClasses.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Objects\DataClasses.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -102,11 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataClasses.dbml.layout">
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blackjack.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -13,12 +14,12 @@ namespace Blackjack
     public interface IGame
     {
         [OperationContract]
-        void Register(string user, string pass);
+        void Register(string username, string pass);
 
         [OperationContract]
-        Player GetPlayerInfo(string user);
+        Player Login(string username, string pass);
 
         [OperationContract]
-        Player GetMyInfo();
+        Player GetPlayerInfo(string username);
     }
 }

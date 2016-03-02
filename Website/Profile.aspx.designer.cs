@@ -7,27 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Website.Views {
+namespace Website {
     
     
-    public partial class index {
+    public partial class Profile {
         
         /// <summary>
-        /// GridView1 control.
+        /// logoutBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-        
-        /// <summary>
-        /// PlayerDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource PlayerDataSource;
+        protected global::System.Web.UI.WebControls.Button logoutBtn;
     }
 }
