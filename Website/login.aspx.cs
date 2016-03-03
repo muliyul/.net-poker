@@ -11,7 +11,7 @@ namespace Website
     public partial class Login : System.Web.UI.Page
     {
         GameClient gc;
-
+        //test
         protected void Page_Load(object sender, EventArgs e)
         {
              gc = Session["GameClient"] as GameClient;
