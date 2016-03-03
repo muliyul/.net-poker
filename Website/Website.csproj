@@ -69,8 +69,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.min.css" />
     <Content Include="Install\publish.htm" />
     <Content Include="Install\setup.exe" />
+    <Content Include="js\bootstrap.min.js" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Install\ConsoleClient.application" />
