@@ -13,7 +13,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Username" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Password" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Bank" AutoSync="OnUpdate" Type="System.Int64" DbType="BigInt NOT NULL" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Bank" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Association Name="Player_Game" Member="Games" ThisKey="Id" OtherKey="PlayerId" Type="Game" />
     </Type>
   </Table>

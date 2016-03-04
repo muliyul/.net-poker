@@ -70,8 +70,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Objects\Card.cs" />
-    <Compile Include="CustomValidator.cs" />
     <Compile Include="Objects\DataClasses.cs">
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
@@ -80,6 +78,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Objects\Table.cs" />
+    <Compile Include="Objects\Card.cs" />
+    <Compile Include="CustomValidator.cs" />
     <Compile Include="Objects\Deck.cs" />
     <Compile Include="Game.svc.cs">
       <DependentUpon>Game.svc</DependentUpon>
@@ -87,11 +88,6 @@
     <Compile Include="Objects\Hand.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Objects\DataClasses.dbml.layout">
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Objects\DataClasses.dbml">
@@ -112,6 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Objects\DataClasses.dbml.layout">
+      <DependentUpon>DataClasses.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

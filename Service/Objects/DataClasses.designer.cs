@@ -332,7 +332,7 @@ namespace Blackjack.Objects
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bank", AutoSync=AutoSync.OnUpdate, DbType="BigInt NOT NULL", IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bank", DbType="BigInt NOT NULL")]
 		public long Bank
 		{
 			get
