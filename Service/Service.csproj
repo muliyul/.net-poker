@@ -41,10 +41,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -65,36 +75,62 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.svc" />
+    <Content Include="Models\DB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB.edmx</DependentUpon>
+      <LastGenOutput>DB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DB.edmx.sql" />
+    <Content Include="Models\DB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB.edmx</DependentUpon>
+      <LastGenOutput>DB.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Objects\DataClasses.cs">
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Objects\DataClasses.designer.cs">
+    <Compile Include="IGameCallback.cs" />
+    <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses.dbml</DependentUpon>
+      <DependentUpon>DB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Table.cs" />
-    <Compile Include="Objects\Card.cs" />
+    <Compile Include="Models\DB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Game.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Player.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="CustomValidator.cs" />
-    <Compile Include="Objects\Deck.cs" />
     <Compile Include="Game.svc.cs">
       <DependentUpon>Game.svc</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Hand.cs" />
     <Compile Include="IGame.cs" />
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Objects\DataClasses.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    <EntityDeploy Include="Models\DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DB.edmx.diagram">
+      <DependentUpon>DB.edmx</DependentUpon>
     </Content>
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\blackjackgameservice - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -105,14 +141,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Objects\DataClasses.dbml.layout">
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </None>
+    <ProjectReference Include="..\GameModels\SharedModels.csproj">
+      <Project>{bfda4326-e3c7-45fb-98cd-fc79192a385b}</Project>
+      <Name>SharedModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

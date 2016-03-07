@@ -1,4 +1,4 @@
-﻿using Blackjack.Objects;
+﻿using Blackjack.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,98 +13,128 @@ using System.Web;
 
 namespace Blackjack
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
+        ConcurrencyMode = ConcurrencyMode.Reentrant)]
     public class Game : IGame
     {
-        DataClassesDataContext db = new DataClassesDataContext();
-        IList<Player> sessions = new List<Player>();
-        IDictionary<Player, Table> playersToTablesMap = new Dictionary<Player, Table>();
-        IEnumerable<Table> Tables
+        IDictionary<string, Player> sessions = new Dictionary<string, Player>();
+        IList<Table> Tables = new List<Table>();
+
+        Player CurrentPlayer
         {
             get
             {
-                return playersToTablesMap.Values.AsEnumerable();
+                var key = ServiceSecurityContext.Current.PrimaryIdentity.Name;
+                return sessions[key];
             }
         }
-        Tuple<Player, Table> CurrentPlayer
+        Table CurrentPlayerTable
         {
             get
             {
-                var identity = ServiceSecurityContext.Current.PrimaryIdentity;
-                var player = sessions.First(p => p.Identity == identity);
-                var table = playersToTablesMap[player];
-                return new Tuple<Player, Table>(player, table);
+                return Tables.FirstOrDefault(t => t.Players.FirstOrDefault(p => p!=null) != null);
             }
         }
 
         public void Bet(int amount)
         {
-            CurrentPlayer.Item2?.Bet(CurrentPlayer.Item1, amount);
+            CurrentPlayerTable?.Bet(CurrentPlayer, amount);
         }
 
-        public Table CreateTable()
+        public SharedModels.Table CreateTable()
         {
-            throw new NotImplementedException();
+            var t = new Table();
+            Tables.Add(t);
+            return JoinTable(t.Id) as SharedModels.Table;
         }
 
-        public Player GetPlayerInfo(string username)
+        public void Fold()
         {
-            return db.Players.FirstOrDefault(p => p.Username.Equals(username));
+            CurrentPlayerTable?.Fold(CurrentPlayer);
         }
 
-        public Card Hit()
+        public SharedModels.Player GetPlayerInfo(string username)
         {
-            return CurrentPlayer.Item2?.Hit(CurrentPlayer.Item1);
+            if (string.IsNullOrEmpty(username))
+                return null;
+            using (var db = new DBContainer())
+            {
+                var player = db.Players.FirstOrDefault(p => p.Username.Equals(username));
+                if(player != null)
+                    return new SharedModels.Player()
+                    {
+                        Id = player.Id,
+                        Bank = player.Bank,
+                        MemberSince = player.MemberSince,
+                        Username = player.Username
+                    };
+                
+            }
+            return null;
         }
 
-        public Table JoinTable(int tableId)
+        public SharedModels.Card Hit()
+        {
+            return CurrentPlayerTable?.Hit(CurrentPlayer);
+        }
+
+        public SharedModels.Table JoinTable(string tableId)
         {
             var table = Tables.FirstOrDefault(t => t.Id == tableId);
-            table?.Join(CurrentPlayer.Item1);
-            return table;
+            //table.Join(CurrentPlayer);
+            return table as SharedModels.Table;
         }
 
         public void Leave()
         {
-            CurrentPlayer.Item2?.Leave(CurrentPlayer.Item1);
+            CurrentPlayerTable?.Leave(CurrentPlayer);
         }
 
-        public IEnumerable<Table> ListTables()
+        public IEnumerable<SharedModels.Table> ListTables()
         {
             return Tables;
         }
 
-        public Player Login(string username, string pass)
+        public SharedModels.Player Login(string username, string pass)
         {
             //Hash password and verify?
-            var player = db.Players.First(p => p.Username.Equals(username) && p.Password.Equals(pass));
-            player.Identity = ServiceSecurityContext.Current.PrimaryIdentity;
-            sessions.Add(player);
-            return player;
+            Player player;
+            using (var db = new DBContainer())
+            {
+                player = db.Players.FirstOrDefault(p =>
+                p.Username.Equals(username) && p.Password.Equals(pass));
+                sessions[ServiceSecurityContext.Current.PrimaryIdentity.Name] = player;
+
+                return new SharedModels.Player()
+                {
+                    Id = player.Id,
+                    Bank = player.Bank,
+                    MemberSince = player.MemberSince,
+                    Username = player.Username
+                };
+            }
         }
 
         public void Logout()
         {
-            CurrentPlayer.Item1.Identity = null;
-            sessions.Remove(CurrentPlayer.Item1);
+            CurrentPlayerTable?.Leave(CurrentPlayer);
+            sessions[ServiceSecurityContext.Current.PrimaryIdentity.Name] = null;
         }
 
         public void Register(string user, string pass)
         {
             try
             {
-                db.Players.InsertOnSubmit(new Player { Username = user, Password = pass });
-                db.SubmitChanges();
+                using (var db = new DBContainer())
+                {
+                    db.Players.Add(new Player { Username = user, Password = pass, MemberSince = DateTime.Now, Bank = 4000 });
+                    db.SaveChanges();
+                }
             }
             catch (Exception e)
             {
                 throw new FaultException("Username already exists!");
             }
-        }
-
-        public void Fold()
-        {
-            CurrentPlayer.Item2.Fold(CurrentPlayer.Item1);
         }
     }
 }

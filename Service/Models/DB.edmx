@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Blackjack.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BlackjackStoreContainer">
+    <EntitySet Name="Games" EntityType="Blackjack.Store.Games" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Players" EntityType="Blackjack.Store.Players" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_PlayerGame" Association="Blackjack.Store.FK_PlayerGame">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlayerId" Type="int" Nullable="false" />
+    <Property Name="Winnings" Type="float" Nullable="false" />
+    <Property Name="Blackjacks" Type="int" Nullable="true" />
+    <Property Name="PlayedOn" Type="datetime" StoreGeneratedPattern="None" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bank" Type="float" Nullable="false" StoreGeneratedPattern="None" />
+    <Property Name="MemberSince" Type="datetime" StoreGeneratedPattern="None" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PlayerGame">
+    <End Role="Players" Type="Blackjack.Store.Players" Multiplicity="1" />
+    <End Role="Games" Type="Blackjack.Store.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Blackjack" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerGame" FromRole="Games" ToRole="Players" />
+          <Property Name="Winnings" Type="Double" Nullable="false" ConcurrencyMode="None" />
+          <Property Name="Blackjacks" Type="Int32" Nullable="true" />
+          <Property Name="PlayedOn" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="None" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bank" Type="Double" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="MemberSince" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_PlayerGame" FromRole="Players" ToRole="Games" />
+        </EntityType>
+        <Association Name="FK_PlayerGame">
+          <End Role="Players" Type="Self.Player" Multiplicity="1" />
+          <End Role="Games" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <AssociationSet Name="FK_PlayerGame" Association="Self.FK_PlayerGame">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BlackjackStoreContainer" CdmEntityContainer="DBContainer">
+    <EntitySetMapping Name="Games">
+      <EntityTypeMapping TypeName="IsTypeOf(Blackjack.Game)">
+        <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+          <ScalarProperty Name="Winnings" ColumnName="Winnings" />
+          <ScalarProperty Name="Blackjacks" ColumnName="Blackjacks" />
+          <ScalarProperty Name="PlayedOn" ColumnName="PlayedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="IsTypeOf(Blackjack.Player)">
+        <MappingFragment StoreEntitySet="Players">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Bank" ColumnName="Bank" />
+          <ScalarProperty Name="MemberSince" ColumnName="MemberSince" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

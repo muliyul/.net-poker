@@ -1,0 +1,559 @@
+﻿<Window x:Class="CardGame.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:properties="clr-namespace:CardGame.Properties"
+        Title="BlackJack Casino WPF" Height="745" Width="750"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="Resources\Background.jpg"></ImageBrush>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="MyFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Control}">
+                        <Grid Margin="3 2">
+                            <Rectangle Name="r1" StrokeThickness="1" Stroke="Black" StrokeDashArray="2 2"/>
+                            <Border Name="border" Width="{TemplateBinding ActualWidth}" Height="{TemplateBinding ActualHeight}"  CornerRadius="2" BorderThickness="2" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ShadowStyle">
+            <Setter Property="Control.Foreground" Value="RoyalBlue" />
+        </Style>
+        <Style x:Key="TenButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Sans-serif"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <ImageBrush ImageSource="Resources/coin1.gif"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+        				BorderThickness="1"
+        				Padding="4,2" 
+        				BorderBrush="DarkGray" 
+        				CornerRadius="70" 
+        				Background="{TemplateBinding Background}">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+        	                           VerticalAlignment="Center" Name="contentShadow" 
+        					Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="Resources/coin1.gif"></ImageBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TwentyFiveButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Sans-serif"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <ImageBrush ImageSource="Resources/coin2.gif"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+        				BorderThickness="1"
+        				Padding="4,2" 
+        				BorderBrush="DarkGray" 
+        				CornerRadius="70" 
+        				Background="{TemplateBinding Background}">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+        	                           VerticalAlignment="Center" Name="contentShadow" 
+        					Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="Resources/coin2.gif"></ImageBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FiftyButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Sans-serif"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <ImageBrush ImageSource="Resources/coin3.gif"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+        				BorderThickness="1"
+        				Padding="4,2" 
+        				BorderBrush="DarkGray" 
+        				CornerRadius="70" 
+        				Background="{TemplateBinding Background}">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+        	                           VerticalAlignment="Center" Name="contentShadow" 
+        					Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="Resources/coin3.gif"></ImageBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HundrendButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Sans-serif"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <ImageBrush ImageSource="Resources/coin4.gif"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+        				BorderThickness="1"
+        				Padding="4,2" 
+        				BorderBrush="DarkGray" 
+        				CornerRadius="70" 
+        				Background="{TemplateBinding Background}">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+        	                           VerticalAlignment="Center" Name="contentShadow" 
+        					Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="Resources/coin4.gif"></ImageBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ClearButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Sans-serif"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <ImageBrush ImageSource="Resources/ButtonSquare.gif"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+        				BorderThickness="1"
+        				Padding="4,2" 
+        				BorderBrush="DarkGray" 
+        				CornerRadius="0" 
+        				Background="{TemplateBinding Background}" Height="34">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+        	                           VerticalAlignment="Center" Name="contentShadow" 
+        					Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="Resources/ButtonSquare.gif"></ImageBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ControlButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Sans-serif"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <ImageBrush ImageSource="Resources/ButtonRound.gif"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+        				BorderThickness="1"
+        				Padding="4,2" 
+        				BorderBrush="DarkGray" 
+        				CornerRadius="70" 
+        				Background="{TemplateBinding Background}" Height="34">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+        	                           VerticalAlignment="Center" Name="contentShadow" 
+        					Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="Resources/ButtonRound.gif"></ImageBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="rootV">
+        
+        <!-- Top And Bottom Borders -->
+        <Image HorizontalAlignment="Left" Height="66" Margin="100,31,0,0" VerticalAlignment="Top" Width="550" Source="Resources/BorderPlaceYourBetTop.gif" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="75" Margin="100,582,0,0" VerticalAlignment="Top" Width="550" Source="Resources/BorderPlaceYourBetBottom.gif" Stretch="Fill"/>
+        
+        <!-- Top Elements -->
+        <Label Content="My Account" HorizontalAlignment="Left" Margin="142,31,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" FontWeight="Bold" Foreground="Gold"/>
+        <Label Content="Wins" HorizontalAlignment="Left" Margin="293,31,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" FontWeight="Bold" Foreground="Gold"/>
+        <Label Content="Loses" HorizontalAlignment="Left" Margin="409,31,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" FontWeight="Bold" Foreground="Gold"/>
+        <Label Content="Ties" HorizontalAlignment="Left" Margin="534,31,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" FontWeight="Bold" Foreground="Gold"/>
+        <Label x:Name="total_sum_label" Content="2000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="142,63,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFD100" Offset="0"/>
+                    <GradientStop Color="#FFF9C561" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+            <Label.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1" >
+                    <GradientStop Color="Black" />
+                    <GradientStop Color="#FF5F5F5F" Offset="1" />
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label x:Name="wins_label" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="264,63,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFD100" Offset="0"/>
+                    <GradientStop Color="#FFF9C561" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+            <Label.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1" >
+                    <GradientStop Color="Black" />
+                    <GradientStop Color="#FF5F5F5F" Offset="1" />
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label x:Name="loses_label" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="385,63,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFD100" Offset="0"/>
+                    <GradientStop Color="#FFF9C561" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+            <Label.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1" >
+                    <GradientStop Color="Black" />
+                    <GradientStop Color="#FF5F5F5F" Offset="1" />
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label x:Name="ties_label" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="502,63,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFD100" Offset="0"/>
+                    <GradientStop Color="#FFF9C561" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+            <Label.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1" >
+                    <GradientStop Color="Black" />
+                    <GradientStop Color="#FF5F5F5F" Offset="1" />
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        
+        <!-- Side Deck -->
+        <Image Source="Resources/cardSkin.PNG" HorizontalAlignment="Left" Height="81" Margin="535,119,0,0" VerticalAlignment="Top" Width="59" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="82" Margin="533,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="82" Margin="531,123,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="82" Margin="529,125,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="82" Margin="527,127,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
+        
+        <!-- Dealer Cards -->
+        <Image x:Name="DealerCard0" HorizontalAlignment="Left" Height="82" Margin="145,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="DealerCard1" HorizontalAlignment="Left" Height="82" Margin="174,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="DealerCard2" HorizontalAlignment="Left" Height="82" Margin="208,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="DealerCard3" HorizontalAlignment="Left" Height="82" Margin="237,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="DealerCard4" HorizontalAlignment="Left" Height="82" Margin="267,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="DealerCard5" HorizontalAlignment="Left" Height="82" Margin="300,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+
+        <!-- Player Cards -->
+        <Image x:Name="PlayerCard0" HorizontalAlignment="Left" Height="82" Margin="254,240,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="PlayerCard1" HorizontalAlignment="Left" Height="82" Margin="283,240,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="PlayerCard2" HorizontalAlignment="Left" Height="82" Margin="317,240,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="PlayerCard3" HorizontalAlignment="Left" Height="82" Margin="346,240,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="PlayerCard4" HorizontalAlignment="Left" Height="82" Margin="376,240,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="PlayerCard5" HorizontalAlignment="Left" Height="82" Margin="409,240,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+
+        <!-- Player Cards Status -->
+        <Label x:Name="TotalCardValLbl" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="219,240,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Hidden"/>
+        
+        <!-- Player Widget -->
+        <Image HorizontalAlignment="Left" Height="172" Margin="274,394,0,0" VerticalAlignment="Top" Width="154" Source="Resources/FrameOrange.gif" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="119" Margin="294,420,0,0" VerticalAlignment="Top" Width="113" Source="{Binding Source={x:Static properties:Settings.Default},Path=PlayerImage}" Stretch="Fill"/>
+        <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="119,506,0,0"  Content="{Binding Source={x:Static properties:Settings.Default},Path=PlayerName}" VerticalAlignment="Top" Width="135" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
+        
+        <!-- Win Status -->
+        <Label x:Name="WinStatus" Visibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="450,506,0,0"  Content="Dealer Won" VerticalAlignment="Top" Width="190" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Comic Sans MS" BorderThickness="1"/>
+        
+        <!-- Bet Button Elements -->
+        <Button x:Name="Bet10Btn" Style="{StaticResource TenButton}" Content="10" HorizontalAlignment="Left" Margin="115,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet10"/>
+        <Button x:Name="Bet25Btn" Style="{StaticResource TwentyFiveButton}" Content="25" HorizontalAlignment="Left" Margin="183,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet25"/>
+        <Button x:Name="Bet50Btn" Style="{StaticResource FiftyButton}" Content="50" HorizontalAlignment="Left" Margin="250,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet50"/>
+        <Button x:Name="Bet100Btn" Style="{StaticResource HundrendButton}" Content="100" HorizontalAlignment="Left" Margin="317,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet100"/>
+        
+        <!-- Bet Status -->
+        <Label x:Name="current_bet_label" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="411,619,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFD100" Offset="0"/>
+                    <GradientStop Color="#FFF9C561" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+            <Label.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1" >
+                    <GradientStop Color="Black" />
+                    <GradientStop Color="#FF5F5F5F" Offset="1" />
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="34" Margin="411,584,0,0" Content="My Bet" VerticalAlignment="Top" Width="112" Background="{x:Null}" BorderBrush="Gold" Foreground="Gold" FontFamily="Arial" FontSize="14" FontWeight="Bold" BorderThickness="1"/>
+        
+        <!-- Bet Clear Button -->
+        <Button x:Name="ClearBtn" Style="{StaticResource ClearButton}" Content="Clear" HorizontalAlignment="Left" Margin="544,604,0,0" VerticalAlignment="Top" Width="86" Height="32" Click="ClearBet" FontFamily="Arial"/>
+        
+        <!-- Lower Game Buttons -->
+        <Button x:Name="DoubleBetBtn" Style="{StaticResource ControlButton}" Content="Double Down" HorizontalAlignment="Left" Margin="100,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="DoubleBet" FontFamily="Arial"/>
+        <Button x:Name="HitBtn" Style="{StaticResource ControlButton}" Content="Hit" HorizontalAlignment="Left" Margin="213,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Hit" FontFamily="Arial"/>
+        <Button x:Name="StandBtn" Style="{StaticResource ControlButton}" Content="Stand" HorizontalAlignment="Left" Margin="327,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Stand" FontFamily="Arial"/>
+        <Button x:Name="DealBtn" Style="{StaticResource ControlButton}" Content="Deal" HorizontalAlignment="Left" Margin="438,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Deal" FontFamily="Arial"/>
+        <Button Style="{StaticResource ControlButton}" Content="End Game" HorizontalAlignment="Left" Margin="550,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Button_Click" FontFamily="Arial"/>
+        
+    </Grid>
+</Window>

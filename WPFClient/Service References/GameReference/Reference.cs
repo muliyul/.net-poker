@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPFClient.GameReference {
+namespace CardGame.GameReference {
     using System.Runtime.Serialization;
     using System;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Blackjack.Objects")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Blackjack.Models")]
     [System.SerializableAttribute()]
     public partial class Player : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -23,13 +23,16 @@ namespace WPFClient.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long BankField;
+        private double BankField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPFClient.GameReference.Game[] GamesField;
+        private CardGame.GameReference.Game[] GamesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime MemberSinceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
@@ -48,7 +51,7 @@ namespace WPFClient.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Bank {
+        public double Bank {
             get {
                 return this.BankField;
             }
@@ -61,7 +64,7 @@ namespace WPFClient.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPFClient.GameReference.Game[] Games {
+        public CardGame.GameReference.Game[] Games {
             get {
                 return this.GamesField;
             }
@@ -82,6 +85,19 @@ namespace WPFClient.GameReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime MemberSince {
+            get {
+                return this.MemberSinceField;
+            }
+            set {
+                if ((this.MemberSinceField.Equals(value) != true)) {
+                    this.MemberSinceField = value;
+                    this.RaisePropertyChanged("MemberSince");
                 }
             }
         }
@@ -124,7 +140,7 @@ namespace WPFClient.GameReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Game", Namespace="http://schemas.datacontract.org/2004/07/Blackjack.Objects")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Game", Namespace="http://schemas.datacontract.org/2004/07/Blackjack.Models")]
     [System.SerializableAttribute()]
     public partial class Game : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -132,16 +148,22 @@ namespace WPFClient.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<long> EarningsField;
+        private System.Nullable<int> BlackjacksField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPFClient.GameReference.Player PlayerField;
+        private System.DateTime PlayedOnField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> PlayerIdField;
+        private CardGame.GameReference.Player PlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlayerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double WinningsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -154,14 +176,14 @@ namespace WPFClient.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<long> Earnings {
+        public System.Nullable<int> Blackjacks {
             get {
-                return this.EarningsField;
+                return this.BlackjacksField;
             }
             set {
-                if ((this.EarningsField.Equals(value) != true)) {
-                    this.EarningsField = value;
-                    this.RaisePropertyChanged("Earnings");
+                if ((this.BlackjacksField.Equals(value) != true)) {
+                    this.BlackjacksField = value;
+                    this.RaisePropertyChanged("Blackjacks");
                 }
             }
         }
@@ -180,7 +202,20 @@ namespace WPFClient.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPFClient.GameReference.Player Player {
+        public System.DateTime PlayedOn {
+            get {
+                return this.PlayedOnField;
+            }
+            set {
+                if ((this.PlayedOnField.Equals(value) != true)) {
+                    this.PlayedOnField = value;
+                    this.RaisePropertyChanged("PlayedOn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CardGame.GameReference.Player Player {
             get {
                 return this.PlayerField;
             }
@@ -193,7 +228,7 @@ namespace WPFClient.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> PlayerId {
+        public int PlayerId {
             get {
                 return this.PlayerIdField;
             }
@@ -201,6 +236,19 @@ namespace WPFClient.GameReference {
                 if ((this.PlayerIdField.Equals(value) != true)) {
                     this.PlayerIdField = value;
                     this.RaisePropertyChanged("PlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Winnings {
+            get {
+                return this.WinningsField;
+            }
+            set {
+                if ((this.WinningsField.Equals(value) != true)) {
+                    this.WinningsField = value;
+                    this.RaisePropertyChanged("Winnings");
                 }
             }
         }
@@ -215,6 +263,221 @@ namespace WPFClient.GameReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Table", Namespace="http://schemas.datacontract.org/2004/07/Blackjack")]
+    [System.SerializableAttribute()]
+    public partial class Table : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CardGame.GameReference.Player[] PlayersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PotField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CardGame.GameReference.Player[] Players {
+            get {
+                return this.PlayersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayersField, value) != true)) {
+                    this.PlayersField = value;
+                    this.RaisePropertyChanged("Players");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Pot {
+            get {
+                return this.PotField;
+            }
+            set {
+                if ((this.PotField.Equals(value) != true)) {
+                    this.PotField = value;
+                    this.RaisePropertyChanged("Pot");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://schemas.datacontract.org/2004/07/Blackjack")]
+    [System.SerializableAttribute()]
+    public partial class Card : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CardGame.GameReference.Face FaceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CardGame.GameReference.Suit SuitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CardGame.GameReference.Face Face {
+            get {
+                return this.FaceField;
+            }
+            set {
+                if ((this.FaceField.Equals(value) != true)) {
+                    this.FaceField = value;
+                    this.RaisePropertyChanged("Face");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CardGame.GameReference.Suit Suit {
+            get {
+                return this.SuitField;
+            }
+            set {
+                if ((this.SuitField.Equals(value) != true)) {
+                    this.SuitField = value;
+                    this.RaisePropertyChanged("Suit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((this.ValueField.Equals(value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Face", Namespace="http://schemas.datacontract.org/2004/07/Blackjack")]
+    public enum Face : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Two = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Three = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Four = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Five = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Six = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Seven = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Eight = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Nine = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ten = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Jack = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Queen = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        King = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ace = 11,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Suit", Namespace="http://schemas.datacontract.org/2004/07/Blackjack")]
+    public enum Suit : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Spades = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Hearts = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Clubs = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Diamonds = 3,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameReference.IGame", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IGame {
@@ -226,25 +489,73 @@ namespace WPFClient.GameReference {
         System.Threading.Tasks.Task RegisterAsync(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
-        WPFClient.GameReference.Player Login(string username, string pass);
+        CardGame.GameReference.Player Login(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
-        System.Threading.Tasks.Task<WPFClient.GameReference.Player> LoginAsync(string username, string pass);
+        System.Threading.Tasks.Task<CardGame.GameReference.Player> LoginAsync(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        WPFClient.GameReference.Player GetPlayerInfo(string username);
+        CardGame.GameReference.Player GetPlayerInfo(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        System.Threading.Tasks.Task<WPFClient.GameReference.Player> GetPlayerInfoAsync(string username);
+        System.Threading.Tasks.Task<CardGame.GameReference.Player> GetPlayerInfoAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
+        CardGame.GameReference.Table[] ListTables();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
+        System.Threading.Tasks.Task<CardGame.GameReference.Table[]> ListTablesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/IGame/Logout", ReplyAction="http://tempuri.org/IGame/LogoutResponse")]
+        void Logout();
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/IGame/Logout", ReplyAction="http://tempuri.org/IGame/LogoutResponse")]
+        System.Threading.Tasks.Task LogoutAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IGame/CreateTable", ReplyAction="http://tempuri.org/IGame/CreateTableResponse")]
+        CardGame.GameReference.Table CreateTable();
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IGame/CreateTable", ReplyAction="http://tempuri.org/IGame/CreateTableResponse")]
+        System.Threading.Tasks.Task<CardGame.GameReference.Table> CreateTableAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
+        CardGame.GameReference.Table JoinTable(string tableId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
+        System.Threading.Tasks.Task<CardGame.GameReference.Table> JoinTableAsync(string tableId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, IsInitiating=false, Action="http://tempuri.org/IGame/Leave")]
+        void Leave();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, IsInitiating=false, Action="http://tempuri.org/IGame/Leave")]
+        System.Threading.Tasks.Task LeaveAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, IsInitiating=false, Action="http://tempuri.org/IGame/Bet")]
+        void Bet(int amount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, IsInitiating=false, Action="http://tempuri.org/IGame/Bet")]
+        System.Threading.Tasks.Task BetAsync(int amount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IGame/Hit", ReplyAction="http://tempuri.org/IGame/HitResponse")]
+        CardGame.GameReference.Card Hit();
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IGame/Hit", ReplyAction="http://tempuri.org/IGame/HitResponse")]
+        System.Threading.Tasks.Task<CardGame.GameReference.Card> HitAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, IsInitiating=false, Action="http://tempuri.org/IGame/Fold")]
+        void Fold();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, IsInitiating=false, Action="http://tempuri.org/IGame/Fold")]
+        System.Threading.Tasks.Task FoldAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IGameChannel : WPFClient.GameReference.IGame, System.ServiceModel.IClientChannel {
+    public interface IGameChannel : CardGame.GameReference.IGame, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GameClient : System.ServiceModel.ClientBase<WPFClient.GameReference.IGame>, WPFClient.GameReference.IGame {
+    public partial class GameClient : System.ServiceModel.ClientBase<CardGame.GameReference.IGame>, CardGame.GameReference.IGame {
         
         public GameClient() {
         }
@@ -273,20 +584,84 @@ namespace WPFClient.GameReference {
             return base.Channel.RegisterAsync(username, pass);
         }
         
-        public WPFClient.GameReference.Player Login(string username, string pass) {
+        public CardGame.GameReference.Player Login(string username, string pass) {
             return base.Channel.Login(username, pass);
         }
         
-        public System.Threading.Tasks.Task<WPFClient.GameReference.Player> LoginAsync(string username, string pass) {
+        public System.Threading.Tasks.Task<CardGame.GameReference.Player> LoginAsync(string username, string pass) {
             return base.Channel.LoginAsync(username, pass);
         }
         
-        public WPFClient.GameReference.Player GetPlayerInfo(string username) {
+        public CardGame.GameReference.Player GetPlayerInfo(string username) {
             return base.Channel.GetPlayerInfo(username);
         }
         
-        public System.Threading.Tasks.Task<WPFClient.GameReference.Player> GetPlayerInfoAsync(string username) {
+        public System.Threading.Tasks.Task<CardGame.GameReference.Player> GetPlayerInfoAsync(string username) {
             return base.Channel.GetPlayerInfoAsync(username);
+        }
+        
+        public CardGame.GameReference.Table[] ListTables() {
+            return base.Channel.ListTables();
+        }
+        
+        public System.Threading.Tasks.Task<CardGame.GameReference.Table[]> ListTablesAsync() {
+            return base.Channel.ListTablesAsync();
+        }
+        
+        public void Logout() {
+            base.Channel.Logout();
+        }
+        
+        public System.Threading.Tasks.Task LogoutAsync() {
+            return base.Channel.LogoutAsync();
+        }
+        
+        public CardGame.GameReference.Table CreateTable() {
+            return base.Channel.CreateTable();
+        }
+        
+        public System.Threading.Tasks.Task<CardGame.GameReference.Table> CreateTableAsync() {
+            return base.Channel.CreateTableAsync();
+        }
+        
+        public CardGame.GameReference.Table JoinTable(string tableId) {
+            return base.Channel.JoinTable(tableId);
+        }
+        
+        public System.Threading.Tasks.Task<CardGame.GameReference.Table> JoinTableAsync(string tableId) {
+            return base.Channel.JoinTableAsync(tableId);
+        }
+        
+        public void Leave() {
+            base.Channel.Leave();
+        }
+        
+        public System.Threading.Tasks.Task LeaveAsync() {
+            return base.Channel.LeaveAsync();
+        }
+        
+        public void Bet(int amount) {
+            base.Channel.Bet(amount);
+        }
+        
+        public System.Threading.Tasks.Task BetAsync(int amount) {
+            return base.Channel.BetAsync(amount);
+        }
+        
+        public CardGame.GameReference.Card Hit() {
+            return base.Channel.Hit();
+        }
+        
+        public System.Threading.Tasks.Task<CardGame.GameReference.Card> HitAsync() {
+            return base.Channel.HitAsync();
+        }
+        
+        public void Fold() {
+            base.Channel.Fold();
+        }
+        
+        public System.Threading.Tasks.Task FoldAsync() {
+            return base.Channel.FoldAsync();
         }
     }
 }

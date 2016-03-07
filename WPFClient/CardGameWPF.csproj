@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32018F85-6C2F-44F6-BE1F-A26551144B7E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CardGame</RootNamespace>
+    <AssemblyName>CardGameWPF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BlackJackGame\BlackJackGame.cs" />
+    <Compile Include="BlackJackGame\Player.cs" />
+    <Compile Include="BlackJackGame\State.cs" />
+    <Compile Include="CardGameFramework\Card.cs" />
+    <Compile Include="CardGameFramework\Deck.cs" />
+    <Compile Include="CardGameFramework\Hand.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\GameReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Page Include="BlackJackWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BlackJackWindow.xaml.cs">
+      <DependentUpon>BlackJackWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="OptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OptionsWindow.xaml.cs">
+      <DependentUpon>OptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\GameReference\CardGame.GameReference.Card.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GameReference\CardGame.GameReference.Player.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GameReference\CardGame.GameReference.Table.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GameReference\Game.wsdl" />
+    <None Include="Service References\GameReference\Game.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameReference\Game1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameReference\Game2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameReference\Game3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\cardSkin.PNG" />
+    <Resource Include="Images\Cards\cl1.gif" />
+    <Resource Include="Images\Cards\cl10.gif" />
+    <Resource Include="Images\Cards\cl2.gif" />
+    <Resource Include="Images\Cards\cl3.gif" />
+    <Resource Include="Images\Cards\cl4.gif" />
+    <Resource Include="Images\Cards\cl5.gif" />
+    <Resource Include="Images\Cards\cl6.gif" />
+    <Resource Include="Images\Cards\cl7.gif" />
+    <Resource Include="Images\Cards\cl8.gif" />
+    <Resource Include="Images\Cards\cl9.gif" />
+    <Resource Include="Images\Cards\clj.gif" />
+    <Resource Include="Images\Cards\clk.gif" />
+    <Resource Include="Images\Cards\clq.gif" />
+    <Resource Include="Images\Cards\di1.gif" />
+    <Resource Include="Images\Cards\di10.gif" />
+    <Resource Include="Images\Cards\di2.gif" />
+    <Resource Include="Images\Cards\di3.gif" />
+    <Resource Include="Images\Cards\di4.gif" />
+    <Resource Include="Images\Cards\di5.gif" />
+    <Resource Include="Images\Cards\di6.gif" />
+    <Resource Include="Images\Cards\di7.gif" />
+    <Resource Include="Images\Cards\di8.gif" />
+    <Resource Include="Images\Cards\di9.gif" />
+    <Resource Include="Images\Cards\dij.gif" />
+    <Resource Include="Images\Cards\dik.gif" />
+    <Resource Include="Images\Cards\diq.gif" />
+    <Resource Include="Images\Cards\he1.gif" />
+    <Resource Include="Images\Cards\he10.gif" />
+    <Resource Include="Images\Cards\he2.gif" />
+    <Resource Include="Images\Cards\he3.gif" />
+    <Resource Include="Images\Cards\he4.gif" />
+    <Resource Include="Images\Cards\he5.gif" />
+    <Resource Include="Images\Cards\he6.gif" />
+    <Resource Include="Images\Cards\he7.gif" />
+    <Resource Include="Images\Cards\he8.gif" />
+    <Resource Include="Images\Cards\he9.gif" />
+    <Resource Include="Images\Cards\hej.gif" />
+    <Resource Include="Images\Cards\hek.gif" />
+    <Resource Include="Images\Cards\heq.gif" />
+    <Resource Include="Images\Cards\sp1.gif" />
+    <Resource Include="Images\Cards\sp10.gif" />
+    <Resource Include="Images\Cards\sp2.gif" />
+    <Resource Include="Images\Cards\sp3.gif" />
+    <Resource Include="Images\Cards\sp4.gif" />
+    <Resource Include="Images\Cards\sp5.gif" />
+    <Resource Include="Images\Cards\sp6.gif" />
+    <Resource Include="Images\Cards\sp7.gif" />
+    <Resource Include="Images\Cards\sp8.gif" />
+    <Resource Include="Images\Cards\sp9.gif" />
+    <Resource Include="Images\Cards\spj.gif" />
+    <Resource Include="Images\Cards\spk.gif" />
+    <Resource Include="Images\Cards\spq.gif" />
+    <Resource Include="Images\Players\cat.jpg" />
+    <Resource Include="Images\Players\dog.jpg" />
+    <Resource Include="Images\Players\rubberduck.jpg" />
+    <Resource Include="Images\Players\soccerball.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\backGreen.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BorderPlaceYourBetBottom.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BorderPlaceYourBetTop.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ButtonRound.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ButtonRoundRollOver.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ButtonSquare.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cardSkin.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\coin1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\coin2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\coin3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\coin4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameBlue.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameBrightRed.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameOrange.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FramePink.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameRed.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameTextField1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameTextField2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameTextField3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameTextField4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FrameTextField5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PlaceYourBetTextField.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SplashPage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\StartMenuIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TemplateIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TextFieldTop.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GameReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameReference\Game.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GameReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameModels\SharedModels.csproj">
+      <Project>{bfda4326-e3c7-45fb-98cd-fc79192a385b}</Project>
+      <Name>SharedModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

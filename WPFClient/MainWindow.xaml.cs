@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardGame.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,34 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFClient
+namespace CardGame
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartForm : Window
     {
-        public MainWindow()
+        public StartForm()
         {
             InitializeComponent();
+        }
+        
+        private void NewGame(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            GameWindow gameWindow = new GameWindow();
+            gameWindow.ShowDialog();
+            this.Show();
+        }
+
+        private void Options(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            OptionsWindow optionsWindow = new OptionsWindow();
+            optionsWindow.ShowDialog();
+            this.Show();
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

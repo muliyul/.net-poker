@@ -11,10 +11,11 @@
     <div class="table-responsive">
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" EmptyDataText="No players in the system. Be the first?" CssClass="table table-striped table-bordered table-hover text-center" DataSourceID="PlayerDataSource">
             <Columns>
+                <asp:BoundField DataField="MemberSince" HeaderText="MemberSince" SortExpression="MemberSince" />
                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
-                <asp:BoundField DataField="Bank" HeaderText="Bank" SortExpression="Bank" DataFormatString="{0:d}$" />
+                <asp:BoundField DataField="Bank" HeaderText="Bank" SortExpression="Bank" />
             </Columns>
         </asp:GridView>
-        <asp:SqlDataSource ID="PlayerDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:default %>" SelectCommand="SELECT DISTINCT [Username], [Bank] FROM [Player] ORDER BY [Bank] DESC" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="PlayerDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>" SelectCommand="SELECT DISTINCT [Username], [Bank], [MemberSince] FROM [Players] ORDER BY [Bank]"></asp:SqlDataSource>
     </div>
 </asp:Content>

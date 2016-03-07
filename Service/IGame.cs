@@ -1,4 +1,4 @@
-﻿using Blackjack.Objects;
+﻿using SharedModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +33,7 @@ namespace Blackjack
         Table CreateTable();
 
         [OperationContract(IsInitiating = false)]
-        Table JoinTable(int tableId);
+        Table JoinTable(string tableId);
 
         //IsOneWay - Launch & Forget
         [OperationContract(IsOneWay = true, IsInitiating = false)]
@@ -48,16 +48,4 @@ namespace Blackjack
         [OperationContract(IsOneWay = true, IsInitiating = false)]
         void Fold();
     }
-
-    public interface IGameCallback
-    {
-        void OnJoin(object sender, object arg);
-        void OnLeave(object sender, object arg);
-        void OnRoundStarted(object sender, object arg);
-        void OnBet(object sender, object arg);
-        void OnHit(object sender, object arg);
-        void OnFold(object sender, object arg);
-        void OnRoundEnded(object sender, object arg);
-    }
-
 }

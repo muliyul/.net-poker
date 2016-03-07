@@ -1,4 +1,4 @@
-﻿using Blackjack.Objects;
+﻿using Blackjack.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
@@ -17,7 +17,7 @@ namespace Blackjack
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException("No password proveded");
 
-            using (var db = new DataClassesDataContext())
+            using (var db = new DBContainer())
             {
                 var player = db.Players.FirstOrDefault(p => p.Username.Equals(userName) && p.Password.Equals(password));
                 if (player == null)

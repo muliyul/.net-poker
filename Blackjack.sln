@@ -10,12 +10,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{659334A2-2B40-4CB9-A9F2-5F87D2E8514C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFClient", "WPFClient\WPFClient.csproj", "{4C999502-3B3C-4A52-8D0D-B4B95151C8C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormClient", "WinFormClient\WinFormClient.csproj", "{02E75DA0-4900-4EF0-B08E-7160A42A8DAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGameWPF", "WPFClient\CardGameWPF.csproj", "{32018F85-6C2F-44F6-BE1F-A26551144B7E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{659334A2-2B40-4CB9-A9F2-5F87D2E8514C} = {659334A2-2B40-4CB9-A9F2-5F87D2E8514C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormClient", "WinFormClient\WinFormClient.csproj", "{02E75DA0-4900-4EF0-B08E-7160A42A8DAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "GameModels\SharedModels.csproj", "{BFDA4326-E3C7-45FB-98CD-FC79192A385B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +33,18 @@ Global
 		{659334A2-2B40-4CB9-A9F2-5F87D2E8514C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{659334A2-2B40-4CB9-A9F2-5F87D2E8514C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{659334A2-2B40-4CB9-A9F2-5F87D2E8514C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C999502-3B3C-4A52-8D0D-B4B95151C8C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C999502-3B3C-4A52-8D0D-B4B95151C8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C999502-3B3C-4A52-8D0D-B4B95151C8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C999502-3B3C-4A52-8D0D-B4B95151C8C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{02E75DA0-4900-4EF0-B08E-7160A42A8DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02E75DA0-4900-4EF0-B08E-7160A42A8DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02E75DA0-4900-4EF0-B08E-7160A42A8DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02E75DA0-4900-4EF0-B08E-7160A42A8DAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32018F85-6C2F-44F6-BE1F-A26551144B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32018F85-6C2F-44F6-BE1F-A26551144B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32018F85-6C2F-44F6-BE1F-A26551144B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32018F85-6C2F-44F6-BE1F-A26551144B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFDA4326-E3C7-45FB-98CD-FC79192A385B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFDA4326-E3C7-45FB-98CD-FC79192A385B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFDA4326-E3C7-45FB-98CD-FC79192A385B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFDA4326-E3C7-45FB-98CD-FC79192A385B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
