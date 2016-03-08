@@ -1,4 +1,4 @@
-﻿using Blackjack.Models;
+﻿using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Web;
 
-namespace Blackjack
+namespace Service
 {
     public class CustomValidator : UserNamePasswordValidator
     {

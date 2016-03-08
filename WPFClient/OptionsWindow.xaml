@@ -1,7 +1,7 @@
-﻿<Window x:Class="CardGame.OptionsWindow"
+﻿<Window x:Class="Blackjack.OptionsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:properties="clr-namespace:CardGame.Properties"
+        xmlns:properties="clr-namespace:Blackjack.Properties"
         Title="BlackJack Options" Height="650" Width="650"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>

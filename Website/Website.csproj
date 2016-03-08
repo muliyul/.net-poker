@@ -76,8 +76,12 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
-    <Content Include="Install\ConsoleClient.application" />
+    <Content Include="Install\BlackjackWPF.application" />
     <None Include="Properties\PublishProfiles\dotnetfinal.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Service References\GameReference\Game.wsdl" />
     <None Include="Service References\GameReference\Game.xsd">
       <SubType>Designer</SubType>
@@ -91,6 +95,15 @@
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Service References\GameReference\Website.GameReference.Player.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\GameReference\Game3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\GameReference\Website.GameReference.Card.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GameReference\Website.GameReference.Table.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
@@ -141,6 +154,11 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>

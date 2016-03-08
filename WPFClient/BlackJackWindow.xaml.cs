@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CardGame
+namespace Blackjack
 {
     public partial class GameWindow : Window
     {

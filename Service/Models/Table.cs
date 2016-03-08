@@ -1,19 +1,16 @@
-﻿using Blackjack.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Web;
 using System.Collections.Specialized;
+using Shared;
 
-namespace Blackjack.Models
+namespace Service.Models
 {
-    [DataContract]
-    public class Table : SharedModels.Table
+    public class Table : Shared.Table
     {
-       
-
         #region Game Events
         event EventHandler<GameArgs> JoinHandler;
         event EventHandler<GameArgs> LeaveHandler;
@@ -23,58 +20,65 @@ namespace Blackjack.Models
         event EventHandler<GameArgs> NextTurnHandler;
         #endregion
 
+        Deck d = new Deck();
+
         public Table() { Id = Guid.NewGuid().ToString(); }
         
 
         internal void Join(Player player)
         {
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
-
+            RegisterEvents(cb);
         }
 
-        private void NextRound()
+        void RegisterEvents(IGameCallback callback)
         {
+            JoinHandler += callback.OnJoin;
+            LeaveHandler += callback.OnLeave;
+            HitHandler += callback.OnHit;
+            BetHandler += callback.OnBet;
+            FoldHandler += callback.OnFold;
+            NextTurnHandler += callback.OnNextTurn;
+        }
 
+        void RemoveEvents(IGameCallback callback)
+        {
+            JoinHandler -= callback.OnJoin;
+            LeaveHandler -= callback.OnLeave;
+            HitHandler -= callback.OnHit;
+            BetHandler -= callback.OnBet;
+            FoldHandler -= callback.OnFold;
+            NextTurnHandler -= callback.OnNextTurn;
+        }
+
+        void NextRound()
+        {
         
         }
 
-        internal Card Hit(Player player)
+        internal void Hit(Player player)
         {
-            throw new NotImplementedException();
+            var c = d.Pop();
+            Players.Add(player);
+            player.Hand.Add(c);
+            HitHandler(this, new GameArgs() { Player = player, Card = c});
         }
 
         internal void Leave(Player player)
         {
-            throw new NotImplementedException();
+            var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+            RemoveEvents(cb);
+            LeaveHandler(this, new GameArgs() { Player=player });
         }
 
-        internal void Bet(Player currentPlayer, int amount)
+        internal void Bet(Player player, int amount)
         {
-            throw new NotImplementedException();
+            BetHandler(this, new GameArgs() { Player=player, Amount=amount });
         }
 
         internal void Fold(Player player)
         {
-            throw new NotImplementedException();
+            FoldHandler(this, new GameArgs() { Player = player });
         }
-
-        internal class PlayerContainer
-        {
-            public PlayerContainer(Player p, IGameCallback cb)
-            {
-                Player = p;
-                Callback = cb;
-            }
-
-            public Player Player { get; set; }
-            public IGameCallback Callback { get; set; }
-        }
-    }
-
-    public class GameArgs : EventArgs
-    {
-        public Player Player { get; set; }
-        public int Amount { get; set; }
-        public Card Card { get; set; }
     }
 }

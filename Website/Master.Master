@@ -30,6 +30,9 @@
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav dropdown-toggle">
+                    <li><a href="play.aspx">Play</a></li>
+                </ul>
+                <ul class="nav navbar-nav dropdown-toggle">
                     <li><a href="Install/publish.htm">Download</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right dropdown-toggle">

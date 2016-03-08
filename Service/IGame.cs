@@ -1,4 +1,4 @@
-﻿using SharedModels;
+﻿using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,45 +7,39 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
-namespace Blackjack
+namespace Service
 {
-    [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IGameCallback))]
+    [ServiceContract(CallbackContract = typeof(IGameCallback))]
     public interface IGame
     {
         [OperationContract]
         void Register(string username, string pass);
 
         [OperationContract]
-        Player Login(string username, string pass);
+        Models.Player Login(string username, string pass);
 
         [OperationContract]
-        Player GetPlayerInfo(string username);
+        Models.Player GetPlayerInfo(string username);
 
         [OperationContract]
         IEnumerable<Table> ListTables();
 
-        //IsInitiating decides whenever the call to this method deletes the session
-        [OperationContract(IsTerminating = true)]
-        void Logout();
-
-        //IsInitiating decides whenever the call to this method creates session
-        [OperationContract(IsInitiating = false)]
+        [OperationContract]
         Table CreateTable();
 
-        [OperationContract(IsInitiating = false)]
+        [OperationContract]
         Table JoinTable(string tableId);
-
-        //IsOneWay - Launch & Forget
-        [OperationContract(IsOneWay = true, IsInitiating = false)]
+        
+        [OperationContract(IsOneWay = true)]
         void Leave();
 
-        [OperationContract(IsOneWay = true, IsInitiating = false)]
+        [OperationContract(IsOneWay = true)]
         void Bet(int amount);
 
-        [OperationContract(IsInitiating = false)]
-        Card Hit();
+        [OperationContract(IsOneWay = true)]
+        void Hit();
 
-        [OperationContract(IsOneWay = true, IsInitiating = false)]
+        [OperationContract(IsOneWay = true)]
         void Fold();
     }
 }

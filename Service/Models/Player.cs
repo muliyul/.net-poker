@@ -7,12 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Blackjack.Models
+namespace Service.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Player
+    using System.Runtime.Serialization;
+
+    public partial class Player: Shared.Player
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Player()

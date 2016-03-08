@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Blackjack.Models
+namespace Service.Models
 {
     using System;
     using System.Collections.Generic;

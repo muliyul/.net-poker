@@ -1,4 +1,4 @@
-﻿using Blackjack.Models;
+﻿using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Web;
 
-namespace Blackjack
+namespace Service
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
         ConcurrencyMode = ConcurrencyMode.Reentrant)]
@@ -24,117 +24,84 @@ namespace Blackjack
         {
             get
             {
-                var key = ServiceSecurityContext.Current.PrimaryIdentity.Name;
-                return sessions[key];
+                
+                return null;
             }
         }
-        Table CurrentPlayerTable
+
+        Table CurrentTable
         {
             get
             {
-                return Tables.FirstOrDefault(t => t.Players.FirstOrDefault(p => p!=null) != null);
+                return null;
             }
         }
 
         public void Bet(int amount)
         {
-            CurrentPlayerTable?.Bet(CurrentPlayer, amount);
+            CurrentTable.Bet(CurrentPlayer, amount);
         }
 
-        public SharedModels.Table CreateTable()
+        public Shared.Table CreateTable()
         {
             var t = new Table();
             Tables.Add(t);
-            return JoinTable(t.Id) as SharedModels.Table;
+            t.Join(CurrentPlayer);
+            return t;
         }
 
         public void Fold()
         {
-            CurrentPlayerTable?.Fold(CurrentPlayer);
+            CurrentTable?.Fold(CurrentPlayer);
         }
 
-        public SharedModels.Player GetPlayerInfo(string username)
+        public Player GetPlayerInfo(string username)
         {
-            if (string.IsNullOrEmpty(username))
-                return null;
             using (var db = new DBContainer())
             {
-                var player = db.Players.FirstOrDefault(p => p.Username.Equals(username));
-                if(player != null)
-                    return new SharedModels.Player()
-                    {
-                        Id = player.Id,
-                        Bank = player.Bank,
-                        MemberSince = player.MemberSince,
-                        Username = player.Username
-                    };
-                
+                var player = db.Players.SingleOrDefault(p => p.Username == username);
+                return player;
             }
-            return null;
         }
 
-        public SharedModels.Card Hit()
+        public void Hit()
         {
-            return CurrentPlayerTable?.Hit(CurrentPlayer);
+            CurrentTable?.Hit(CurrentPlayer);
         }
 
-        public SharedModels.Table JoinTable(string tableId)
+        public Shared.Table JoinTable(string tableId)
         {
-            var table = Tables.FirstOrDefault(t => t.Id == tableId);
-            //table.Join(CurrentPlayer);
-            return table as SharedModels.Table;
+            var table = Tables.SingleOrDefault(t => t.Id == tableId);
+            table?.Join(CurrentPlayer);
+            return table;
         }
 
         public void Leave()
         {
-            CurrentPlayerTable?.Leave(CurrentPlayer);
+            CurrentTable?.Leave(CurrentPlayer);
         }
 
-        public IEnumerable<SharedModels.Table> ListTables()
+        public IEnumerable<Shared.Table> ListTables()
         {
-            return Tables;
+            return Tables.AsEnumerable();
         }
 
-        public SharedModels.Player Login(string username, string pass)
+        public Player Login(string username, string pass)
         {
-            //Hash password and verify?
-            Player player;
             using (var db = new DBContainer())
             {
-                player = db.Players.FirstOrDefault(p =>
-                p.Username.Equals(username) && p.Password.Equals(pass));
-                sessions[ServiceSecurityContext.Current.PrimaryIdentity.Name] = player;
+                var player = db.Players.SingleOrDefault(p => p.Username == username && p.Password == pass);
+                var newGuid = Guid.NewGuid();
+                // sessions[newGuid] = player;
+                var px = ServiceSecurityContext.Current;
 
-                return new SharedModels.Player()
-                {
-                    Id = player.Id,
-                    Bank = player.Bank,
-                    MemberSince = player.MemberSince,
-                    Username = player.Username
-                };
+                return player;
             }
         }
 
-        public void Logout()
+        public void Register(string username, string pass)
         {
-            CurrentPlayerTable?.Leave(CurrentPlayer);
-            sessions[ServiceSecurityContext.Current.PrimaryIdentity.Name] = null;
-        }
-
-        public void Register(string user, string pass)
-        {
-            try
-            {
-                using (var db = new DBContainer())
-                {
-                    db.Players.Add(new Player { Username = user, Password = pass, MemberSince = DateTime.Now, Bank = 4000 });
-                    db.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new FaultException("Username already exists!");
-            }
+            throw new NotImplementedException();
         }
     }
 }

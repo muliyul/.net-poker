@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace SharedModels
+namespace Shared
 {
     [CollectionDataContract]
     public class Hand : List<Card>

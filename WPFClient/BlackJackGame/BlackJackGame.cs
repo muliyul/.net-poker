@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BlackJack.CardGameFramework;
-using SharedModels;
+using Shared;
 
 namespace BlackJack
 {
@@ -9,7 +9,7 @@ namespace BlackJack
 		#region Fields
 
         // private Deck and Player objects for the current deck, dealer, and player
-		private Deck deck;
+		private CardGameFramework.Deck deck;
 		private Player dealer;
         private Player player;
 
@@ -20,7 +20,7 @@ namespace BlackJack
         // public properties to return the current player, dealer, and current deck
         public Player CurrentPlayer { get { return player; } }
 		public Player Dealer { get { return dealer; } }
-        public SharedModels.Deck CurrentDeck { get { return deck; } }
+        public CardGameFramework.Deck CurrentDeck { get { return deck; } }
 
 		#endregion
 
@@ -46,9 +46,8 @@ namespace BlackJack
         /// </summary>
 		public void DealNewGame()
 		{
-            CardGame.GameReference.GameClient gc = new CardGame.GameReference.GameClient();
             // Create a new deck and then shuffle the deck
-            deck = gc.GetDeck();
+            deck = new CardGameFramework.Deck();
             deck.Shuffle();
 
 			// Reset the player and the dealer's hands in case this is not the first game

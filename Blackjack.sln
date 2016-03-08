@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormClient", "WinFormClient\WinFormClient.csproj", "{02E75DA0-4900-4EF0-B08E-7160A42A8DAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGameWPF", "WPFClient\CardGameWPF.csproj", "{32018F85-6C2F-44F6-BE1F-A26551144B7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFClient", "WPFClient\WPFClient.csproj", "{32018F85-6C2F-44F6-BE1F-A26551144B7E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{659334A2-2B40-4CB9-A9F2-5F87D2E8514C} = {659334A2-2B40-4CB9-A9F2-5F87D2E8514C}
 	EndProjectSection

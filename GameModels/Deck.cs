@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SharedModels
+namespace Shared
 {
     public class Deck : Stack<Card>
     {
-        static readonly List<Card> CARDS = new List<Card>();
+        static readonly IList<Card> CARDS = new List<Card>();
 
         static Deck()
         {

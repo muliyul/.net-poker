@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Blackjack" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Blackjack" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Blackjack.Models" />
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Shared" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Shared" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="ArrayOfTable">
     <xs:sequence>
@@ -11,11 +10,27 @@
   <xs:complexType name="Table">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Blackjack.Models" minOccurs="0" name="Players" nillable="true" type="q1:ArrayOfPlayer" />
+      <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfPlayer" />
       <xs:element minOccurs="0" name="Pot" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Table" nillable="true" type="tns:Table" />
+  <xs:complexType name="ArrayOfPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Player" nillable="true" type="tns:Player" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayer" nillable="true" type="tns:ArrayOfPlayer" />
+  <xs:complexType name="Player">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bank" type="xs:double" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="MemberSince" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Player" nillable="true" type="tns:Player" />
   <xs:complexType name="Card">
     <xs:sequence>
       <xs:element minOccurs="0" name="Face" type="tns:Face" />

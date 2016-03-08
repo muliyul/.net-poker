@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace SharedModels
+namespace Shared
 {
 
     public enum Suit { Spades, Hearts, Clubs, Diamonds }
