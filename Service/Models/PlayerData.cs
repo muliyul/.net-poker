@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Web;
 
-namespace Shared
+namespace Service.Models
 {
     [DataContract]
-    public class Player
+    public class PlayerData
     {
         [DataMember]
         public int Id { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BlackJack.CardGameFramework;
-using Shared;
+
 
 namespace BlackJack
 {

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
-namespace Shared
+namespace Service.Models
 {
+    [DataContract]
     public class Deck : Stack<Card>
     {
         static readonly IList<Card> CARDS = new List<Card>();

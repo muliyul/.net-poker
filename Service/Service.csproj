@@ -91,6 +91,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Card.cs" />
     <Compile Include="Models\DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,10 +107,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Deck.cs" />
     <Compile Include="Models\Game.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GameArgs.cs" />
+    <Compile Include="Models\Hand.cs" />
     <Compile Include="Models\IGameCallback.cs" />
     <Compile Include="Models\Player.cs">
       <DependentUpon>DB.tt</DependentUpon>
@@ -119,6 +122,7 @@
       <DependentUpon>Game.svc</DependentUpon>
     </Compile>
     <Compile Include="IGame.cs" />
+    <Compile Include="Models\PlayerData.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,12 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GameModels\SharedModels.csproj">
-      <Project>{bfda4326-e3c7-45fb-98cd-fc79192a385b}</Project>
-      <Name>SharedModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

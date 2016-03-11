@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿
+using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

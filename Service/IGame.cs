@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿
+using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,25 +17,28 @@ namespace Service
         void Register(string username, string pass);
 
         [OperationContract]
-        Models.Player Login(string username, string pass);
+        PlayerData Login(string username, string pass);
 
         [OperationContract]
-        Models.Player GetPlayerInfo(string username);
+        PlayerData GetPlayerInfo(string username);
 
         [OperationContract]
-        IEnumerable<Table> ListTables();
+        Models.Table GetTable();
 
         [OperationContract]
-        Table CreateTable();
+        IEnumerable<Models.Table> ListTables();
 
         [OperationContract]
-        Table JoinTable(string tableId);
+        Models.Table CreateTable();
+
+        [OperationContract]
+        Models.Table JoinTable(string playerGuid, string tableId);
         
         [OperationContract(IsOneWay = true)]
         void Leave();
 
         [OperationContract(IsOneWay = true)]
-        void Bet(int amount);
+        void Bet(string guid, int amount);
 
         [OperationContract(IsOneWay = true)]
         void Hit();

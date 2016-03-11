@@ -25,6 +25,14 @@ namespace Blackjack
         private void NewGame(object sender, RoutedEventArgs e)
         {
             this.Hide();
+
+            using (var gc = new GameReference.GameClient())
+            {
+                var g = gc.CreateTable();
+                var p = gc.Login("kosta1", "123");
+                var ss = new Blackjack.GameReference.Table();
+            
+            }
             GameWindow gameWindow = new GameWindow();
             gameWindow.ShowDialog();
             this.Show();

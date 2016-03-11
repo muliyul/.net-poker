@@ -4,7 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Shared" />
+      <xsd:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Models" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGame_Register_InputMessage">
@@ -25,17 +25,17 @@
   <wsdl:message name="IGame_GetPlayerInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IGame_GetTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTable" />
+  </wsdl:message>
+  <wsdl:message name="IGame_GetTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTableResponse" />
+  </wsdl:message>
   <wsdl:message name="IGame_ListTables_InputMessage">
     <wsdl:part name="parameters" element="tns:ListTables" />
   </wsdl:message>
   <wsdl:message name="IGame_ListTables_OutputMessage">
     <wsdl:part name="parameters" element="tns:ListTablesResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGame_Logout_InputMessage">
-    <wsdl:part name="parameters" element="tns:Logout" />
-  </wsdl:message>
-  <wsdl:message name="IGame_Logout_OutputMessage">
-    <wsdl:part name="parameters" element="tns:LogoutResponse" />
   </wsdl:message>
   <wsdl:message name="IGame_CreateTable_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateTable" />
@@ -58,9 +58,6 @@
   <wsdl:message name="IGame_Hit_InputMessage">
     <wsdl:part name="parameters" element="tns:Hit" />
   </wsdl:message>
-  <wsdl:message name="IGame_Hit_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HitResponse" />
-  </wsdl:message>
   <wsdl:message name="IGame_Fold_InputMessage">
     <wsdl:part name="parameters" element="tns:Fold" />
   </wsdl:message>
@@ -77,13 +74,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/GetPlayerInfo" message="tns:IGame_GetPlayerInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/GetPlayerInfoResponse" message="tns:IGame_GetPlayerInfo_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGame/GetTable" message="tns:IGame_GetTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/GetTableResponse" message="tns:IGame_GetTable_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ListTables">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/ListTables" message="tns:IGame_ListTables_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/ListTablesResponse" message="tns:IGame_ListTables_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Logout">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGame/Logout" message="tns:IGame_Logout_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGame/LogoutResponse" message="tns:IGame_Logout_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateTable">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/CreateTable" message="tns:IGame_CreateTable_InputMessage" />
@@ -101,7 +98,6 @@
     </wsdl:operation>
     <wsdl:operation name="Hit">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Hit" message="tns:IGame_Hit_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGame/HitResponse" message="tns:IGame_Hit_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Fold">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Fold" message="tns:IGame_Fold_InputMessage" />
@@ -136,8 +132,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ListTables">
-      <soap:operation soapAction="http://tempuri.org/IGame/ListTables" style="document" />
+    <wsdl:operation name="GetTable">
+      <soap:operation soapAction="http://tempuri.org/IGame/GetTable" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -145,8 +141,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Logout">
-      <soap:operation soapAction="http://tempuri.org/IGame/Logout" style="document" />
+    <wsdl:operation name="ListTables">
+      <soap:operation soapAction="http://tempuri.org/IGame/ListTables" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -189,9 +185,6 @@
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Fold">
       <soap:operation soapAction="http://tempuri.org/IGame/Fold" style="document" />

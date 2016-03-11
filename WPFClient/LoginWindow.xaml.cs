@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Blackjack
+{
+    /// <summary>
+    /// Interaction logic for LoginWindow.xaml
+    /// </summary>
+    public partial class LoginWindow : Window
+    {
+        public LoginWindow()
+        {
+            InitializeComponent();
+
+        }
+
+        private void BtLogin_Click(object sender, RoutedEventArgs e)
+        {
+            using (var gr = new GameReference.GameClient())
+            {
+                gr.LoginCompleted += Gr_LoginCompleted;
+                gr.LoginAsync(TbUserName.Text, PbPassword.Password);
+            }
+        }
+
+        private void Gr_LoginCompleted(object sender, GameReference.LoginCompletedEventArgs e)
+        {
+            var player = e.Result;
+            if (player != null)
+            {
+                var w = new StartForm();
+                w.Visibility = Visibility.Visible;
+            } else
+            {
+                LbWrongPass.Visibility = Visibility.Visible;
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Shared" />
+  <xs:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Models" />
   <xs:element name="Register">
     <xs:complexType>
       <xs:sequence>
@@ -25,7 +25,7 @@
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Shared" minOccurs="0" name="LoginResult" nillable="true" type="q1:Player" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="LoginResult" nillable="true" type="q1:PlayerData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -39,7 +39,19 @@
   <xs:element name="GetPlayerInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Shared" minOccurs="0" name="GetPlayerInfoResult" nillable="true" type="q2:Player" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="GetPlayerInfoResult" nillable="true" type="q2:PlayerData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTable">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="GetTableResult" nillable="true" type="q3:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -51,18 +63,8 @@
   <xs:element name="ListTablesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Shared" minOccurs="0" name="ListTablesResult" nillable="true" type="q3:ArrayOfTable" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="ListTablesResult" nillable="true" type="q4:ArrayOfTable" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Logout">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="LogoutResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateTable">
@@ -73,13 +75,14 @@
   <xs:element name="CreateTableResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Shared" minOccurs="0" name="CreateTableResult" nillable="true" type="q4:Table" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="CreateTableResult" nillable="true" type="q5:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="JoinTable">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="playerGuid" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="tableId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -87,7 +90,7 @@
   <xs:element name="JoinTableResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Shared" minOccurs="0" name="JoinTableResult" nillable="true" type="q5:Table" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="JoinTableResult" nillable="true" type="q6:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -99,6 +102,7 @@
   <xs:element name="Bet">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="amount" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -106,13 +110,6 @@
   <xs:element name="Hit">
     <xs:complexType>
       <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HitResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Shared" minOccurs="0" name="HitResult" nillable="true" type="q6:Card" />
-      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Fold">

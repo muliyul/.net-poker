@@ -11,9 +11,8 @@ namespace Service.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    public partial class Player: Shared.Player
+    
+    public partial class Player
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Player()
@@ -26,6 +25,7 @@ namespace Service.Models
         public string Password { get; set; }
         public double Bank { get; set; }
         public System.DateTime MemberSince { get; set; }
+        public string Guid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }
