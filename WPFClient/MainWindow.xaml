@@ -90,9 +90,18 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Button x:Name="newGameButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="431,231,0,0" VerticalAlignment="Top" Width="204" Height="47" Content="New Game" FontSize="18" FontWeight="Bold" Click="NewGame" FontFamily="Arial"/>
-        <Button x:Name="optionsButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="431,297,0,0" VerticalAlignment="Top" Width="204" Height="47" Content="Options" FontSize="18" FontWeight="Bold" Click="Options" FontFamily="Arial"/>
-        <Button x:Name="exitButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="431,362,0,0" VerticalAlignment="Top" Width="204" Height="47" Content="Exit" FontSize="18" FontWeight="Bold" Click="Exit" FontFamily="Arial"/>
+        <Button x:Name="optionsButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="511,290,0,0" VerticalAlignment="Top" Width="204" Height="47" Content="Options" FontSize="18" FontWeight="Bold" Click="Options" FontFamily="Arial"/>
+        <Button x:Name="exitButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="511,349,0,0" VerticalAlignment="Top" Width="204" Height="47" Content="Exit" FontSize="18" FontWeight="Bold" Click="Exit" FontFamily="Arial"/>
+        <ListBox x:Name="tablesList" HorizontalAlignment="Left" Height="244" Margin="42,290,0,0" VerticalAlignment="Top" Width="242">
+            <ListBoxItem>
+                <Label>Table 1 : waiting for players</Label>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Label>Table 2 : In game</Label>
+            </ListBoxItem>
+        </ListBox>
+        <Button x:Name="createTableButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="302,349,0,0" VerticalAlignment="Top" Width="117" Height="47" Content="Create Table" FontSize="18" FontWeight="Bold" Click="createTableButton_Click" FontFamily="Arial"/>
+        <Button x:Name="joinTableButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="302,290,0,0" VerticalAlignment="Top" Width="117" Height="47" Content="Join Table" FontSize="18" FontWeight="Bold" Click="joinTableButton_Click" FontFamily="Arial"/>
 
 
     </Grid>

@@ -16,7 +16,7 @@ namespace Service.Models
         IList<Player> players = new List<Player>();
 
         [DataMember]
-        public IList<Player> Players { get; set; }
+        public IList<PlayerData> Players { get; set; }
 
         [DataMember]
         public string Id { get; set; }
@@ -41,10 +41,11 @@ namespace Service.Models
         public Table() { Id = Guid.NewGuid().ToString(); }
 
 
-        internal void Join(Player player)
+        internal void Join(PlayerData player)
         {
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             RegisterEvents(cb);
+            JoinHandler(this, new GameArgs() { Player = player });
         }
 
         void RegisterEvents(IGameCallback callback)
@@ -72,7 +73,7 @@ namespace Service.Models
 
         }
 
-        internal void Hit(Player player)
+        internal void Hit(PlayerData player)
         {
             var c = d.Pop();
             Players.Add(player);
@@ -80,20 +81,20 @@ namespace Service.Models
             HitHandler(this, new GameArgs() { Player = player, Card = c });
         }
 
-        internal void Leave(Player player)
+        internal void Leave(PlayerData player)
         {
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             RemoveEvents(cb);
             LeaveHandler(this, new GameArgs() { Player = player });
         }
 
-        internal void Bet(Player player, int amount)
+        internal void Bet(PlayerData player, int amount)
         {
             BetHandler(this, new GameArgs() { Player = player, Amount = amount });
         }
 
 
-        internal void Fold(Player player)
+        internal void Fold(PlayerData player)
         {
             FoldHandler(this, new GameArgs() { Player = player });
         }

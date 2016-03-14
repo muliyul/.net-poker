@@ -9,7 +9,7 @@ namespace Service.Models
 {
 
     public enum Suit { Spades, Hearts, Clubs, Diamonds }
-    public enum Face { Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack = 10, Queen = 10, King = 10, Ace = 11 }
+    public enum Face:int { Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack = 10, Queen = 10, King = 10, Ace = 11 }
 
 
     [DataContract]

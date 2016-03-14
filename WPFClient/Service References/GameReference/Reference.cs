@@ -312,7 +312,7 @@ namespace Blackjack.GameReference {
         private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Blackjack.GameReference.Player[] PlayersField;
+        private Blackjack.GameReference.PlayerData[] PlayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PotField;
@@ -341,7 +341,7 @@ namespace Blackjack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Blackjack.GameReference.Player[] Players {
+        public Blackjack.GameReference.PlayerData[] Players {
             get {
                 return this.PlayersField;
             }
@@ -378,33 +378,21 @@ namespace Blackjack.GameReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GameArgs", Namespace="http://schemas.datacontract.org/2004/07/Service")]
     [System.SerializableAttribute()]
-    public partial class Player : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class GameArgs : System.EventArgs, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double BankField;
+        private int AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Blackjack.GameReference.Game[] GamesField;
+        private Blackjack.GameReference.Card CardField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GuidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime MemberSinceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameField;
+        private Blackjack.GameReference.PlayerData PlayerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -417,184 +405,33 @@ namespace Blackjack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Bank {
+        public int Amount {
             get {
-                return this.BankField;
+                return this.AmountField;
             }
             set {
-                if ((this.BankField.Equals(value) != true)) {
-                    this.BankField = value;
-                    this.RaisePropertyChanged("Bank");
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Blackjack.GameReference.Game[] Games {
+        public Blackjack.GameReference.Card Card {
             get {
-                return this.GamesField;
+                return this.CardField;
             }
             set {
-                if ((object.ReferenceEquals(this.GamesField, value) != true)) {
-                    this.GamesField = value;
-                    this.RaisePropertyChanged("Games");
+                if ((object.ReferenceEquals(this.CardField, value) != true)) {
+                    this.CardField = value;
+                    this.RaisePropertyChanged("Card");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Guid {
-            get {
-                return this.GuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GuidField, value) != true)) {
-                    this.GuidField = value;
-                    this.RaisePropertyChanged("Guid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime MemberSince {
-            get {
-                return this.MemberSinceField;
-            }
-            set {
-                if ((this.MemberSinceField.Equals(value) != true)) {
-                    this.MemberSinceField = value;
-                    this.RaisePropertyChanged("MemberSince");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
-                return this.PasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Username {
-            get {
-                return this.UsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
-                    this.UsernameField = value;
-                    this.RaisePropertyChanged("Username");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Game", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
-    [System.SerializableAttribute()]
-    public partial class Game : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> BlackjacksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime PlayedOnField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Blackjack.GameReference.Player PlayerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PlayerIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double WinningsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Blackjacks {
-            get {
-                return this.BlackjacksField;
-            }
-            set {
-                if ((this.BlackjacksField.Equals(value) != true)) {
-                    this.BlackjacksField = value;
-                    this.RaisePropertyChanged("Blackjacks");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime PlayedOn {
-            get {
-                return this.PlayedOnField;
-            }
-            set {
-                if ((this.PlayedOnField.Equals(value) != true)) {
-                    this.PlayedOnField = value;
-                    this.RaisePropertyChanged("PlayedOn");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Blackjack.GameReference.Player Player {
+        public Blackjack.GameReference.PlayerData Player {
             get {
                 return this.PlayerField;
             }
@@ -606,32 +443,6 @@ namespace Blackjack.GameReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PlayerId {
-            get {
-                return this.PlayerIdField;
-            }
-            set {
-                if ((this.PlayerIdField.Equals(value) != true)) {
-                    this.PlayerIdField = value;
-                    this.RaisePropertyChanged("PlayerId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Winnings {
-            get {
-                return this.WinningsField;
-            }
-            set {
-                if ((this.WinningsField.Equals(value) != true)) {
-                    this.WinningsField = value;
-                    this.RaisePropertyChanged("Winnings");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -643,96 +454,188 @@ namespace Blackjack.GameReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameReference.IGame")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameReference.IGame", CallbackContract=typeof(Blackjack.GameReference.IGameCallback))]
     public interface IGame {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Register", ReplyAction="http://tempuri.org/IGame/RegisterResponse")]
         void Register(string username, string pass);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IGame/Register", ReplyAction="http://tempuri.org/IGame/RegisterResponse")]
-        System.IAsyncResult BeginRegister(string username, string pass, System.AsyncCallback callback, object asyncState);
-        
-        void EndRegister(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Register", ReplyAction="http://tempuri.org/IGame/RegisterResponse")]
+        System.Threading.Tasks.Task RegisterAsync(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
         Blackjack.GameReference.PlayerData Login(string username, string pass);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
-        System.IAsyncResult BeginLogin(string username, string pass, System.AsyncCallback callback, object asyncState);
-        
-        Blackjack.GameReference.PlayerData EndLogin(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
+        System.Threading.Tasks.Task<Blackjack.GameReference.PlayerData> LoginAsync(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
         Blackjack.GameReference.PlayerData GetPlayerInfo(string username);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        System.IAsyncResult BeginGetPlayerInfo(string username, System.AsyncCallback callback, object asyncState);
-        
-        Blackjack.GameReference.PlayerData EndGetPlayerInfo(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
+        System.Threading.Tasks.Task<Blackjack.GameReference.PlayerData> GetPlayerInfoAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetTable", ReplyAction="http://tempuri.org/IGame/GetTableResponse")]
         Blackjack.GameReference.Table GetTable();
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IGame/GetTable", ReplyAction="http://tempuri.org/IGame/GetTableResponse")]
-        System.IAsyncResult BeginGetTable(System.AsyncCallback callback, object asyncState);
-        
-        Blackjack.GameReference.Table EndGetTable(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetTable", ReplyAction="http://tempuri.org/IGame/GetTableResponse")]
+        System.Threading.Tasks.Task<Blackjack.GameReference.Table> GetTableAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
         Blackjack.GameReference.Table[] ListTables();
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
-        System.IAsyncResult BeginListTables(System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
+        System.Threading.Tasks.Task<Blackjack.GameReference.Table[]> ListTablesAsync();
         
-        Blackjack.GameReference.Table[] EndListTables(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/CreateTable")]
+        void CreateTable(string playerGuid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/CreateTable", ReplyAction="http://tempuri.org/IGame/CreateTableResponse")]
-        Blackjack.GameReference.Table CreateTable();
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IGame/CreateTable", ReplyAction="http://tempuri.org/IGame/CreateTableResponse")]
-        System.IAsyncResult BeginCreateTable(System.AsyncCallback callback, object asyncState);
-        
-        Blackjack.GameReference.Table EndCreateTable(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/CreateTable")]
+        System.Threading.Tasks.Task CreateTableAsync(string playerGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
         Blackjack.GameReference.Table JoinTable(string playerGuid, string tableId);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
-        System.IAsyncResult BeginJoinTable(string playerGuid, string tableId, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
+        System.Threading.Tasks.Task<Blackjack.GameReference.Table> JoinTableAsync(string playerGuid, string tableId);
         
-        Blackjack.GameReference.Table EndJoinTable(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlayerReady", ReplyAction="http://tempuri.org/IGame/PlayerReadyResponse")]
+        Blackjack.GameReference.Table PlayerReady(string playerGuid, string tableId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlayerReady", ReplyAction="http://tempuri.org/IGame/PlayerReadyResponse")]
+        System.Threading.Tasks.Task<Blackjack.GameReference.Table> PlayerReadyAsync(string playerGuid, string tableId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Leave")]
         void Leave();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IGame/Leave")]
-        System.IAsyncResult BeginLeave(System.AsyncCallback callback, object asyncState);
-        
-        void EndLeave(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Leave")]
+        System.Threading.Tasks.Task LeaveAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Bet")]
         void Bet(string guid, int amount);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IGame/Bet")]
-        System.IAsyncResult BeginBet(string guid, int amount, System.AsyncCallback callback, object asyncState);
-        
-        void EndBet(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Bet")]
+        System.Threading.Tasks.Task BetAsync(string guid, int amount);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Hit")]
         void Hit();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IGame/Hit")]
-        System.IAsyncResult BeginHit(System.AsyncCallback callback, object asyncState);
-        
-        void EndHit(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Hit")]
+        System.Threading.Tasks.Task HitAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Fold")]
         void Fold();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IGame/Fold")]
-        System.IAsyncResult BeginFold(System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Fold")]
+        System.Threading.Tasks.Task FoldAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGameCallback {
         
-        void EndFold(System.IAsyncResult result);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnJoin", ReplyAction="http://tempuri.org/IGame/OnJoinResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnJoin(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnLeave", ReplyAction="http://tempuri.org/IGame/OnLeaveResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnLeave(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnHit", ReplyAction="http://tempuri.org/IGame/OnHitResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnHit(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnBet", ReplyAction="http://tempuri.org/IGame/OnBetResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnBet(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnFold", ReplyAction="http://tempuri.org/IGame/OnFoldResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnFold(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnNextTurn", ReplyAction="http://tempuri.org/IGame/OnNextTurnResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnNextTurn(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnDeal", ReplyAction="http://tempuri.org/IGame/OnDealResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnDeal(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnNewTableCreated")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnNewTableCreated(object sender, Blackjack.GameReference.GameArgs e);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -741,768 +644,122 @@ namespace Blackjack.GameReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GameClient : System.ServiceModel.DuplexClientBase<Blackjack.GameReference.IGame>, Blackjack.GameReference.IGame {
         
-        private object[] results;
-        
-        public LoginCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public Blackjack.GameReference.PlayerData Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Blackjack.GameReference.PlayerData)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetPlayerInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetPlayerInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public Blackjack.GameReference.PlayerData Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Blackjack.GameReference.PlayerData)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetTableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetTableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public Blackjack.GameReference.Table Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Blackjack.GameReference.Table)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ListTablesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public ListTablesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public Blackjack.GameReference.Table[] Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Blackjack.GameReference.Table[])(this.results[0]));
-            }
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CreateTableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public CreateTableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public Blackjack.GameReference.Table Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Blackjack.GameReference.Table)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class JoinTableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public JoinTableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public Blackjack.GameReference.Table Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Blackjack.GameReference.Table)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GameClient : System.ServiceModel.ClientBase<Blackjack.GameReference.IGame>, Blackjack.GameReference.IGame {
-        
-        private BeginOperationDelegate onBeginRegisterDelegate;
-        
-        private EndOperationDelegate onEndRegisterDelegate;
-        
-        private System.Threading.SendOrPostCallback onRegisterCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginLoginDelegate;
-        
-        private EndOperationDelegate onEndLoginDelegate;
-        
-        private System.Threading.SendOrPostCallback onLoginCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginGetPlayerInfoDelegate;
-        
-        private EndOperationDelegate onEndGetPlayerInfoDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetPlayerInfoCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginGetTableDelegate;
-        
-        private EndOperationDelegate onEndGetTableDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetTableCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginListTablesDelegate;
-        
-        private EndOperationDelegate onEndListTablesDelegate;
-        
-        private System.Threading.SendOrPostCallback onListTablesCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginCreateTableDelegate;
-        
-        private EndOperationDelegate onEndCreateTableDelegate;
-        
-        private System.Threading.SendOrPostCallback onCreateTableCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginJoinTableDelegate;
-        
-        private EndOperationDelegate onEndJoinTableDelegate;
-        
-        private System.Threading.SendOrPostCallback onJoinTableCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginLeaveDelegate;
-        
-        private EndOperationDelegate onEndLeaveDelegate;
-        
-        private System.Threading.SendOrPostCallback onLeaveCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginBetDelegate;
-        
-        private EndOperationDelegate onEndBetDelegate;
-        
-        private System.Threading.SendOrPostCallback onBetCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginHitDelegate;
-        
-        private EndOperationDelegate onEndHitDelegate;
-        
-        private System.Threading.SendOrPostCallback onHitCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginFoldDelegate;
-        
-        private EndOperationDelegate onEndFoldDelegate;
-        
-        private System.Threading.SendOrPostCallback onFoldCompletedDelegate;
-        
-        public GameClient() {
-        }
-        
-        public GameClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public GameClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public GameClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public GameClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RegisterCompleted;
-        
-        public event System.EventHandler<LoginCompletedEventArgs> LoginCompleted;
-        
-        public event System.EventHandler<GetPlayerInfoCompletedEventArgs> GetPlayerInfoCompleted;
-        
-        public event System.EventHandler<GetTableCompletedEventArgs> GetTableCompleted;
-        
-        public event System.EventHandler<ListTablesCompletedEventArgs> ListTablesCompleted;
-        
-        public event System.EventHandler<CreateTableCompletedEventArgs> CreateTableCompleted;
-        
-        public event System.EventHandler<JoinTableCompletedEventArgs> JoinTableCompleted;
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> LeaveCompleted;
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> BetCompleted;
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> HitCompleted;
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> FoldCompleted;
         
         public void Register(string username, string pass) {
             base.Channel.Register(username, pass);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginRegister(string username, string pass, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginRegister(username, pass, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndRegister(System.IAsyncResult result) {
-            base.Channel.EndRegister(result);
-        }
-        
-        private System.IAsyncResult OnBeginRegister(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string username = ((string)(inValues[0]));
-            string pass = ((string)(inValues[1]));
-            return this.BeginRegister(username, pass, callback, asyncState);
-        }
-        
-        private object[] OnEndRegister(System.IAsyncResult result) {
-            this.EndRegister(result);
-            return null;
-        }
-        
-        private void OnRegisterCompleted(object state) {
-            if ((this.RegisterCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.RegisterCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void RegisterAsync(string username, string pass) {
-            this.RegisterAsync(username, pass, null);
-        }
-        
-        public void RegisterAsync(string username, string pass, object userState) {
-            if ((this.onBeginRegisterDelegate == null)) {
-                this.onBeginRegisterDelegate = new BeginOperationDelegate(this.OnBeginRegister);
-            }
-            if ((this.onEndRegisterDelegate == null)) {
-                this.onEndRegisterDelegate = new EndOperationDelegate(this.OnEndRegister);
-            }
-            if ((this.onRegisterCompletedDelegate == null)) {
-                this.onRegisterCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRegisterCompleted);
-            }
-            base.InvokeAsync(this.onBeginRegisterDelegate, new object[] {
-                        username,
-                        pass}, this.onEndRegisterDelegate, this.onRegisterCompletedDelegate, userState);
+        public System.Threading.Tasks.Task RegisterAsync(string username, string pass) {
+            return base.Channel.RegisterAsync(username, pass);
         }
         
         public Blackjack.GameReference.PlayerData Login(string username, string pass) {
             return base.Channel.Login(username, pass);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginLogin(string username, string pass, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginLogin(username, pass, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Blackjack.GameReference.PlayerData EndLogin(System.IAsyncResult result) {
-            return base.Channel.EndLogin(result);
-        }
-        
-        private System.IAsyncResult OnBeginLogin(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string username = ((string)(inValues[0]));
-            string pass = ((string)(inValues[1]));
-            return this.BeginLogin(username, pass, callback, asyncState);
-        }
-        
-        private object[] OnEndLogin(System.IAsyncResult result) {
-            Blackjack.GameReference.PlayerData retVal = this.EndLogin(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnLoginCompleted(object state) {
-            if ((this.LoginCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.LoginCompleted(this, new LoginCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void LoginAsync(string username, string pass) {
-            this.LoginAsync(username, pass, null);
-        }
-        
-        public void LoginAsync(string username, string pass, object userState) {
-            if ((this.onBeginLoginDelegate == null)) {
-                this.onBeginLoginDelegate = new BeginOperationDelegate(this.OnBeginLogin);
-            }
-            if ((this.onEndLoginDelegate == null)) {
-                this.onEndLoginDelegate = new EndOperationDelegate(this.OnEndLogin);
-            }
-            if ((this.onLoginCompletedDelegate == null)) {
-                this.onLoginCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnLoginCompleted);
-            }
-            base.InvokeAsync(this.onBeginLoginDelegate, new object[] {
-                        username,
-                        pass}, this.onEndLoginDelegate, this.onLoginCompletedDelegate, userState);
+        public System.Threading.Tasks.Task<Blackjack.GameReference.PlayerData> LoginAsync(string username, string pass) {
+            return base.Channel.LoginAsync(username, pass);
         }
         
         public Blackjack.GameReference.PlayerData GetPlayerInfo(string username) {
             return base.Channel.GetPlayerInfo(username);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginGetPlayerInfo(string username, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetPlayerInfo(username, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Blackjack.GameReference.PlayerData EndGetPlayerInfo(System.IAsyncResult result) {
-            return base.Channel.EndGetPlayerInfo(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetPlayerInfo(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string username = ((string)(inValues[0]));
-            return this.BeginGetPlayerInfo(username, callback, asyncState);
-        }
-        
-        private object[] OnEndGetPlayerInfo(System.IAsyncResult result) {
-            Blackjack.GameReference.PlayerData retVal = this.EndGetPlayerInfo(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetPlayerInfoCompleted(object state) {
-            if ((this.GetPlayerInfoCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetPlayerInfoCompleted(this, new GetPlayerInfoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetPlayerInfoAsync(string username) {
-            this.GetPlayerInfoAsync(username, null);
-        }
-        
-        public void GetPlayerInfoAsync(string username, object userState) {
-            if ((this.onBeginGetPlayerInfoDelegate == null)) {
-                this.onBeginGetPlayerInfoDelegate = new BeginOperationDelegate(this.OnBeginGetPlayerInfo);
-            }
-            if ((this.onEndGetPlayerInfoDelegate == null)) {
-                this.onEndGetPlayerInfoDelegate = new EndOperationDelegate(this.OnEndGetPlayerInfo);
-            }
-            if ((this.onGetPlayerInfoCompletedDelegate == null)) {
-                this.onGetPlayerInfoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetPlayerInfoCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetPlayerInfoDelegate, new object[] {
-                        username}, this.onEndGetPlayerInfoDelegate, this.onGetPlayerInfoCompletedDelegate, userState);
+        public System.Threading.Tasks.Task<Blackjack.GameReference.PlayerData> GetPlayerInfoAsync(string username) {
+            return base.Channel.GetPlayerInfoAsync(username);
         }
         
         public Blackjack.GameReference.Table GetTable() {
             return base.Channel.GetTable();
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginGetTable(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetTable(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Blackjack.GameReference.Table EndGetTable(System.IAsyncResult result) {
-            return base.Channel.EndGetTable(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetTable(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginGetTable(callback, asyncState);
-        }
-        
-        private object[] OnEndGetTable(System.IAsyncResult result) {
-            Blackjack.GameReference.Table retVal = this.EndGetTable(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetTableCompleted(object state) {
-            if ((this.GetTableCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetTableCompleted(this, new GetTableCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetTableAsync() {
-            this.GetTableAsync(null);
-        }
-        
-        public void GetTableAsync(object userState) {
-            if ((this.onBeginGetTableDelegate == null)) {
-                this.onBeginGetTableDelegate = new BeginOperationDelegate(this.OnBeginGetTable);
-            }
-            if ((this.onEndGetTableDelegate == null)) {
-                this.onEndGetTableDelegate = new EndOperationDelegate(this.OnEndGetTable);
-            }
-            if ((this.onGetTableCompletedDelegate == null)) {
-                this.onGetTableCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTableCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetTableDelegate, null, this.onEndGetTableDelegate, this.onGetTableCompletedDelegate, userState);
+        public System.Threading.Tasks.Task<Blackjack.GameReference.Table> GetTableAsync() {
+            return base.Channel.GetTableAsync();
         }
         
         public Blackjack.GameReference.Table[] ListTables() {
             return base.Channel.ListTables();
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginListTables(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginListTables(callback, asyncState);
+        public System.Threading.Tasks.Task<Blackjack.GameReference.Table[]> ListTablesAsync() {
+            return base.Channel.ListTablesAsync();
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Blackjack.GameReference.Table[] EndListTables(System.IAsyncResult result) {
-            return base.Channel.EndListTables(result);
+        public void CreateTable(string playerGuid) {
+            base.Channel.CreateTable(playerGuid);
         }
         
-        private System.IAsyncResult OnBeginListTables(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginListTables(callback, asyncState);
-        }
-        
-        private object[] OnEndListTables(System.IAsyncResult result) {
-            Blackjack.GameReference.Table[] retVal = this.EndListTables(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnListTablesCompleted(object state) {
-            if ((this.ListTablesCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.ListTablesCompleted(this, new ListTablesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void ListTablesAsync() {
-            this.ListTablesAsync(null);
-        }
-        
-        public void ListTablesAsync(object userState) {
-            if ((this.onBeginListTablesDelegate == null)) {
-                this.onBeginListTablesDelegate = new BeginOperationDelegate(this.OnBeginListTables);
-            }
-            if ((this.onEndListTablesDelegate == null)) {
-                this.onEndListTablesDelegate = new EndOperationDelegate(this.OnEndListTables);
-            }
-            if ((this.onListTablesCompletedDelegate == null)) {
-                this.onListTablesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnListTablesCompleted);
-            }
-            base.InvokeAsync(this.onBeginListTablesDelegate, null, this.onEndListTablesDelegate, this.onListTablesCompletedDelegate, userState);
-        }
-        
-        public Blackjack.GameReference.Table CreateTable() {
-            return base.Channel.CreateTable();
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginCreateTable(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginCreateTable(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Blackjack.GameReference.Table EndCreateTable(System.IAsyncResult result) {
-            return base.Channel.EndCreateTable(result);
-        }
-        
-        private System.IAsyncResult OnBeginCreateTable(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginCreateTable(callback, asyncState);
-        }
-        
-        private object[] OnEndCreateTable(System.IAsyncResult result) {
-            Blackjack.GameReference.Table retVal = this.EndCreateTable(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnCreateTableCompleted(object state) {
-            if ((this.CreateTableCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.CreateTableCompleted(this, new CreateTableCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void CreateTableAsync() {
-            this.CreateTableAsync(null);
-        }
-        
-        public void CreateTableAsync(object userState) {
-            if ((this.onBeginCreateTableDelegate == null)) {
-                this.onBeginCreateTableDelegate = new BeginOperationDelegate(this.OnBeginCreateTable);
-            }
-            if ((this.onEndCreateTableDelegate == null)) {
-                this.onEndCreateTableDelegate = new EndOperationDelegate(this.OnEndCreateTable);
-            }
-            if ((this.onCreateTableCompletedDelegate == null)) {
-                this.onCreateTableCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateTableCompleted);
-            }
-            base.InvokeAsync(this.onBeginCreateTableDelegate, null, this.onEndCreateTableDelegate, this.onCreateTableCompletedDelegate, userState);
+        public System.Threading.Tasks.Task CreateTableAsync(string playerGuid) {
+            return base.Channel.CreateTableAsync(playerGuid);
         }
         
         public Blackjack.GameReference.Table JoinTable(string playerGuid, string tableId) {
             return base.Channel.JoinTable(playerGuid, tableId);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginJoinTable(string playerGuid, string tableId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginJoinTable(playerGuid, tableId, callback, asyncState);
+        public System.Threading.Tasks.Task<Blackjack.GameReference.Table> JoinTableAsync(string playerGuid, string tableId) {
+            return base.Channel.JoinTableAsync(playerGuid, tableId);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public Blackjack.GameReference.Table EndJoinTable(System.IAsyncResult result) {
-            return base.Channel.EndJoinTable(result);
+        public Blackjack.GameReference.Table PlayerReady(string playerGuid, string tableId) {
+            return base.Channel.PlayerReady(playerGuid, tableId);
         }
         
-        private System.IAsyncResult OnBeginJoinTable(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string playerGuid = ((string)(inValues[0]));
-            string tableId = ((string)(inValues[1]));
-            return this.BeginJoinTable(playerGuid, tableId, callback, asyncState);
-        }
-        
-        private object[] OnEndJoinTable(System.IAsyncResult result) {
-            Blackjack.GameReference.Table retVal = this.EndJoinTable(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnJoinTableCompleted(object state) {
-            if ((this.JoinTableCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.JoinTableCompleted(this, new JoinTableCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void JoinTableAsync(string playerGuid, string tableId) {
-            this.JoinTableAsync(playerGuid, tableId, null);
-        }
-        
-        public void JoinTableAsync(string playerGuid, string tableId, object userState) {
-            if ((this.onBeginJoinTableDelegate == null)) {
-                this.onBeginJoinTableDelegate = new BeginOperationDelegate(this.OnBeginJoinTable);
-            }
-            if ((this.onEndJoinTableDelegate == null)) {
-                this.onEndJoinTableDelegate = new EndOperationDelegate(this.OnEndJoinTable);
-            }
-            if ((this.onJoinTableCompletedDelegate == null)) {
-                this.onJoinTableCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnJoinTableCompleted);
-            }
-            base.InvokeAsync(this.onBeginJoinTableDelegate, new object[] {
-                        playerGuid,
-                        tableId}, this.onEndJoinTableDelegate, this.onJoinTableCompletedDelegate, userState);
+        public System.Threading.Tasks.Task<Blackjack.GameReference.Table> PlayerReadyAsync(string playerGuid, string tableId) {
+            return base.Channel.PlayerReadyAsync(playerGuid, tableId);
         }
         
         public void Leave() {
             base.Channel.Leave();
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginLeave(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginLeave(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndLeave(System.IAsyncResult result) {
-            base.Channel.EndLeave(result);
-        }
-        
-        private System.IAsyncResult OnBeginLeave(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginLeave(callback, asyncState);
-        }
-        
-        private object[] OnEndLeave(System.IAsyncResult result) {
-            this.EndLeave(result);
-            return null;
-        }
-        
-        private void OnLeaveCompleted(object state) {
-            if ((this.LeaveCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.LeaveCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void LeaveAsync() {
-            this.LeaveAsync(null);
-        }
-        
-        public void LeaveAsync(object userState) {
-            if ((this.onBeginLeaveDelegate == null)) {
-                this.onBeginLeaveDelegate = new BeginOperationDelegate(this.OnBeginLeave);
-            }
-            if ((this.onEndLeaveDelegate == null)) {
-                this.onEndLeaveDelegate = new EndOperationDelegate(this.OnEndLeave);
-            }
-            if ((this.onLeaveCompletedDelegate == null)) {
-                this.onLeaveCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnLeaveCompleted);
-            }
-            base.InvokeAsync(this.onBeginLeaveDelegate, null, this.onEndLeaveDelegate, this.onLeaveCompletedDelegate, userState);
+        public System.Threading.Tasks.Task LeaveAsync() {
+            return base.Channel.LeaveAsync();
         }
         
         public void Bet(string guid, int amount) {
             base.Channel.Bet(guid, amount);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginBet(string guid, int amount, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginBet(guid, amount, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndBet(System.IAsyncResult result) {
-            base.Channel.EndBet(result);
-        }
-        
-        private System.IAsyncResult OnBeginBet(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string guid = ((string)(inValues[0]));
-            int amount = ((int)(inValues[1]));
-            return this.BeginBet(guid, amount, callback, asyncState);
-        }
-        
-        private object[] OnEndBet(System.IAsyncResult result) {
-            this.EndBet(result);
-            return null;
-        }
-        
-        private void OnBetCompleted(object state) {
-            if ((this.BetCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.BetCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void BetAsync(string guid, int amount) {
-            this.BetAsync(guid, amount, null);
-        }
-        
-        public void BetAsync(string guid, int amount, object userState) {
-            if ((this.onBeginBetDelegate == null)) {
-                this.onBeginBetDelegate = new BeginOperationDelegate(this.OnBeginBet);
-            }
-            if ((this.onEndBetDelegate == null)) {
-                this.onEndBetDelegate = new EndOperationDelegate(this.OnEndBet);
-            }
-            if ((this.onBetCompletedDelegate == null)) {
-                this.onBetCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnBetCompleted);
-            }
-            base.InvokeAsync(this.onBeginBetDelegate, new object[] {
-                        guid,
-                        amount}, this.onEndBetDelegate, this.onBetCompletedDelegate, userState);
+        public System.Threading.Tasks.Task BetAsync(string guid, int amount) {
+            return base.Channel.BetAsync(guid, amount);
         }
         
         public void Hit() {
             base.Channel.Hit();
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginHit(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginHit(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndHit(System.IAsyncResult result) {
-            base.Channel.EndHit(result);
-        }
-        
-        private System.IAsyncResult OnBeginHit(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginHit(callback, asyncState);
-        }
-        
-        private object[] OnEndHit(System.IAsyncResult result) {
-            this.EndHit(result);
-            return null;
-        }
-        
-        private void OnHitCompleted(object state) {
-            if ((this.HitCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.HitCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void HitAsync() {
-            this.HitAsync(null);
-        }
-        
-        public void HitAsync(object userState) {
-            if ((this.onBeginHitDelegate == null)) {
-                this.onBeginHitDelegate = new BeginOperationDelegate(this.OnBeginHit);
-            }
-            if ((this.onEndHitDelegate == null)) {
-                this.onEndHitDelegate = new EndOperationDelegate(this.OnEndHit);
-            }
-            if ((this.onHitCompletedDelegate == null)) {
-                this.onHitCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnHitCompleted);
-            }
-            base.InvokeAsync(this.onBeginHitDelegate, null, this.onEndHitDelegate, this.onHitCompletedDelegate, userState);
+        public System.Threading.Tasks.Task HitAsync() {
+            return base.Channel.HitAsync();
         }
         
         public void Fold() {
             base.Channel.Fold();
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginFold(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginFold(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndFold(System.IAsyncResult result) {
-            base.Channel.EndFold(result);
-        }
-        
-        private System.IAsyncResult OnBeginFold(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginFold(callback, asyncState);
-        }
-        
-        private object[] OnEndFold(System.IAsyncResult result) {
-            this.EndFold(result);
-            return null;
-        }
-        
-        private void OnFoldCompleted(object state) {
-            if ((this.FoldCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.FoldCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void FoldAsync() {
-            this.FoldAsync(null);
-        }
-        
-        public void FoldAsync(object userState) {
-            if ((this.onBeginFoldDelegate == null)) {
-                this.onBeginFoldDelegate = new BeginOperationDelegate(this.OnBeginFold);
-            }
-            if ((this.onEndFoldDelegate == null)) {
-                this.onEndFoldDelegate = new EndOperationDelegate(this.OnEndFold);
-            }
-            if ((this.onFoldCompletedDelegate == null)) {
-                this.onFoldCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFoldCompleted);
-            }
-            base.InvokeAsync(this.onBeginFoldDelegate, null, this.onEndFoldDelegate, this.onFoldCompletedDelegate, userState);
+        public System.Threading.Tasks.Task FoldAsync() {
+            return base.Channel.FoldAsync();
         }
     }
 }

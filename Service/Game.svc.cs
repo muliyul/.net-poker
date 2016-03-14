@@ -11,6 +11,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading;
 using System.Web;
 
 namespace Service
@@ -19,10 +20,13 @@ namespace Service
         ConcurrencyMode = ConcurrencyMode.Reentrant)]
     public class Game : IGame
     {
-        IDictionary<string, Player> sessions = new Dictionary<string, Player>();
+        IDictionary<string, PlayerData> sessions = new Dictionary<string, PlayerData>();
+        private static Dictionary<string, IGameCallback> clients =
+                new Dictionary<string, IGameCallback>();
         IList<Table> Tables = new List<Table>();
-
-        Player CurrentPlayer
+  
+        private static object locker = new object();
+        PlayerData CurrentPlayer
         {
             get
             {
@@ -45,12 +49,18 @@ namespace Service
             CurrentTable.Bet(CurrentPlayer, amount);
         }
 
-        public Table CreateTable()
+        public void CreateTable(string playerGuid)
         {
             var t = new Table();
             Tables.Add(t);
-            t.Join(CurrentPlayer);
-            return t;
+
+            foreach (var client in sessions.Values /*.Where(p => !p.Guid.Equals(playerGuid))*/)
+            {
+               sessions[playerGuid].myCallbacks.OnNewTableCreated("8", new GameArgs());
+               // sessions[playerGuid].myCallbacks.OnBet(null, null);
+            }
+            
+           // return t;
         }
 
         public void Fold()
@@ -64,15 +74,17 @@ namespace Service
             {
                 var player = db.Players.SingleOrDefault(p => p.Username == username);
                  if (player == null) return null;
-                    return new PlayerData()
-                    {
-                        Bank = player.Bank,
-                        Id = player.Id,
-                        //Hand = player.Hand,
-                        MemberSince = player.MemberSince,
-                        Username = player.Username
-                        
+                return new PlayerData()
+                {
+                    Bank = player.Bank,
+                    Id = player.Id,
+                    //Hand = player.Hand,
+                    MemberSince = player.MemberSince,
+                    Username = player.Username,
+                    myCallbacks = OperationContext.Current.GetCallbackChannel<IGameCallback>()
+
                     };
+
             }
             
         }
@@ -93,7 +105,7 @@ namespace Service
             if (currentPlayer == null) return null;
        
             var table = Tables.SingleOrDefault(t => t.Id == tableId);
-            table?.Join(currentPlayer);
+         //   table?.Join(currentPlayer);
 
             return table;
         }
@@ -116,18 +128,19 @@ namespace Service
                 {
                     var player = db.Players.SingleOrDefault(p => p.Username == username && p.Password == pass);
                     var newGuid = Guid.NewGuid();
-                    // sessions[newGuid] = player;
 
                     var retPlayer = new PlayerData()
                     {
                         Bank = player.Bank,
                         Id = player.Id,
-                       // Hand =// player.Hand,
-                       // MemberSince = player.MemberSince,
+                        // Hand =// player.Hand,
+                        // MemberSince = player.MemberSince,
                         Username = player.Username,
-                        Guid = newGuid.ToString()
+                        Guid = newGuid.ToString(),
+                        myCallbacks = OperationContext.Current.GetCallbackChannel<IGameCallback>()
                     };
-
+                    sessions[newGuid.ToString()] = retPlayer;
+                 
                     return retPlayer;
                 } catch (InvalidOperationException)
                 {
@@ -139,6 +152,11 @@ namespace Service
                 }
             }
             return null;
+        }
+
+        public Table PlayerReady(string playerGuid, string tableId)
+        {
+            throw new NotImplementedException();
         }
 
         public void Register(string username, string pass)

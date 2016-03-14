@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BlackJack.CardGameFramework;
-
+using Blackjack.GameReference;
 
 namespace BlackJack
 {
@@ -8,14 +8,18 @@ namespace BlackJack
 	{
 		#region Fields
 
+        
+        private Blackjack.GameReference.Table _table;
+
         // private Deck and Player objects for the current deck, dealer, and player
-		private CardGameFramework.Deck deck;
+        private CardGameFramework.Deck deck;
 		private Player dealer;
         private Player player;
+        private Blackjack.GameReference.PlayerData _logedPlayer;
+        private List<Blackjack.GameReference.PlayerData> _otherPlayers;
+        #endregion
 
-		#endregion
-
-		#region Properties
+        #region Properties
 
         // public properties to return the current player, dealer, and current deck
         public Player CurrentPlayer { get { return player; } }
@@ -30,11 +34,12 @@ namespace BlackJack
         /// Main Constructor for BlackJack Game
         /// </summary>
         /// <param name="initBalance"></param>
-		public BlackJackGame(int initBalance)
+		public BlackJackGame(Blackjack.GameReference.PlayerData player)
 		{
 			// Create a dealer and one player with the initial balance.
 			dealer = new Player();
-            player = new Player(initBalance) ;
+            _logedPlayer = player ;
+
 		}
 
 		#endregion
@@ -105,6 +110,14 @@ namespace BlackJack
         {
             player.Balance += player.Bet * 2;
             player.Wins += 1;
+        }
+
+        public void PlayerReady()
+        {
+           // using (var server = new GameClient(Blackjack.StartForm.instanceContext))
+           // {
+           //     server.PlayerReady(_logedPlayer.Guid, "1");
+            //}
         }
 		#endregion
 	}

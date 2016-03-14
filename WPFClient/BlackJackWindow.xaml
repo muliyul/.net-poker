@@ -421,11 +421,11 @@
         </Style>
     </Window.Resources>
     <Grid x:Name="rootV">
-        
+
         <!-- Top And Bottom Borders -->
         <Image HorizontalAlignment="Left" Height="66" Margin="100,31,0,0" VerticalAlignment="Top" Width="550" Source="Resources/BorderPlaceYourBetTop.gif" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="75" Margin="100,582,0,0" VerticalAlignment="Top" Width="550" Source="Resources/BorderPlaceYourBetBottom.gif" Stretch="Fill"/>
-        
+
         <!-- Top Elements -->
         <Label Content="My Account" HorizontalAlignment="Left" Margin="142,31,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" FontWeight="Bold" Foreground="Gold"/>
         <Label Content="Wins" HorizontalAlignment="Left" Margin="293,31,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" FontWeight="Bold" Foreground="Gold"/>
@@ -487,14 +487,14 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        
+
         <!-- Side Deck -->
         <Image Source="Resources/cardSkin.PNG" HorizontalAlignment="Left" Height="81" Margin="535,119,0,0" VerticalAlignment="Top" Width="59" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="82" Margin="533,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="82" Margin="531,123,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="82" Margin="529,125,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="82" Margin="527,127,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
-        
+
         <!-- Dealer Cards -->
         <Image x:Name="DealerCard0" HorizontalAlignment="Left" Height="82" Margin="145,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
         <Image x:Name="DealerCard1" HorizontalAlignment="Left" Height="82" Margin="174,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
@@ -513,21 +513,21 @@
 
         <!-- Player Cards Status -->
         <Label x:Name="TotalCardValLbl" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="219,240,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Hidden"/>
-        
+
         <!-- Player Widget -->
         <Image HorizontalAlignment="Left" Height="172" Margin="274,394,0,0" VerticalAlignment="Top" Width="154" Source="Resources/FrameOrange.gif" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="119" Margin="294,420,0,0" VerticalAlignment="Top" Width="113" Source="{Binding Source={x:Static properties:Settings.Default},Path=PlayerImage}" Stretch="Fill"/>
         <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="119,506,0,0"  Content="{Binding Source={x:Static properties:Settings.Default},Path=PlayerName}" VerticalAlignment="Top" Width="135" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
-        
+
         <!-- Win Status -->
         <Label x:Name="WinStatus" Visibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="450,506,0,0"  Content="Dealer Won" VerticalAlignment="Top" Width="190" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Comic Sans MS" BorderThickness="1"/>
-        
+
         <!-- Bet Button Elements -->
         <Button x:Name="Bet10Btn" Style="{StaticResource TenButton}" Content="10" HorizontalAlignment="Left" Margin="115,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet10"/>
         <Button x:Name="Bet25Btn" Style="{StaticResource TwentyFiveButton}" Content="25" HorizontalAlignment="Left" Margin="183,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet25"/>
         <Button x:Name="Bet50Btn" Style="{StaticResource FiftyButton}" Content="50" HorizontalAlignment="Left" Margin="250,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet50"/>
         <Button x:Name="Bet100Btn" Style="{StaticResource HundrendButton}" Content="100" HorizontalAlignment="Left" Margin="317,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet100"/>
-        
+
         <!-- Bet Status -->
         <Label x:Name="current_bet_label" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="411,619,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
@@ -544,16 +544,17 @@
             </Label.Background>
         </Label>
         <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="34" Margin="411,584,0,0" Content="My Bet" VerticalAlignment="Top" Width="112" Background="{x:Null}" BorderBrush="Gold" Foreground="Gold" FontFamily="Arial" FontSize="14" FontWeight="Bold" BorderThickness="1"/>
-        
+
         <!-- Bet Clear Button -->
         <Button x:Name="ClearBtn" Style="{StaticResource ClearButton}" Content="Clear" HorizontalAlignment="Left" Margin="544,604,0,0" VerticalAlignment="Top" Width="86" Height="32" Click="ClearBet" FontFamily="Arial"/>
-        
+
         <!-- Lower Game Buttons -->
         <Button x:Name="DoubleBetBtn" Style="{StaticResource ControlButton}" Content="Double Down" HorizontalAlignment="Left" Margin="100,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="DoubleBet" FontFamily="Arial"/>
         <Button x:Name="HitBtn" Style="{StaticResource ControlButton}" Content="Hit" HorizontalAlignment="Left" Margin="213,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Hit" FontFamily="Arial"/>
         <Button x:Name="StandBtn" Style="{StaticResource ControlButton}" Content="Stand" HorizontalAlignment="Left" Margin="327,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Stand" FontFamily="Arial"/>
         <Button x:Name="DealBtn" Style="{StaticResource ControlButton}" Content="Deal" HorizontalAlignment="Left" Margin="438,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Deal" FontFamily="Arial"/>
         <Button Style="{StaticResource ControlButton}" Content="End Game" HorizontalAlignment="Left" Margin="550,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Button_Click" FontFamily="Arial"/>
-        
+        <Button x:Name="ReadyBtn" Style="{StaticResource ControlButton}" Content="Ready" HorizontalAlignment="Left" Margin="52,587,0,0" VerticalAlignment="Top" Width="48" Height="65" Click="ReadyBtn_Click" FontFamily="Arial"/>
+
     </Grid>
 </Window>

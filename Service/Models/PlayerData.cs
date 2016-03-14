@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+
 using System.Web;
 
 namespace Service.Models
@@ -23,5 +24,9 @@ namespace Service.Models
         public DateTime MemberSince { get; set; }
         [DataMember]
         public Hand Hand { get; set; }
+
+        public IGameCallback myCallbacks { get; set; }
+
+
     }
 }

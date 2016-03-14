@@ -28,12 +28,14 @@ namespace Service
         [OperationContract]
         IEnumerable<Models.Table> ListTables();
 
-        [OperationContract]
-        Models.Table CreateTable();
+        [OperationContract(IsOneWay = true)]
+        void CreateTable(string playerGuid);
 
         [OperationContract]
         Models.Table JoinTable(string playerGuid, string tableId);
-        
+        [OperationContract]
+        Models.Table PlayerReady(string playerGuid, string tableId);
+
         [OperationContract(IsOneWay = true)]
         void Leave();
 

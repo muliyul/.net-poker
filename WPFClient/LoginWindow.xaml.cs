@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,32 +22,35 @@ namespace Blackjack
     /// </summary>
     public partial class LoginWindow : Window
     {
+        public static GameReference.GameClient GameServer;
+        public static InstanceContext InstContext;
+        private StartForm startForm;
         public LoginWindow()
         {
             InitializeComponent();
-
+            startForm = new StartForm();
+            InstContext = new InstanceContext(startForm);
+            GameServer = new GameReference.GameClient(InstContext);
         }
 
-        private void BtLogin_Click(object sender, RoutedEventArgs e)
+        private async void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-            using (var gr = new GameReference.GameClient())
-            {
-                gr.LoginCompleted += Gr_LoginCompleted;
-                gr.LoginAsync(TbUserName.Text, PbPassword.Password);
-            }
-        }
-
-        private void Gr_LoginCompleted(object sender, GameReference.LoginCompletedEventArgs e)
-        {
-            var player = e.Result;
+           
+            var player = await GameServer.LoginAsync(TbUserName.Text, PbPassword.Password);
+            startForm.Player = player;
             if (player != null)
             {
-                var w = new StartForm();
+                var w = new StartForm(player);
                 w.Visibility = Visibility.Visible;
-            } else
+                this.Hide();
+            }
+            else
             {
                 LbWrongPass.Visibility = Visibility.Visible;
             }
+            
         }
+
+
     }
 }

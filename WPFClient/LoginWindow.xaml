@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blackjack"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="300">
+        Title=".Net Black Jack Login" Height="300" Width="300">
     <Grid RenderTransformOrigin="0.483,0.491" >
 
         <Grid.RowDefinitions>
@@ -27,6 +27,10 @@
         <Label x:Name="LbPassword" Content="Password:" HorizontalAlignment="Left" Margin="10,7,0,0" Grid.Row="2" VerticalAlignment="Top" Height="26" Width="126"/>
         <PasswordBox x:Name="PbPassword" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="20"/>
         <Label x:Name="LbWrongPass" Content="User or password invalid!" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="272" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Hidden"/>
-        <Label x:Name="label2" Content="Register" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="4" VerticalAlignment="Top" Width="126"  FontWeight="Bold"/>
+        <TextBlock x:Name="label2"  HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="4" VerticalAlignment="Top" Width="282"  FontWeight="Bold" Grid.ColumnSpan="2">
+            <Hyperlink NavigateUri="http://www.google.com" >
+                Don't have a user.
+            </Hyperlink>
+        </TextBlock>
     </Grid>
 </Window>

@@ -13,17 +13,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Blackjack.GameReference;
 
 namespace Blackjack
 {
     public partial class GameWindow : Window
     {
-        public GameWindow()
+
+        public GameWindow(PlayerData player, GameReference.Table table) 
         {
+            this.player = player;
+            this.table = table;
+            game = new BlackJackGame(player);
             InitializeComponent();
             SetUpNewGame();
         }
 
+   
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -32,8 +38,10 @@ namespace Blackjack
         #region Fields
 
         //Creates a new blackjack game with one player and an inital balance set through the settings designer
-        private BlackJackGame game = new BlackJackGame(2000);
+        private BlackJackGame game;
         private bool firstTurn;
+        private PlayerData player;
+        private GameReference.Table table;
 
         #endregion
 
@@ -96,32 +104,32 @@ namespace Blackjack
         /// <returns></returns>
         private EndResult GetGameResult()
         {
-            EndResult endState;
-            // Check for blackjack
-            if (game.Dealer.Hand.NumCards == 2 && game.Dealer.HasBlackJack())
-            {
-                endState = EndResult.DealerBlackJack;
-            }
-            // Check if the dealer has bust
-            else if (game.Dealer.HasBust())
-            {
-                endState = EndResult.DealerBust;
-            }
-            else if (game.Dealer.Hand.CompareFaceValue(game.CurrentPlayer.Hand) > 0)
-            {
-                //dealer wins
-                endState = EndResult.DealerWin;
-            }
-            else if (game.Dealer.Hand.CompareFaceValue(game.CurrentPlayer.Hand) == 0)
-            {
-                // push
-                endState = EndResult.Push;
-            }
-            else
-            {
-                // player wins
-                endState = EndResult.PlayerWin;
-            }
+            EndResult endState= EndResult.DealerBlackJack;
+            //// Check for blackjack
+            //if (game.Dealer.Hand.NumCards == 2 && game.Dealer.HasBlackJack())
+            //{
+            //    endState = EndResult.DealerBlackJack;
+            //}
+            //// Check if the dealer has bust
+            //else if (game.Dealer.HasBust())
+            //{
+            //    endState = EndResult.DealerBust;
+            //}
+            //else if (game.Dealer.Hand.CompareFace(game.CurrentPlayer.Hand) > 0)
+            //{
+            //    //dealer wins
+            //    endState = EndResult.DealerWin;
+            //}
+            //else if (game.Dealer.Hand.CompareFace(game.CurrentPlayer.Hand) == 0)
+            //{
+            //    // push
+            //    endState = EndResult.Push;
+            //}
+            //else
+            //{
+            //    // player wins
+            //    endState = EndResult.PlayerWin;
+            //}
             return endState;
         }
 
@@ -228,26 +236,26 @@ namespace Blackjack
         /// </summary>
         private void UpdateUIPlayerCards()
         {
-            // Update the value of the hand
-            TotalCardValLbl.Content = game.CurrentPlayer.Hand.GetSumOfHand().ToString();
+            //// Update the value of the hand
+            //TotalCardValLbl.Content = game.CurrentPlayer.Hand.GetSumOfHand().ToString();
 
-            List<Card> playerCards = game.CurrentPlayer.Hand.Cards;
-            for (int i = 0; i < playerCards.Count; i++)
-            {
-                // Load each card from file
-                Image card = (Image)rootV.FindName("PlayerCard" + i);
-                LoadCard(card, playerCards[i]);
-                card.Visibility = Visibility.Visible;
-                //card.BringToFront();
-            }
+            //List<Card> playerCards = game.CurrentPlayer.Hand.Cards;
+            //for (int i = 0; i < playerCards.Count; i++)
+            //{
+            //    // Load each card from file
+            //    Image card = (Image)rootV.FindName("PlayerCard" + i);
+            //    LoadCard(card, playerCards[i]);
+            //    card.Visibility = Visibility.Visible;
+            //    //card.BringToFront();
+            //}
 
-            List<Card> dealerCards = game.Dealer.Hand.Cards;
-            for (int i = 0; i < dealerCards.Count; i++)
-            {
-                Image card = (Image)rootV.FindName("DealerCard" + i);
-                LoadCard(card, dealerCards[i]);
-                card.Visibility = Visibility.Visible;
-            }
+            //List<Card> dealerCards = game.Dealer.Hand.Cards;
+            //for (int i = 0; i < dealerCards.Count; i++)
+            //{
+            //    Image card = (Image)rootV.FindName("DealerCard" + i);
+            //    LoadCard(card, dealerCards[i]);
+            //    card.Visibility = Visibility.Visible;
+            //}
         }
 
         /// <summary>
@@ -255,7 +263,7 @@ namespace Blackjack
         /// </summary>
         /// <param name="pb"></param>
         /// <param name="c"></param>
-        private void LoadCard(Image pb, Card c)
+        private void LoadCard(Image pb, GameReference.Card c)
         {
             try
             {
@@ -263,59 +271,58 @@ namespace Blackjack
 
                 switch (c.Suit)
                 {
-                    case Suit.Diamonds:
+                    case GameReference.Suit.Diamonds:
                         image.Append("di");
                         break;
-                    case Suit.Hearts:
+                    case GameReference.Suit.Hearts:
                         image.Append("he");
                         break;
-                    case Suit.Spades:
+                    case GameReference.Suit.Spades:
                         image.Append("sp");
                         break;
-                    case Suit.Clubs:
+                    case GameReference.Suit.Clubs:
                         image.Append("cl");
                         break;
                 }
 
-                switch (c.FaceVal)
+                switch (c.Face)
                 {
-                    case FaceValue.Ace:
+                    case Face.Ace:
                         image.Append("1");
                         break;
-                    case FaceValue.King:
-                        image.Append("k");
+                    case Face.Ten:
+                        if( c.Face.ToString().Equals(Face.Ten.ToString()) )
+                            image.Append("10");
+                        else if (c.Face.ToString().Equals(Face.Queen.ToString()))
+                            image.Append("q");
+                        else if (c.Face.ToString().Equals(Face.King.ToString()))
+                            image.Append("k");
+                        else if (c.Face.ToString().Equals(Face.Jack.ToString()))
+                            image.Append("j");
                         break;
-                    case FaceValue.Queen:
-                        image.Append("q");
-                        break;
-                    case FaceValue.Jack:
-                        image.Append("j");
-                        break;
-                    case FaceValue.Ten:
-                        image.Append("10");
-                        break;
-                    case FaceValue.Nine:
+
+                    case Face.Nine:
                         image.Append("9");
                         break;
-                    case FaceValue.Eight:
+                    case Face.Eight:
                         image.Append("8");
                         break;
-                    case FaceValue.Seven:
+                    case Face.Seven:
                         image.Append("7");
                         break;
-                    case FaceValue.Six:
+                    case Face.Six:
                         image.Append("6");
                         break;
-                    case FaceValue.Five:
+                    case Face.Five:
                         image.Append("5");
                         break;
-                    case FaceValue.Four:
+                    case Face.Four:
                         image.Append("4");
                         break;
-                    case FaceValue.Three:
+                    case Face.Three:
                         image.Append("3");
                         break;
-                    case FaceValue.Two:
+                    case Face.Two:
                         image.Append("2");
                         break;
                 }
@@ -325,8 +332,10 @@ namespace Blackjack
                 string cardGameImageSkinPath = "..\\..\\Images\\Cards\\cardSkin.PNG";
                 image.Insert(0, cardGameImagePath);
                 //check to see if the card should be faced down or up;
-                if (!c.IsCardUp)
-                    image.Replace(image.ToString(), cardGameImageSkinPath);
+
+                // TODO
+                //if (!c.IsCardUp)
+               //     image.Replace(image.ToString(), cardGameImageSkinPath);
                 
                 // And also here
                 ImageSourceConverter imageConverter = new ImageSourceConverter();
@@ -453,6 +462,11 @@ namespace Blackjack
             //Clear the bet amount
             game.CurrentPlayer.ClearBet();
             ShowBankValue();
+        }
+
+        private void ReadyBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
