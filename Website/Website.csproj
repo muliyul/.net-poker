@@ -94,16 +94,16 @@
     </None>
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
-    <Content Include="Service References\GameReference\Website.GameReference.Player.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\GameReference\Game3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\GameReference\Website.GameReference.Card.datasource">
+    <Content Include="Service References\GameReference\Website.GameReference.Table.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\GameReference\Website.GameReference.Table.datasource">
+    <None Include="Service References\GameReference\Game4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\GameReference\Website.GameReference.PlayerData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

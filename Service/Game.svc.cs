@@ -60,7 +60,7 @@ namespace Service
             {
                 try
                 {
-                    s.Callback.OnNewTableCreated(t, null);
+                    s.Callback.OnNewTableCreated(null, Tables);
                 }
                 catch (Exception )
                 {
@@ -199,6 +199,10 @@ namespace Service
             }
         }
 
-       
+        public void Deal()
+        {
+            CurrentPlayer.IsReady = true;
+            CurrentTable.CheckReady();
+        }
     }
 }

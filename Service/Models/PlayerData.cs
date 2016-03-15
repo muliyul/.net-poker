@@ -41,6 +41,7 @@ namespace Service.Models
             }
         }
 
+        public bool IsReady { get; set; }
         public Deck CurrentDeck { get; set; }
 
 

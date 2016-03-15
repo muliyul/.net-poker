@@ -15,262 +15,24 @@ namespace Website.GameReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerData", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
     [System.SerializableAttribute()]
-    public partial class Player : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Website.GameReference.Game[] GamesField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Website.GameReference.Game[] Games {
-            get {
-                return this.GamesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GamesField, value) != true)) {
-                    this.GamesField = value;
-                    this.RaisePropertyChanged("Games");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Game", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
-    [System.SerializableAttribute()]
-    public partial class Game : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> BlackjacksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime PlayedOnField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Website.GameReference.Player PlayerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PlayerIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double WinningsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Blackjacks {
-            get {
-                return this.BlackjacksField;
-            }
-            set {
-                if ((this.BlackjacksField.Equals(value) != true)) {
-                    this.BlackjacksField = value;
-                    this.RaisePropertyChanged("Blackjacks");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime PlayedOn {
-            get {
-                return this.PlayedOnField;
-            }
-            set {
-                if ((this.PlayedOnField.Equals(value) != true)) {
-                    this.PlayedOnField = value;
-                    this.RaisePropertyChanged("PlayedOn");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Website.GameReference.Player Player {
-            get {
-                return this.PlayerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
-                    this.PlayerField = value;
-                    this.RaisePropertyChanged("Player");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PlayerId {
-            get {
-                return this.PlayerIdField;
-            }
-            set {
-                if ((this.PlayerIdField.Equals(value) != true)) {
-                    this.PlayerIdField = value;
-                    this.RaisePropertyChanged("PlayerId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Winnings {
-            get {
-                return this.WinningsField;
-            }
-            set {
-                if ((this.WinningsField.Equals(value) != true)) {
-                    this.WinningsField = value;
-                    this.RaisePropertyChanged("Winnings");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Table", Namespace="http://schemas.datacontract.org/2004/07/Shared")]
-    [System.SerializableAttribute()]
-    public partial class Table : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Website.GameReference.Player1[] PlayersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PotField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IdField, value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Website.GameReference.Player1[] Players {
-            get {
-                return this.PlayersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PlayersField, value) != true)) {
-                    this.PlayersField = value;
-                    this.RaisePropertyChanged("Players");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Pot {
-            get {
-                return this.PotField;
-            }
-            set {
-                if ((this.PotField.Equals(value) != true)) {
-                    this.PotField = value;
-                    this.RaisePropertyChanged("Pot");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Shared")]
-    [System.SerializableAttribute()]
-    public partial class Player1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class PlayerData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double BankField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal BetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Website.GameReference.Card[] HandField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
@@ -303,6 +65,45 @@ namespace Website.GameReference {
                 if ((this.BankField.Equals(value) != true)) {
                     this.BankField = value;
                     this.RaisePropertyChanged("Bank");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Bet {
+            get {
+                return this.BetField;
+            }
+            set {
+                if ((this.BetField.Equals(value) != true)) {
+                    this.BetField = value;
+                    this.RaisePropertyChanged("Bet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Guid {
+            get {
+                return this.GuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GuidField, value) != true)) {
+                    this.GuidField = value;
+                    this.RaisePropertyChanged("Guid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Website.GameReference.Card[] Hand {
+            get {
+                return this.HandField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HandField, value) != true)) {
+                    this.HandField = value;
+                    this.RaisePropertyChanged("Hand");
                 }
             }
         }
@@ -371,7 +172,7 @@ namespace Website.GameReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://schemas.datacontract.org/2004/07/Shared")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
     [System.SerializableAttribute()]
     public partial class Card : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -380,6 +181,9 @@ namespace Website.GameReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Website.GameReference.Face FaceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsCardUpField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Website.GameReference.Suit SuitField;
@@ -406,6 +210,19 @@ namespace Website.GameReference {
                 if ((this.FaceField.Equals(value) != true)) {
                     this.FaceField = value;
                     this.RaisePropertyChanged("Face");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsCardUp {
+            get {
+                return this.IsCardUpField;
+            }
+            set {
+                if ((this.IsCardUpField.Equals(value) != true)) {
+                    this.IsCardUpField = value;
+                    this.RaisePropertyChanged("IsCardUp");
                 }
             }
         }
@@ -447,7 +264,7 @@ namespace Website.GameReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Face", Namespace="http://schemas.datacontract.org/2004/07/Shared")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Face", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
     public enum Face : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -491,7 +308,7 @@ namespace Website.GameReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Suit", Namespace="http://schemas.datacontract.org/2004/07/Shared")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Suit", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
     public enum Suit : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -507,8 +324,194 @@ namespace Website.GameReference {
         Diamonds = 3,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Table", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
+    [System.SerializableAttribute()]
+    public partial class Table : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Website.GameReference.PlayerData DealerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Website.GameReference.PlayerData[] PlayersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PotField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Website.GameReference.PlayerData Dealer {
+            get {
+                return this.DealerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DealerField, value) != true)) {
+                    this.DealerField = value;
+                    this.RaisePropertyChanged("Dealer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Website.GameReference.PlayerData[] Players {
+            get {
+                return this.PlayersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayersField, value) != true)) {
+                    this.PlayersField = value;
+                    this.RaisePropertyChanged("Players");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Pot {
+            get {
+                return this.PotField;
+            }
+            set {
+                if ((this.PotField.Equals(value) != true)) {
+                    this.PotField = value;
+                    this.RaisePropertyChanged("Pot");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GameArgs", Namespace="http://schemas.datacontract.org/2004/07/Service")]
+    [System.SerializableAttribute()]
+    public partial class GameArgs : System.EventArgs, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal AmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Website.GameReference.Card CardField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Website.GameReference.PlayerData PlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Website.GameReference.Table TableField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Website.GameReference.Card Card {
+            get {
+                return this.CardField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardField, value) != true)) {
+                    this.CardField = value;
+                    this.RaisePropertyChanged("Card");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Website.GameReference.PlayerData Player {
+            get {
+                return this.PlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
+                    this.PlayerField = value;
+                    this.RaisePropertyChanged("Player");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Website.GameReference.Table Table {
+            get {
+                return this.TableField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TableField, value) != true)) {
+                    this.TableField = value;
+                    this.RaisePropertyChanged("Table");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameReference.IGame")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameReference.IGame", CallbackContract=typeof(Website.GameReference.IGameCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IGame {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Register", ReplyAction="http://tempuri.org/IGame/RegisterResponse")]
@@ -518,16 +521,16 @@ namespace Website.GameReference {
         System.Threading.Tasks.Task RegisterAsync(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
-        Website.GameReference.Player Login(string username, string pass);
+        Website.GameReference.PlayerData Login(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.Player> LoginAsync(string username, string pass);
+        System.Threading.Tasks.Task<Website.GameReference.PlayerData> LoginAsync(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        Website.GameReference.Player GetPlayerInfo(string username);
+        Website.GameReference.PlayerData GetPlayerInfo(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.Player> GetPlayerInfoAsync(string username);
+        System.Threading.Tasks.Task<Website.GameReference.PlayerData> GetPlayerInfoAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
         Website.GameReference.Table[] ListTables();
@@ -535,17 +538,23 @@ namespace Website.GameReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
         System.Threading.Tasks.Task<Website.GameReference.Table[]> ListTablesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/CreateTable", ReplyAction="http://tempuri.org/IGame/CreateTableResponse")]
-        Website.GameReference.Table CreateTable();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/CreateTable")]
+        void CreateTable();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/CreateTable", ReplyAction="http://tempuri.org/IGame/CreateTableResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.Table> CreateTableAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
-        Website.GameReference.Table JoinTable(string tableId);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/CreateTable")]
+        System.Threading.Tasks.Task CreateTableAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.Table> JoinTableAsync(string tableId);
+        Website.GameReference.Table JoinTable(int tableIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
+        System.Threading.Tasks.Task<Website.GameReference.Table> JoinTableAsync(int tableIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlayerReady", ReplyAction="http://tempuri.org/IGame/PlayerReadyResponse")]
+        Website.GameReference.Table PlayerReady(string tableId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlayerReady", ReplyAction="http://tempuri.org/IGame/PlayerReadyResponse")]
+        System.Threading.Tasks.Task<Website.GameReference.Table> PlayerReadyAsync(string tableId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Leave")]
         void Leave();
@@ -554,16 +563,16 @@ namespace Website.GameReference {
         System.Threading.Tasks.Task LeaveAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Bet")]
-        void Bet(int amount);
+        void Bet(decimal amount);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Bet")]
-        System.Threading.Tasks.Task BetAsync(int amount);
+        System.Threading.Tasks.Task BetAsync(decimal amount);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Hit", ReplyAction="http://tempuri.org/IGame/HitResponse")]
-        Website.GameReference.Card Hit();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Hit")]
+        void Hit();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Hit", ReplyAction="http://tempuri.org/IGame/HitResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.Card> HitAsync();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Hit")]
+        System.Threading.Tasks.Task HitAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Fold")]
         void Fold();
@@ -573,30 +582,139 @@ namespace Website.GameReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGameCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnJoin", ReplyAction="http://tempuri.org/IGame/OnJoinResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnJoin(object sender, Website.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnLeave", ReplyAction="http://tempuri.org/IGame/OnLeaveResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnLeave(object sender, Website.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnHit", ReplyAction="http://tempuri.org/IGame/OnHitResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnHit(object sender, Website.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnBet", ReplyAction="http://tempuri.org/IGame/OnBetResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnBet(object sender, Website.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnFold", ReplyAction="http://tempuri.org/IGame/OnFoldResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnFold(object sender, Website.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnNextTurn", ReplyAction="http://tempuri.org/IGame/OnNextTurnResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnNextTurn(object sender, Website.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnDeal", ReplyAction="http://tempuri.org/IGame/OnDealResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnDeal(object sender, Website.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnNewTableCreated")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnNewTableCreated(object sender, Website.GameReference.Table[] tableList);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGameChannel : Website.GameReference.IGame, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GameClient : System.ServiceModel.ClientBase<Website.GameReference.IGame>, Website.GameReference.IGame {
+    public partial class GameClient : System.ServiceModel.DuplexClientBase<Website.GameReference.IGame>, Website.GameReference.IGame {
         
-        public GameClient() {
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public GameClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public GameClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public GameClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public GameClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public GameClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public void Register(string username, string pass) {
@@ -607,19 +725,19 @@ namespace Website.GameReference {
             return base.Channel.RegisterAsync(username, pass);
         }
         
-        public Website.GameReference.Player Login(string username, string pass) {
+        public Website.GameReference.PlayerData Login(string username, string pass) {
             return base.Channel.Login(username, pass);
         }
         
-        public System.Threading.Tasks.Task<Website.GameReference.Player> LoginAsync(string username, string pass) {
+        public System.Threading.Tasks.Task<Website.GameReference.PlayerData> LoginAsync(string username, string pass) {
             return base.Channel.LoginAsync(username, pass);
         }
         
-        public Website.GameReference.Player GetPlayerInfo(string username) {
+        public Website.GameReference.PlayerData GetPlayerInfo(string username) {
             return base.Channel.GetPlayerInfo(username);
         }
         
-        public System.Threading.Tasks.Task<Website.GameReference.Player> GetPlayerInfoAsync(string username) {
+        public System.Threading.Tasks.Task<Website.GameReference.PlayerData> GetPlayerInfoAsync(string username) {
             return base.Channel.GetPlayerInfoAsync(username);
         }
         
@@ -631,20 +749,28 @@ namespace Website.GameReference {
             return base.Channel.ListTablesAsync();
         }
         
-        public Website.GameReference.Table CreateTable() {
-            return base.Channel.CreateTable();
+        public void CreateTable() {
+            base.Channel.CreateTable();
         }
         
-        public System.Threading.Tasks.Task<Website.GameReference.Table> CreateTableAsync() {
+        public System.Threading.Tasks.Task CreateTableAsync() {
             return base.Channel.CreateTableAsync();
         }
         
-        public Website.GameReference.Table JoinTable(string tableId) {
-            return base.Channel.JoinTable(tableId);
+        public Website.GameReference.Table JoinTable(int tableIndex) {
+            return base.Channel.JoinTable(tableIndex);
         }
         
-        public System.Threading.Tasks.Task<Website.GameReference.Table> JoinTableAsync(string tableId) {
-            return base.Channel.JoinTableAsync(tableId);
+        public System.Threading.Tasks.Task<Website.GameReference.Table> JoinTableAsync(int tableIndex) {
+            return base.Channel.JoinTableAsync(tableIndex);
+        }
+        
+        public Website.GameReference.Table PlayerReady(string tableId) {
+            return base.Channel.PlayerReady(tableId);
+        }
+        
+        public System.Threading.Tasks.Task<Website.GameReference.Table> PlayerReadyAsync(string tableId) {
+            return base.Channel.PlayerReadyAsync(tableId);
         }
         
         public void Leave() {
@@ -655,19 +781,19 @@ namespace Website.GameReference {
             return base.Channel.LeaveAsync();
         }
         
-        public void Bet(int amount) {
+        public void Bet(decimal amount) {
             base.Channel.Bet(amount);
         }
         
-        public System.Threading.Tasks.Task BetAsync(int amount) {
+        public System.Threading.Tasks.Task BetAsync(decimal amount) {
             return base.Channel.BetAsync(amount);
         }
         
-        public Website.GameReference.Card Hit() {
-            return base.Channel.Hit();
+        public void Hit() {
+            base.Channel.Hit();
         }
         
-        public System.Threading.Tasks.Task<Website.GameReference.Card> HitAsync() {
+        public System.Threading.Tasks.Task HitAsync() {
             return base.Channel.HitAsync();
         }
         

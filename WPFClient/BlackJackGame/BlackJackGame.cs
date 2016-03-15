@@ -100,7 +100,7 @@ namespace BlackJack
         /// </summary>
         public void PlayerLose()
         {
-            player.Losses += 1;
+       //     player.Losses += 1;
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace BlackJack
         /// </summary>
         public void PlayerWin()
         {
-            player.Balance += player.Bet * 2;
-            player.Wins += 1;
+           // player.Balance += player.Bet * 2;
+           // player.Wins += 1;
         }
 
         public void PlayerReady()

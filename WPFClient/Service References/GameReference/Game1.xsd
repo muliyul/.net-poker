@@ -136,6 +136,7 @@
   <xs:element name="ArrayOfTable" nillable="true" type="tns:ArrayOfTable" />
   <xs:complexType name="Table">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Dealer" nillable="true" type="tns:PlayerData" />
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfPlayerData" />
       <xs:element minOccurs="0" name="Pot" type="xs:int" />

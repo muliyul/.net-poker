@@ -22,12 +22,10 @@ namespace Service.Models
         public int Pot { get; set; }
 
         [DataMember]
-        public PlayerData Dealer { get { return _dealer; }  }
+        public PlayerData Dealer { get; set; }
 
         private Deck _deck;
-
-        [DataMember]
-        private PlayerData _dealer;
+        
         #region Game Events
 
 
@@ -46,8 +44,8 @@ namespace Service.Models
         {
             Id = Guid.NewGuid().ToString();
             Players = new List<PlayerData>();
-            _dealer = new PlayerData();
-           // Players.Add(_dealer); // Is the dealer one of the players?
+            Dealer = new PlayerData();
+           // Players.Add(Dealer); // Is the dealer one of the players?
         }
 
 
@@ -56,7 +54,7 @@ namespace Service.Models
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             RegisterEvents(cb);
             Players.Add(player);
-            JoinHandler(null, new GameArgs() { Player = player });
+            JoinHandler(null, new GameArgs() { Table = this });
         }
 
         void RegisterEvents(IGameCallback callback)
@@ -109,15 +107,15 @@ namespace Service.Models
             // Set the dealer's second card to be facing down
             d.IsCardUp = false;
 
-            _dealer.Hand.Cards.Add(d);
+            Dealer.Hand.Cards.Add(d);
 
             // Give the player and the dealer a handle to the current deck
             foreach (var player in Players)
             {
                 player.CurrentDeck = _deck;
             }
-            _dealer.CurrentDeck = _deck;
-
+            Dealer.CurrentDeck = _deck;
+            NextTurnHandler(null, new GameArgs() { Table = this });
         }
 
         internal void Hit(PlayerData player)
@@ -144,6 +142,24 @@ namespace Service.Models
         internal void Fold(PlayerData player)
         {
             FoldHandler(null, new GameArgs() { Player = player });
+        }
+
+        /// <summary>
+        /// Check if all players are ready to play
+        /// </summary>
+        internal void CheckReady()
+        {
+           
+           foreach(var p in Players)
+           {
+                if (p.IsReady == false)
+                    return;
+           }
+
+            // Start The Game
+
+            DealNewGame();
+
         }
     }
 }

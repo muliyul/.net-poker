@@ -334,6 +334,9 @@ namespace Blackjack.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Blackjack.GameReference.PlayerData DealerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -349,6 +352,19 @@ namespace Blackjack.GameReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Blackjack.GameReference.PlayerData Dealer {
+            get {
+                return this.DealerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DealerField, value) != true)) {
+                    this.DealerField = value;
+                    this.RaisePropertyChanged("Dealer");
+                }
             }
         }
         
@@ -419,6 +435,9 @@ namespace Blackjack.GameReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Blackjack.GameReference.PlayerData PlayerField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Blackjack.GameReference.Table TableField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -464,6 +483,19 @@ namespace Blackjack.GameReference {
                 if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
                     this.PlayerField = value;
                     this.RaisePropertyChanged("Player");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Blackjack.GameReference.Table Table {
+            get {
+                return this.TableField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TableField, value) != true)) {
+                    this.TableField = value;
+                    this.RaisePropertyChanged("Table");
                 }
             }
         }
@@ -535,6 +567,12 @@ namespace Blackjack.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Bet")]
         System.Threading.Tasks.Task BetAsync(decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Deal")]
+        void Deal();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Deal")]
+        System.Threading.Tasks.Task DealAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Hit")]
         void Hit();
@@ -755,6 +793,14 @@ namespace Blackjack.GameReference {
         
         public System.Threading.Tasks.Task BetAsync(decimal amount) {
             return base.Channel.BetAsync(amount);
+        }
+        
+        public void Deal() {
+            base.Channel.Deal();
+        }
+        
+        public System.Threading.Tasks.Task DealAsync() {
+            return base.Channel.DealAsync();
         }
         
         public void Hit() {

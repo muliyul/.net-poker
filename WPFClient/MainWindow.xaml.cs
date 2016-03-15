@@ -34,7 +34,10 @@ namespace Blackjack
             }
         }
         private PlayerData _player;
+        private GameReference.Table _currentTable;
         private List<GameReference.Table> _serverTableList;
+
+        private GameWindow gameWindow;
 
         public StartForm()
         {
@@ -116,8 +119,8 @@ namespace Blackjack
             this.Hide();
             var i = tablesList.SelectedIndex;
 
-            var table = await LoginWindow.GameServer.JoinTableAsync(_player.Guid, i);
-            GameWindow gameWindow = new GameWindow(_player, table);
+            _currentTable = await LoginWindow.GameServer.JoinTableAsync(i);
+            gameWindow = new GameWindow(_player, _currentTable);
             gameWindow.ShowDialog();
             this.Show();
         }
@@ -125,18 +128,23 @@ namespace Blackjack
         private void createTableButton_Click(object sender, RoutedEventArgs e)
         {
 
-            LoginWindow.GameServer.CreateTableAsync(_player.Guid);
+            LoginWindow.GameServer.CreateTableAsync();
 
         }
 
         public void OnBet(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            // update table bets
         }
 
         public void OnDeal(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            // game starts
+
+            gameWindow.SetUpGameInPlay();
         }
 
         public void OnFold(object sender, GameArgs e)
@@ -152,6 +160,12 @@ namespace Blackjack
         public void OnJoin(object sender, GameArgs e)
         {
             //throw new NotImplementedException();
+            // update table ui
+            if (e.Table != null && gameWindow != null)
+            {
+                gameWindow.Table = e.Table;
+                gameWindow.UpdatePlayers();
+            }
         }
 
         public void OnLeave(object sender, GameArgs e)

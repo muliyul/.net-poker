@@ -43,6 +43,9 @@ namespace Service
         void Bet(decimal amount);
 
         [OperationContract(IsOneWay = true)]
+        void Deal();
+
+        [OperationContract(IsOneWay = true)]
         void Hit();
 
         [OperationContract(IsOneWay = true)]
