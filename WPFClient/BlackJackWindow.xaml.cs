@@ -431,6 +431,8 @@ namespace Blackjack
                 }
                 else
                 {
+                    
+
                     // Place the bet
                     LoginWindow.GameServer.PlaceBet(player.Guid);
                     //player. PlaceBet();
