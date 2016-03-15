@@ -1,30 +1,20 @@
-﻿using BlackJack;
-using BlackJack.CardGameFramework;
+﻿using Blackjack.Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Blackjack.GameReference;
 
 namespace Blackjack
 {
     public partial class GameWindow : Window
     {
 
-        public GameWindow(PlayerData player, GameReference.Table table) 
+        public GameWindow(Player player, Service.Table table) 
         {
             this.player = player;
             this.table = table;
-            game = new BlackJackGame(player);
             InitializeComponent();
             SetUpNewGame();
         }
@@ -38,10 +28,9 @@ namespace Blackjack
         #region Fields
 
         //Creates a new blackjack game with one player and an inital balance set through the settings designer
-        private BlackJackGame game;
         private bool firstTurn;
-        private PlayerData player;
-        private GameReference.Table table;
+        private Player player;
+        private Service.Table table;
 
         #endregion
 
@@ -53,18 +42,6 @@ namespace Blackjack
         /// <param name="betValue"></param>
         private void Bet(decimal betValue)
         {
-            try
-            {
-                // Update the bet amount
-                game.CurrentPlayer.IncreaseBet(betValue);
-
-                // Update the "My Bet" and "My Account" values
-                ShowBankValue();
-            }
-            catch (Exception NotEnoughMoneyException)
-            {
-                MessageBox.Show(NotEnoughMoneyException.Message);
-            }
         }
 
         /// <summary>
@@ -72,9 +49,6 @@ namespace Blackjack
         /// </summary>
         private void ShowBankValue()
         {
-                // Update the "My Account" value
-            total_sum_label.Content = "$" + game.CurrentPlayer.Balance.ToString();
-            current_bet_label.Content = "$" + game.CurrentPlayer.Bet.ToString();
         }
 
         /// <summary>
@@ -102,7 +76,7 @@ namespace Blackjack
         /// Get the game result.  This returns an EndResult value
         /// </summary>
         /// <returns></returns>
-        private EndResult GetGameResult()
+        /*private EndResult GetGameResult()
         {
             EndResult endState= EndResult.DealerBlackJack;
             //// Check for blackjack
@@ -185,7 +159,7 @@ namespace Blackjack
                 MessageBox.Show("Out of Money.  Please create a new game to play again.");
                 this.Close();
             }
-        }
+        }*/
 
         #endregion
 
@@ -205,7 +179,7 @@ namespace Blackjack
             HitBtn.IsEnabled = true;
             WinStatus.Visibility = Visibility.Hidden;
             TotalCardValLbl.Visibility = Visibility.Visible;
-            DealBtn.IsEnabled = false;
+            //DealBtn.IsEnabled = false;
 
             if (firstTurn)
                 DoubleBetBtn.IsEnabled = true;
@@ -216,7 +190,7 @@ namespace Blackjack
         /// </summary>
         private void SetUpNewGame()
         {
-            DealBtn.IsEnabled = true;
+            //DealBtn.IsEnabled = true;
             DoubleBetBtn.IsEnabled = false;
             StandBtn.IsEnabled = false;
             HitBtn.IsEnabled = false;
@@ -263,7 +237,7 @@ namespace Blackjack
         /// </summary>
         /// <param name="pb"></param>
         /// <param name="c"></param>
-        private void LoadCard(Image pb, GameReference.Card c)
+        private void LoadCard(Image pb, Card c)
         {
             try
             {
@@ -271,16 +245,16 @@ namespace Blackjack
 
                 switch (c.Suit)
                 {
-                    case GameReference.Suit.Diamonds:
+                    case Suit.Diamonds:
                         image.Append("di");
                         break;
-                    case GameReference.Suit.Hearts:
+                    case Suit.Hearts:
                         image.Append("he");
                         break;
-                    case GameReference.Suit.Spades:
+                    case Suit.Spades:
                         image.Append("sp");
                         break;
-                    case GameReference.Suit.Clubs:
+                    case Suit.Clubs:
                         image.Append("cl");
                         break;
                 }
@@ -350,40 +324,6 @@ namespace Blackjack
         }
         #endregion
 
-        private void Deal(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // If the current bet is equal to 0, ask the player to place a bet
-                if ((game.CurrentPlayer.Bet == 0) && (game.CurrentPlayer.Balance > 0))
-                {
-                    MessageBox.Show("You must place a bet before the dealer deals.", "Error", MessageBoxButton.OK);
-                }
-                else
-                {
-                    // Place the bet
-                    game.CurrentPlayer.PlaceBet();
-                    ShowBankValue();
-
-                    // Clear the table, set up the UI for playing a game, and deal a new game
-                    ClearTable();
-                    SetUpGameInPlay();
-                    game.DealNewGame();
-                    UpdateUIPlayerCards();
-
-                    // Check see if the current player has blackjack
-                    if (game.CurrentPlayer.HasBlackJack())
-                    {
-                        EndGame(EndResult.PlayerBlackJack);
-                    }
-                }
-            }
-            catch (Exception NotEnoughMoneyException)
-            {
-                MessageBox.Show(NotEnoughMoneyException.Message);
-            }
-        }
-
         private void Bet10(object sender, RoutedEventArgs e)
         {
             Bet(10);
@@ -406,67 +346,22 @@ namespace Blackjack
 
         private void Stand(object sender, RoutedEventArgs e)
         {
-            // Dealer should finish playing and the UI should be updated
-            game.DealerPlay();
-            UpdateUIPlayerCards();
-
-            // Check who won the game
-            EndGame(GetGameResult());
         }
 
         private void Hit(object sender, RoutedEventArgs e)
         {
-            // It is no longer the first turn, set this to false so that the cards will all be facing upwards
-            firstTurn = false;
-            // Hit once and update UI cards
-            game.CurrentPlayer.Hit();
-            UpdateUIPlayerCards();
-
-            // Check to see if player has bust
-            if (game.CurrentPlayer.HasBust())
-            {
-                EndGame(EndResult.PlayerBust);
-            }
         }
 
         private void DoubleBet(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // Double the player's bet amount
-                game.CurrentPlayer.DoubleDown();
-                UpdateUIPlayerCards();
-                ShowBankValue();
-
-                //Make sure that the player didn't bust
-                if (game.CurrentPlayer.HasBust())
-                {
-                    EndGame(EndResult.PlayerBust);
-                }
-                else
-                {
-                    // Otherwise, let the dealer finish playing
-                    game.DealerPlay();
-                    UpdateUIPlayerCards();
-                    EndGame(GetGameResult());
-                }
-            }
-            catch (Exception NotEnoughMoneyException)
-            {
-                MessageBox.Show(NotEnoughMoneyException.Message);
-            }
         }
 
         private void ClearBet(object sender, RoutedEventArgs e)
         {
-            //Clear the bet amount
-            game.CurrentPlayer.ClearBet();
-            ShowBankValue();
         }
 
         private void ReadyBtn_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

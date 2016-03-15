@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blackjack.Service;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,33 +23,33 @@ namespace Blackjack
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public static GameReference.GameClient GameServer;
+        public static GameServiceClient GameServer;
         public static InstanceContext InstContext;
         private StartForm startForm;
+
         public LoginWindow()
         {
             InitializeComponent();
             startForm = new StartForm();
             InstContext = new InstanceContext(startForm);
-            GameServer = new GameReference.GameClient(InstContext);
+            GameServer = new GameServiceClient(InstContext);
         }
 
         private async void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-           
+
             var player = await GameServer.LoginAsync(TbUserName.Text, PbPassword.Password);
-            startForm.Player = player;
+            startForm.Player = player as Player;
             if (player != null)
             {
-                var w = new StartForm(player);
-                w.Visibility = Visibility.Visible;
-                this.Hide();
+                startForm.Visibility = Visibility.Visible;
+                Hide();
             }
             else
             {
                 LbWrongPass.Visibility = Visibility.Visible;
             }
-            
+
         }
 
 

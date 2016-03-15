@@ -552,7 +552,7 @@
         <Button x:Name="DoubleBetBtn" Style="{StaticResource ControlButton}" Content="Double Down" HorizontalAlignment="Left" Margin="100,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="DoubleBet" FontFamily="Arial"/>
         <Button x:Name="HitBtn" Style="{StaticResource ControlButton}" Content="Hit" HorizontalAlignment="Left" Margin="213,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Hit" FontFamily="Arial"/>
         <Button x:Name="StandBtn" Style="{StaticResource ControlButton}" Content="Stand" HorizontalAlignment="Left" Margin="327,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Stand" FontFamily="Arial"/>
-        <Button x:Name="DealBtn" Style="{StaticResource ControlButton}" Content="Deal" HorizontalAlignment="Left" Margin="438,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Deal" FontFamily="Arial"/>
+        
         <Button Style="{StaticResource ControlButton}" Content="End Game" HorizontalAlignment="Left" Margin="550,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Button_Click" FontFamily="Arial"/>
         <Button x:Name="ReadyBtn" Style="{StaticResource ControlButton}" Content="Ready" HorizontalAlignment="Left" Margin="52,587,0,0" VerticalAlignment="Top" Width="48" Height="65" Click="ReadyBtn_Click" FontFamily="Arial"/>
 

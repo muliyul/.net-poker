@@ -95,12 +95,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BlackJackGame\BlackJackGame.cs" />
-    <Compile Include="BlackJackGame\Player.cs" />
-    <Compile Include="BlackJackGame\State.cs" />
-    <Compile Include="CardGameFramework\Card.cs" />
-    <Compile Include="CardGameFramework\Deck.cs" />
-    <Compile Include="CardGameFramework\Hand.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -109,7 +103,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Service References\GameReference\Reference.cs">
+    <Compile Include="Service References\Service\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -167,20 +161,20 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\GameReference\Game.wsdl" />
-    <None Include="Service References\GameReference\Game.xsd">
+    <None Include="Service References\Service\GameService.wsdl" />
+    <None Include="Service References\Service\GameService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game1.xsd">
+    <None Include="Service References\Service\GameService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game2.xsd">
+    <None Include="Service References\Service\GameService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game3.xsd">
+    <None Include="Service References\Service\GameService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game4.xsd">
+    <None Include="Service References\Service\GameService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="WPFClient_TemporaryKey.pfx" />
@@ -341,19 +335,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\GameReference\" />
+    <WCFMetadataStorage Include="Service References\Service\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\GameReference\Game.disco" />
+    <None Include="Service References\Service\GameService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\GameReference\configuration91.svcinfo" />
+    <None Include="Service References\Service\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\GameReference\configuration.svcinfo" />
+    <None Include="Service References\Service\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\GameReference\Reference.svcmap">
+    <None Include="Service References\Service\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

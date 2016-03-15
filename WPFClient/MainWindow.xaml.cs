@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Blackjack.GameReference;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Threading;
+using Blackjack.Service;
 
 namespace Blackjack
 {
 
-    public partial class StartForm : IGameCallback
+    public partial class StartForm : Service.IGameServiceCallback
     {
-        public PlayerData Player
+        public Player Player
         {
             get
             {
@@ -33,13 +33,13 @@ namespace Blackjack
                 _player = value;
             }
         }
-        private PlayerData _player;
-        private List<GameReference.Table> _serverTableList;
+        private Player _player;
+        private List<Service.Table> _serverTableList;
 
         public StartForm()
         {
             InitializeComponent();
-            this.Loaded += StartForm_Loaded;
+            Loaded += StartForm_Loaded;
         }
 
         private void StartForm_Loaded(object sender, RoutedEventArgs e)
@@ -47,24 +47,18 @@ namespace Blackjack
             PopulateTableList();
         }
 
-        public StartForm(PlayerData player)
+        public StartForm(Player player)
         {
-            this._player = player;
+            _player = player;
             InitializeComponent();
             PopulateTableList();
         }
 
-        private async void PopulateTableList()
+        private void PopulateTableList()
         {
-
-            var serverTableList = await LoginWindow.GameServer.ListTablesAsync();
-            if (serverTableList == null)
-                return;
-
-            _serverTableList = serverTableList.ToList();
-            
-            Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(async () =>
             {
+                var serverTableList = await LoginWindow.GameServer.ListTablesAsync();
                 tablesList.Items.Clear();
                 int i = 0;
                 foreach (var tb in serverTableList)
@@ -114,7 +108,7 @@ namespace Blackjack
             this.Hide();
             var i = tablesList.SelectedIndex;
 
-            GameWindow gameWindow = new GameWindow(_player, _serverTableList[i]);
+            GameWindow gameWindow = new GameWindow(_player, _serverTableList[i] as Service.Table);
             gameWindow.ShowDialog();
             this.Show();
         }
@@ -122,7 +116,7 @@ namespace Blackjack
         private void createTableButton_Click(object sender, RoutedEventArgs e)
         {
 
-            LoginWindow.GameServer.CreateTableAsync(_player.Guid);
+            LoginWindow.GameServer.CreateTableAsync();
 
         }
 
@@ -158,9 +152,7 @@ namespace Blackjack
 
         public void OnNewTableCreated(object sender, GameArgs e)
         {
-            var x = new Thread(() => PopulateTableList());
-            x.SetApartmentState(ApartmentState.STA);
-            x.Start();
+            PopulateTableList();
         }
 
         public void OnNextTurn(object sender, GameArgs e)

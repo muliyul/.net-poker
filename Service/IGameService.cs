@@ -10,37 +10,34 @@ using System.Text;
 
 namespace Service
 {
-    [ServiceContract(CallbackContract = typeof(IGameCallback))]
-    public interface IGame
+    [ServiceContract(CallbackContract = typeof(IGameCallback), SessionMode = SessionMode.Required)]
+    public interface IGameService
     {
         [OperationContract]
         void Register(string username, string pass);
 
         [OperationContract]
-        PlayerData Login(string username, string pass);
+        Models.Player Login(string username, string pass);
 
         [OperationContract]
-        PlayerData GetPlayerInfo(string username);
+        Models.Player GetPlayerInfo(string username);
 
         [OperationContract]
-        Models.Table GetTable();
-
-        [OperationContract]
-        IEnumerable<Models.Table> ListTables();
+        IEnumerable<Table> ListTables();
 
         [OperationContract(IsOneWay = true)]
-        void CreateTable(string playerGuid);
+        void CreateTable();
 
         [OperationContract]
-        Models.Table JoinTable(string playerGuid, string tableId);
+        Table JoinTable(string tableId);
         [OperationContract]
-        Models.Table PlayerReady(string playerGuid, string tableId);
+        Table PlayerReady(string tableId);
 
         [OperationContract(IsOneWay = true)]
         void Leave();
 
         [OperationContract(IsOneWay = true)]
-        void Bet(string guid, int amount);
+        void Bet(int amount);
 
         [OperationContract(IsOneWay = true)]
         void Hit();
