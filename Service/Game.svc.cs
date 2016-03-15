@@ -30,8 +30,11 @@ namespace Service
         {
             get
             {
-                
-                return null;
+                return sessions[OperationContext.Current.SessionId];
+            }
+            set
+            {
+                sessions[OperationContext.Current.SessionId] = value;
             }
         }
 
@@ -39,28 +42,32 @@ namespace Service
         {
             get
             {
-                return null;
+                return Tables.SingleOrDefault(t => t.Players.Contains(CurrentPlayer));
             }
         }
 
-        public void Bet(string guid, int amount)
+        public void Bet( decimal amount)
         {
-            var CurrentPlayer = sessions[guid];
-            CurrentTable.Bet(CurrentPlayer, amount);
+            var CurrentPlayer = sessions[OperationContext.Current.SessionId];
+            CurrentTable?.Bet(CurrentPlayer, amount);
         }
 
-        public void CreateTable(string playerGuid)
+        public void CreateTable()
         {
             var t = new Table();
             Tables.Add(t);
-
-            foreach (var client in sessions.Values /*.Where(p => !p.Guid.Equals(playerGuid))*/)
+            foreach (var s in sessions.Values)
             {
-               sessions[playerGuid].myCallbacks.OnNewTableCreated("8", new GameArgs());
-               // sessions[playerGuid].myCallbacks.OnBet(null, null);
+                try
+                {
+                    s.Callback.OnNewTableCreated(t, null);
+                }
+                catch (Exception )
+                {
+                    sessions.Remove(sessions.Keys.First(k => sessions[k] == s));
+                }
             }
-            
-           // return t;
+
         }
 
         public void Fold()
@@ -81,32 +88,26 @@ namespace Service
                     //Hand = player.Hand,
                     MemberSince = player.MemberSince,
                     Username = player.Username,
-                    myCallbacks = OperationContext.Current.GetCallbackChannel<IGameCallback>()
+                    Callback = OperationContext.Current.GetCallbackChannel<IGameCallback>()
 
-                    };
+                 };
 
             }
             
         }
 
-        public Table GetTable()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Hit()
         {
             CurrentTable?.Hit(CurrentPlayer);
         }
 
-        public Table JoinTable(string playerGuid, string tableId)
+        public Table JoinTable( int tableIndex)
         {
-            var currentPlayer = sessions[playerGuid];
-            if (currentPlayer == null) return null;
-       
-            var table = Tables.SingleOrDefault(t => t.Id == tableId);
-         //   table?.Join(currentPlayer);
-
+            ///////////////////////////////////////////////////TODO Is table full or already playing
+            var table = Tables[tableIndex];
+            table?.Join(CurrentPlayer);
+            CurrentPlayer.CurrentTable = table;
             return table;
         }
 
@@ -136,10 +137,10 @@ namespace Service
                         // Hand =// player.Hand,
                         // MemberSince = player.MemberSince,
                         Username = player.Username,
-                        Guid = newGuid.ToString(),
-                        myCallbacks = OperationContext.Current.GetCallbackChannel<IGameCallback>()
+                        
+                        Callback = OperationContext.Current.GetCallbackChannel<IGameCallback>()
                     };
-                    sessions[newGuid.ToString()] = retPlayer;
+                    CurrentPlayer = retPlayer;
                  
                     return retPlayer;
                 } catch (InvalidOperationException)
@@ -154,7 +155,7 @@ namespace Service
             return null;
         }
 
-        public Table PlayerReady(string playerGuid, string tableId)
+        public Table PlayerReady(string tableId)
         {
             throw new NotImplementedException();
         }
@@ -198,7 +199,6 @@ namespace Service
             }
         }
 
-
- 
+       
     }
 }

@@ -6,7 +6,7 @@
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:EventArgs">
         <xs:sequence>
-          <xs:element minOccurs="0" name="Amount" type="xs:int" />
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
           <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="Card" nillable="true" type="q2:Card" />
           <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="Player" nillable="true" type="q3:PlayerData" />
         </xs:sequence>

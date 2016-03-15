@@ -241,52 +241,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_GetTable_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_GetTable_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_ListTables_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -912,12 +866,6 @@
   <wsdl:message name="IGame_GetPlayerInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerInfoResponse" />
   </wsdl:message>
-  <wsdl:message name="IGame_GetTable_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetTable" />
-  </wsdl:message>
-  <wsdl:message name="IGame_GetTable_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetTableResponse" />
-  </wsdl:message>
   <wsdl:message name="IGame_ListTables_InputMessage">
     <wsdl:part name="parameters" element="tns:ListTables" />
   </wsdl:message>
@@ -996,79 +944,75 @@
   <wsdl:message name="IGame_OnNewTableCreated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnNewTableCreated" />
   </wsdl:message>
-  <wsdl:portType name="IGame">
-    <wsdl:operation name="Register">
+  <wsdl:portType msc:usingSession="true" name="IGame">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Register" message="tns:IGame_Register_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/RegisterResponse" message="tns:IGame_Register_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Login">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Login" message="tns:IGame_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/LoginResponse" message="tns:IGame_Login_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetPlayerInfo">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPlayerInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/GetPlayerInfo" message="tns:IGame_GetPlayerInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/GetPlayerInfoResponse" message="tns:IGame_GetPlayerInfo_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetTable">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGame/GetTable" message="tns:IGame_GetTable_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGame/GetTableResponse" message="tns:IGame_GetTable_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ListTables">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ListTables">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/ListTables" message="tns:IGame_ListTables_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/ListTablesResponse" message="tns:IGame_ListTables_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CreateTable">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CreateTable">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/CreateTable" message="tns:IGame_CreateTable_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="JoinTable">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="JoinTable">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/JoinTable" message="tns:IGame_JoinTable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/JoinTableResponse" message="tns:IGame_JoinTable_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PlayerReady">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerReady">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/PlayerReady" message="tns:IGame_PlayerReady_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/PlayerReadyResponse" message="tns:IGame_PlayerReady_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Leave">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Leave">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Leave" message="tns:IGame_Leave_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Bet">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Bet">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Bet" message="tns:IGame_Bet_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Hit">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Hit">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Hit" message="tns:IGame_Hit_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Fold">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Fold">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/Fold" message="tns:IGame_Fold_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnJoin">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnJoin">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnJoin" message="tns:IGame_OnJoin_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnJoinResponse" message="tns:IGame_OnJoin_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnLeave">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnLeave">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnLeave" message="tns:IGame_OnLeave_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnLeaveResponse" message="tns:IGame_OnLeave_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnHit">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnHit">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnHit" message="tns:IGame_OnHit_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnHitResponse" message="tns:IGame_OnHit_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnBet">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnBet">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnBet" message="tns:IGame_OnBet_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnBetResponse" message="tns:IGame_OnBet_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnFold">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnFold">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnFold" message="tns:IGame_OnFold_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnFoldResponse" message="tns:IGame_OnFold_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnNextTurn">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnNextTurn">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnNextTurn" message="tns:IGame_OnNextTurn_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnNextTurnResponse" message="tns:IGame_OnNextTurn_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnDeal">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnDeal">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnDeal" message="tns:IGame_OnDeal_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnDealResponse" message="tns:IGame_OnDeal_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnNewTableCreated">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnNewTableCreated">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnNewTableCreated" message="tns:IGame_OnNewTableCreated_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
@@ -1105,17 +1049,6 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_GetPlayerInfo_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetTable">
-      <soap12:operation soapAction="http://tempuri.org/IGame/GetTable" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_GetTable_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_GetTable_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Service
 {
-    [ServiceContract(CallbackContract = typeof(IGameCallback))]
+    [ServiceContract(CallbackContract = typeof(IGameCallback),SessionMode = SessionMode.Required)]
     public interface IGame
     {
         [OperationContract]
@@ -22,30 +22,31 @@ namespace Service
         [OperationContract]
         PlayerData GetPlayerInfo(string username);
 
-        [OperationContract]
-        Models.Table GetTable();
+       
 
         [OperationContract]
         IEnumerable<Models.Table> ListTables();
 
         [OperationContract(IsOneWay = true)]
-        void CreateTable(string playerGuid);
+        void CreateTable();
 
         [OperationContract]
-        Models.Table JoinTable(string playerGuid, string tableId);
+        Models.Table JoinTable(int tableIndex);
+
         [OperationContract]
-        Models.Table PlayerReady(string playerGuid, string tableId);
+        Models.Table PlayerReady(string tableId);
 
         [OperationContract(IsOneWay = true)]
         void Leave();
 
         [OperationContract(IsOneWay = true)]
-        void Bet(string guid, int amount);
+        void Bet(decimal amount);
 
         [OperationContract(IsOneWay = true)]
         void Hit();
 
         [OperationContract(IsOneWay = true)]
         void Fold();
+  
     }
 }

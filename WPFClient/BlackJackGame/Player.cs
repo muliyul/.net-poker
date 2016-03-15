@@ -8,8 +8,9 @@ namespace BlackJack
     {
         // Objects to store player information
         private decimal balance;
-        private BlackJackHand hand;
         private decimal bet;
+        private BlackJackHand hand;
+        
         private int wins;
         private int losses;
         private int pushes;

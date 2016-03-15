@@ -40,8 +40,7 @@ namespace Blackjack
             startForm.Player = player;
             if (player != null)
             {
-                var w = new StartForm(player);
-                w.Visibility = Visibility.Visible;
+                startForm.Visibility = Visibility.Visible;
                 this.Hide();
             }
             else

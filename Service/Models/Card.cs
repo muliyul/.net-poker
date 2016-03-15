@@ -15,11 +15,16 @@ namespace Service.Models
     [DataContract]
     public class Card
     {
+        private bool _isCardUp;
+
         [DataMember]
         public Suit Suit { get; set; }
         [DataMember]
         public Face Face { get; set; }
         [DataMember]
         public int Value { get { return (int)Face; } }
+        [DataMember]
+        public bool IsCardUp { get { return _isCardUp; } set { _isCardUp = value; } }
+
     }
 }

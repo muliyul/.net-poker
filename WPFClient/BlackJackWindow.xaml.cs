@@ -24,6 +24,7 @@ namespace Blackjack
         {
             this.player = player;
             this.table = table;
+
             game = new BlackJackGame(player);
             InitializeComponent();
             SetUpNewGame();
@@ -42,7 +43,8 @@ namespace Blackjack
         private bool firstTurn;
         private PlayerData player;
         private GameReference.Table table;
-
+        private List<Label> _playerLabels = new List<Label>();
+        private List<Label> _playerLabelsTotalCardVal = new List<Label>();
         #endregion
 
         #region Game Methods
@@ -56,6 +58,8 @@ namespace Blackjack
             try
             {
                 // Update the bet amount
+
+                LoginWindow.GameServer.Bet(player.Guid, betValue);
                 game.CurrentPlayer.IncreaseBet(betValue);
 
                 // Update the "My Bet" and "My Account" values
@@ -72,9 +76,9 @@ namespace Blackjack
         /// </summary>
         private void ShowBankValue()
         {
-                // Update the "My Account" value
-            total_sum_label.Content = "$" + game.CurrentPlayer.Balance.ToString();
-            current_bet_label.Content = "$" + game.CurrentPlayer.Bet.ToString();
+            // Update the "My Account" value
+            total_sum_label.Content = "$" + player.Bank.ToString();
+            current_bet_label.Content = "$" + player.Bet.ToString();
         }
 
         /// <summary>
@@ -89,13 +93,41 @@ namespace Blackjack
             DealerCard4.Visibility = Visibility.Hidden;
             DealerCard5.Visibility = Visibility.Hidden;
 
-            PlayerCard0.Visibility = Visibility.Hidden;
-            PlayerCard1.Visibility = Visibility.Hidden;
-            PlayerCard2.Visibility = Visibility.Hidden;
-            PlayerCard3.Visibility = Visibility.Hidden;
-            PlayerCard4.Visibility = Visibility.Hidden;
-            PlayerCard5.Visibility = Visibility.Hidden;
-            
+            Player1Card0.Visibility = Visibility.Hidden;
+            Player1Card1.Visibility = Visibility.Hidden;
+            Player1Card2.Visibility = Visibility.Hidden;
+            Player1Card3.Visibility = Visibility.Hidden;
+            Player1Card4.Visibility = Visibility.Hidden;
+            Player1Card5.Visibility = Visibility.Hidden;
+
+            Player2Card0.Visibility = Visibility.Hidden;
+            Player2Card1.Visibility = Visibility.Hidden;
+            Player2Card2.Visibility = Visibility.Hidden;
+            Player2Card3.Visibility = Visibility.Hidden;
+            Player2Card4.Visibility = Visibility.Hidden;
+            Player2Card5.Visibility = Visibility.Hidden;
+
+            Player3Card0.Visibility = Visibility.Hidden;
+            Player3Card1.Visibility = Visibility.Hidden;
+            Player3Card2.Visibility = Visibility.Hidden;
+            Player3Card3.Visibility = Visibility.Hidden;
+            Player3Card4.Visibility = Visibility.Hidden;
+            Player3Card5.Visibility = Visibility.Hidden;
+
+            Player4Card0.Visibility = Visibility.Hidden;
+            Player4Card1.Visibility = Visibility.Hidden;
+            Player4Card2.Visibility = Visibility.Hidden;
+            Player4Card3.Visibility = Visibility.Hidden;
+            Player4Card4.Visibility = Visibility.Hidden;
+            Player4Card5.Visibility = Visibility.Hidden;
+
+            Player5Card0.Visibility = Visibility.Hidden;
+            Player5Card1.Visibility = Visibility.Hidden;
+            Player5Card2.Visibility = Visibility.Hidden;
+            Player5Card3.Visibility = Visibility.Hidden;
+            Player5Card4.Visibility = Visibility.Hidden;
+            Player5Card5.Visibility = Visibility.Hidden;
+
         }
 
         /// <summary>
@@ -204,18 +236,43 @@ namespace Blackjack
             StandBtn.IsEnabled = true;
             HitBtn.IsEnabled = true;
             WinStatus.Visibility = Visibility.Hidden;
-            TotalCardValLbl.Visibility = Visibility.Visible;
+            _playerLabelsTotalCardVal.ForEach(p => p.Visibility = Visibility.Visible);
             DealBtn.IsEnabled = false;
 
             if (firstTurn)
                 DoubleBetBtn.IsEnabled = true;
         }
 
+
+        public void UpdatePlayers()
+        {
+            for (int i = 0; i < table.Players.Length; ++i)
+            {
+                _playerLabels[i].Content = table.Players[i];
+            }
+        }
         /// <summary>
         /// Set up the UI for a new game
         /// </summary>
         private void SetUpNewGame()
         {
+            _playerLabels.Add(Player1Lb);
+            _playerLabels.Add(Player2Lb);
+            _playerLabels.Add(Player3Lb);
+            _playerLabels.Add(Player4Lb);
+            _playerLabels.Add(Player5Lb);
+
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl1);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl2);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl3);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl4);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl5);
+
+            UpdatePlayers();
+
+
+
+
             DealBtn.IsEnabled = true;
             DoubleBetBtn.IsEnabled = false;
             StandBtn.IsEnabled = false;
@@ -225,8 +282,11 @@ namespace Blackjack
             Bet25Btn.IsEnabled = true;
             Bet50Btn.IsEnabled = true;
             Bet100Btn.IsEnabled = true;
+            ReadyBtn.IsEnabled = true;
             WinStatus.Visibility = Visibility.Hidden;
-            TotalCardValLbl.Visibility = Visibility.Hidden;
+            
+            _playerLabelsTotalCardVal.ForEach(p=> p.Visibility = Visibility.Hidden);
+
             firstTurn = true;
             ShowBankValue();
         }
@@ -237,25 +297,35 @@ namespace Blackjack
         private void UpdateUIPlayerCards()
         {
             //// Update the value of the hand
-            //TotalCardValLbl.Content = game.CurrentPlayer.Hand.GetSumOfHand().ToString();
 
-            //List<Card> playerCards = game.CurrentPlayer.Hand.Cards;
-            //for (int i = 0; i < playerCards.Count; i++)
-            //{
-            //    // Load each card from file
-            //    Image card = (Image)rootV.FindName("PlayerCard" + i);
-            //    LoadCard(card, playerCards[i]);
-            //    card.Visibility = Visibility.Visible;
-            //    //card.BringToFront();
-            //}
+            for (int i = 0; i < table.Players.Length; i++)
+            {
+                _playerLabelsTotalCardVal[i].Content = table.Players[i].Hand.GetSumOfHand.ToString();
+            }
+                
+            
+            for( int j = 0; j < table.Players.Length; ++j)
+            { 
+                List<GameReference.Card> playerCards = table.Players[j].Hand.ToList();
+                for (int i = 0; i < playerCards.Count; i++)
+                {
+                    // Load each card from file
+                    Image card = (Image)rootV.FindName("Player"+j+"Card" + i);
+                    LoadCard(card, playerCards[i]);
+                    card.Visibility = Visibility.Visible;
+                    
+                }
+            }
 
-            //List<Card> dealerCards = game.Dealer.Hand.Cards;
-            //for (int i = 0; i < dealerCards.Count; i++)
-            //{
-            //    Image card = (Image)rootV.FindName("DealerCard" + i);
-            //    LoadCard(card, dealerCards[i]);
-            //    card.Visibility = Visibility.Visible;
-            //}
+
+            List<GameReference.Card> dealerCards = table. Dealer.Hand.ToList();
+
+            for (int i = 0; i < dealerCards.Count; i++)
+            {
+                Image card = (Image)rootV.FindName("DealerCard" + i);
+                LoadCard(card, dealerCards[i]);
+                card.Visibility = Visibility.Visible;
+            }
         }
 
         /// <summary>
@@ -334,8 +404,8 @@ namespace Blackjack
                 //check to see if the card should be faced down or up;
 
                 // TODO
-                //if (!c.IsCardUp)
-               //     image.Replace(image.ToString(), cardGameImageSkinPath);
+                if (!c.IsCardUp)
+                    image.Replace(image.ToString(), cardGameImageSkinPath);
                 
                 // And also here
                 ImageSourceConverter imageConverter = new ImageSourceConverter();
@@ -355,15 +425,17 @@ namespace Blackjack
             try
             {
                 // If the current bet is equal to 0, ask the player to place a bet
-                if ((game.CurrentPlayer.Bet == 0) && (game.CurrentPlayer.Balance > 0))
+                if ((player.Bet == 0) && (player.Bank > 0))
                 {
                     MessageBox.Show("You must place a bet before the dealer deals.", "Error", MessageBoxButton.OK);
                 }
                 else
                 {
                     // Place the bet
-                    game.CurrentPlayer.PlaceBet();
-                    ShowBankValue();
+                    LoginWindow.GameServer.PlaceBet(player.Guid);
+                    //player. PlaceBet();
+
+                    // shoud be call back to it ShowBankValue();
 
                     // Clear the table, set up the UI for playing a game, and deal a new game
                     ClearTable();
@@ -457,10 +529,11 @@ namespace Blackjack
             }
         }
 
-        private void ClearBet(object sender, RoutedEventArgs e)
+        private async void ClearBet(object sender, RoutedEventArgs e)
         {
             //Clear the bet amount
-            game.CurrentPlayer.ClearBet();
+            //game.CurrentPlayer.ClearBet();
+            await LoginWindow.GameServer.ClearBetAsync(player.Guid);
             ShowBankValue();
         }
 

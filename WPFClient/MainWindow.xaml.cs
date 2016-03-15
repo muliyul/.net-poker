@@ -54,36 +54,38 @@ namespace Blackjack
             PopulateTableList();
         }
 
-        private async void PopulateTableList()
+        private async void PopulateTableList(bool updateFromServer = true)
         {
 
-            var serverTableList = await LoginWindow.GameServer.ListTablesAsync();
-            if (serverTableList == null)
-                return;
-
-            _serverTableList = serverTableList.ToList();
-            
-            Dispatcher.Invoke(() =>
+            if (updateFromServer)
             {
-                tablesList.Items.Clear();
-                int i = 0;
-                foreach (var tb in serverTableList)
+                var serverTableList = await LoginWindow.GameServer.ListTablesAsync();
+                if (serverTableList == null)
+                    return;
+               _serverTableList = serverTableList.ToList();
+            }
+
+           
+            
+            
+            tablesList.Items.Clear();
+            int i = 0;
+            foreach (var tb in _serverTableList)
+            {
+
+                var numOfPlayers = tb.Players == null ? 0 : tb.Players.Length;
+                var labelString = "Table #" + i++ + " | " + numOfPlayers + " / 6 | ";
+                var lb = new Label()
                 {
+                    Content = labelString
+                };
+                var li = new ListBoxItem();
+                li.Content = lb;
 
-                    var numOfPlayers = tb.Players == null ? 0 : tb.Players.Length;
-                    var labelString = "Table #" + i++ + " | " + numOfPlayers + " / 6 | ";
-                    var lb = new Label()
-                    {
-                        Content = labelString
-                    };
-                    var li = new ListBoxItem();
-                    li.Content = lb;
+                tablesList.Items.Add(li);
+            }
 
-                    tablesList.Items.Add(li);
-                }
-
-                tablesList.UpdateLayout();
-            });
+            
         }
 
 
@@ -109,12 +111,13 @@ namespace Blackjack
             this.Close();
         }
 
-        private void joinTableButton_Click(object sender, RoutedEventArgs e)
+        private async void joinTableButton_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             var i = tablesList.SelectedIndex;
 
-            GameWindow gameWindow = new GameWindow(_player, _serverTableList[i]);
+            var table = await LoginWindow.GameServer.JoinTableAsync(_player.Guid, i);
+            GameWindow gameWindow = new GameWindow(_player, table);
             gameWindow.ShowDialog();
             this.Show();
         }
@@ -148,7 +151,7 @@ namespace Blackjack
 
         public void OnJoin(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnLeave(object sender, GameArgs e)
@@ -156,16 +159,18 @@ namespace Blackjack
             throw new NotImplementedException();
         }
 
-        public void OnNewTableCreated(object sender, GameArgs e)
+        public void OnNewTableCreated(object sender, GameReference.Table[] tableList)
         {
-            var x = new Thread(() => PopulateTableList());
-            x.SetApartmentState(ApartmentState.STA);
-            x.Start();
+            _serverTableList = tableList.ToList();
+            PopulateTableList(false);
+            
         }
 
         public void OnNextTurn(object sender, GameArgs e)
         {
             throw new NotImplementedException();
         }
+
+      
     }
 }

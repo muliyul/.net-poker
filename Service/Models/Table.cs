@@ -13,9 +13,6 @@ namespace Service.Models
     {
 
         [DataMember]
-        IList<Player> players = new List<Player>();
-
-        [DataMember]
         public IList<PlayerData> Players { get; set; }
 
         [DataMember]
@@ -24,6 +21,13 @@ namespace Service.Models
         [DataMember]
         public int Pot { get; set; }
 
+        [DataMember]
+        public PlayerData Dealer { get { return _dealer; }  }
+
+        private Deck _deck;
+
+        [DataMember]
+        private PlayerData _dealer;
         #region Game Events
 
 
@@ -38,14 +42,21 @@ namespace Service.Models
         [DataMember]
         Deck d = new Deck();
 
-        public Table() { Id = Guid.NewGuid().ToString(); }
+        public Table()
+        {
+            Id = Guid.NewGuid().ToString();
+            Players = new List<PlayerData>();
+            _dealer = new PlayerData();
+           // Players.Add(_dealer); // Is the dealer one of the players?
+        }
 
 
         internal void Join(PlayerData player)
         {
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             RegisterEvents(cb);
-            JoinHandler(this, new GameArgs() { Player = player });
+            Players.Add(player);
+            JoinHandler(null, new GameArgs() { Player = player });
         }
 
         void RegisterEvents(IGameCallback callback)
@@ -72,11 +83,47 @@ namespace Service.Models
         {
 
         }
+        public void DealNewGame()
+        {
+            // Create a new deck and then shuffle the deck
+            _deck = new Deck();
+            _deck.Shuffle();
+
+            // Reset the player and the dealer's hands in case this is not the first game
+            foreach (var player in Players)
+            {
+                player.NewHand();
+            }
+
+            // Deal two cards to each person's hand
+            foreach (var player in Players)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    Card c = _deck.Draw();
+                    player.Hand.Cards.Add(c);
+                }
+            }
+            
+            Card d = _deck.Draw();
+            // Set the dealer's second card to be facing down
+            d.IsCardUp = false;
+
+            _dealer.Hand.Cards.Add(d);
+
+            // Give the player and the dealer a handle to the current deck
+            foreach (var player in Players)
+            {
+                player.CurrentDeck = _deck;
+            }
+            _dealer.CurrentDeck = _deck;
+
+        }
 
         internal void Hit(PlayerData player)
         {
             var c = d.Pop();
-            Players.Add(player);
+            //Players.Add(player);
             //player.Hand.Add(c);
             HitHandler(this, new GameArgs() { Player = player, Card = c });
         }
@@ -85,18 +132,18 @@ namespace Service.Models
         {
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             RemoveEvents(cb);
-            LeaveHandler(this, new GameArgs() { Player = player });
+            LeaveHandler(null, new GameArgs() { Player = player });
         }
 
-        internal void Bet(PlayerData player, int amount)
+        internal void Bet(PlayerData player, decimal amount)
         {
-            BetHandler(this, new GameArgs() { Player = player, Amount = amount });
+            BetHandler(null, new GameArgs() { Player = player, Amount = amount });
         }
 
 
         internal void Fold(PlayerData player)
         {
-            FoldHandler(this, new GameArgs() { Player = player });
+            FoldHandler(null, new GameArgs() { Player = player });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -35,6 +36,6 @@ namespace Service
         [OperationContract]
         void OnDeal(object sender, GameArgs e);
         [OperationContract(IsOneWay = true)]
-        void OnNewTableCreated(object sender, GameArgs e);
+        void OnNewTableCreated(object sender, IList<Table> tableList);
     }
 }

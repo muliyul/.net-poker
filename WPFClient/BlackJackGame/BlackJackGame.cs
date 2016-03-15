@@ -14,7 +14,7 @@ namespace BlackJack
         // private Deck and Player objects for the current deck, dealer, and player
         private CardGameFramework.Deck deck;
 		private Player dealer;
-        private Player player;
+        private PlayerData player;
         private Blackjack.GameReference.PlayerData _logedPlayer;
         private List<Blackjack.GameReference.PlayerData> _otherPlayers;
         #endregion
@@ -22,7 +22,7 @@ namespace BlackJack
         #region Properties
 
         // public properties to return the current player, dealer, and current deck
-        public Player CurrentPlayer { get { return player; } }
+        public PlayerData CurrentPlayer { get { return player; } }
 		public Player Dealer { get { return dealer; } }
         public CardGameFramework.Deck CurrentDeck { get { return deck; } }
 
@@ -52,30 +52,30 @@ namespace BlackJack
 		public void DealNewGame()
 		{
             // Create a new deck and then shuffle the deck
-            deck = new CardGameFramework.Deck();
-            deck.Shuffle();
+   //         deck = new CardGameFramework.Deck();
+   //         deck.Shuffle();
 
-			// Reset the player and the dealer's hands in case this is not the first game
-            player.NewHand();
-            dealer.NewHand();
+			//// Reset the player and the dealer's hands in case this is not the first game
+   //         player.NewHand();
+   //         dealer.NewHand();
 
-			// Deal two cards to each person's hand
-			for (int i = 0; i < 2; i++)
-			{
-                CardGameFramework.Card c = deck.Draw();
-				player.Hand.Cards.Add(c);
+			//// Deal two cards to each person's hand
+			//for (int i = 0; i < 2; i++)
+			//{
+   //             CardGameFramework.Card c = deck.Draw();
+			//	player.Hand.Cards.Add(c);
 
-                CardGameFramework.Card d = deck.Draw();
-				// Set the dealer's second card to be facing down
-				if (i == 1)
-					d.IsCardUp = false;
+   //             CardGameFramework.Card d = deck.Draw();
+			//	// Set the dealer's second card to be facing down
+			//	if (i == 1)
+			//		d.IsCardUp = false;
 
-				dealer.Hand.Cards.Add(d);
-			}
+			//	dealer.Hand.Cards.Add(d);
+			//}
 
-            // Give the player and the dealer a handle to the current deck
-            player.CurrentDeck = deck;
-            dealer.CurrentDeck = deck;
+   //         // Give the player and the dealer a handle to the current deck
+   //         player.CurrentDeck = deck;
+   //         dealer.CurrentDeck = deck;
 		}
 
         /// <summary>
