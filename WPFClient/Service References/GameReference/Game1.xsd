@@ -6,7 +6,7 @@
       <xs:element minOccurs="0" name="Bank" type="xs:double" />
       <xs:element minOccurs="0" name="Bet" type="xs:decimal" />
       <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Hand" nillable="true" type="tns:ArrayOfCard" />
+      <xs:element minOccurs="0" name="Hand" nillable="true" type="tns:BlackJackHand" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="MemberSince" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
@@ -14,6 +14,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerData" nillable="true" type="tns:PlayerData" />
+  <xs:complexType name="BlackJackHand">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Hand">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BlackJackHand" nillable="true" type="tns:BlackJackHand" />
+  <xs:complexType name="Hand">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cards" nillable="true" type="tns:ArrayOfCard" />
+      <xs:element minOccurs="0" name="GetSumOfHand" type="xs:int" />
+      <xs:element minOccurs="0" name="Value" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Hand" nillable="true" type="tns:Hand" />
   <xs:complexType name="ArrayOfCard">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Card" nillable="true" type="tns:Card" />

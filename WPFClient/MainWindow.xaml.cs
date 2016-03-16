@@ -36,6 +36,7 @@ namespace Blackjack
         private PlayerData _player;
         private GameReference.Table _currentTable;
         private List<GameReference.Table> _serverTableList;
+        private GameReference.GameClient _server;
 
         private GameWindow gameWindow;
 
@@ -50,8 +51,9 @@ namespace Blackjack
             PopulateTableList();
         }
 
-        public StartForm(PlayerData player)
+        public StartForm(PlayerData player, GameReference.GameClient server)
         {
+            _server = server;
             this._player = player;
             InitializeComponent();
             PopulateTableList();
@@ -62,7 +64,7 @@ namespace Blackjack
 
             if (updateFromServer)
             {
-                var serverTableList = await LoginWindow.GameServer.ListTablesAsync();
+                var serverTableList = await _server.ListTablesAsync();
                 if (serverTableList == null)
                     return;
                _serverTableList = serverTableList.ToList();
@@ -75,8 +77,7 @@ namespace Blackjack
             int i = 0;
             foreach (var tb in _serverTableList)
             {
-
-                var numOfPlayers = tb.Players == null ? 0 : tb.Players.Length;
+                var numOfPlayers = tb.Players == null ? 0 : tb.Players.Count;
                 var labelString = "Table #" + i++ + " | " + numOfPlayers + " / 6 | ";
                 var lb = new Label()
                 {
@@ -90,8 +91,6 @@ namespace Blackjack
 
             
         }
-
-
 
         //private void NewGame(object sender, RoutedEventArgs e)
         //{
@@ -119,8 +118,15 @@ namespace Blackjack
             this.Hide();
             var i = tablesList.SelectedIndex;
 
-            _currentTable = await LoginWindow.GameServer.JoinTableAsync(i);
-            gameWindow = new GameWindow(_player, _currentTable);
+            _currentTable = await _server.JoinTableAsync(i);
+
+            if (_currentTable == null)
+            {
+                MessageBox.Show("Table in game or closed");
+                return;
+            }
+
+            gameWindow = new GameWindow(_player, _currentTable, _server);
             gameWindow.ShowDialog();
             this.Show();
         }
@@ -128,7 +134,7 @@ namespace Blackjack
         private void createTableButton_Click(object sender, RoutedEventArgs e)
         {
 
-            LoginWindow.GameServer.CreateTableAsync();
+            _server.CreateTableAsync();
 
         }
 
@@ -137,6 +143,7 @@ namespace Blackjack
             //throw new NotImplementedException();
 
             // update table bets
+            gameWindow?.OnBet(sender, e);
         }
 
         public void OnDeal(object sender, GameArgs e)
@@ -144,47 +151,47 @@ namespace Blackjack
             //throw new NotImplementedException();
             // game starts
 
-            gameWindow.SetUpGameInPlay();
+            gameWindow?.SetUpGameInPlay();
         }
 
         public void OnFold(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnFold(sender, e);
         }
 
         public void OnHit(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnHit(sender, e);
         }
 
         public void OnJoin(object sender, GameArgs e)
         {
             //throw new NotImplementedException();
             // update table ui
-            if (e.Table != null && gameWindow != null)
-            {
-                gameWindow.Table = e.Table;
-                gameWindow.UpdatePlayers();
-            }
+            gameWindow?.OnJoin(sender, e);
+            
         }
 
         public void OnLeave(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnLeave(sender, e);
         }
 
-        public void OnNewTableCreated(object sender, GameReference.Table[] tableList)
+        public void OnNewTableCreated(object sender, List<GameReference.Table> tableList)
         {
-            _serverTableList = tableList.ToList();
+            _serverTableList = tableList;
             PopulateTableList(false);
             
         }
 
-        public void OnNextTurn(object sender, GameArgs e)
+        public void OnMyTurn(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnMyTurn(sender, e);
         }
 
-      
+        public void OnStand(object sender, GameArgs e)
+        {
+            gameWindow?.OnStand(sender, e);
+        }
     }
 }

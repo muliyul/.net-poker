@@ -6,23 +6,23 @@ using System.Web;
 
 namespace Service.Models
 {
-    [CollectionDataContract]
-    public class Hand : List<Card>
+    [DataContract]
+    public class Hand
     {
-
         // Creates a list of cards
         protected List<Card> cards = new List<Card>();
-        public int NumCards { get { return cards.Count; } }
-        public List<Card> Cards { get { return cards; } }
+        
 
+        [DataMember]
+        public List<Card> Cards { get { return cards; } }
 
         [DataMember]
         public int Value
         {
             get
             {
-                int sum = this.Sum(card => card.Value);
-                int aces = this.Count(card => card.Face == Face.Ace);
+                int sum = cards.Sum(card => card.Value);
+                int aces = cards.Count(card => card.Face == Face.Ace);
 
                 while (sum > 21 && aces-- > 0) sum -= 10;
                 return sum;

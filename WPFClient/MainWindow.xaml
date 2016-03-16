@@ -103,7 +103,6 @@
         </ListBox>
         <Button x:Name="createTableButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="302,349,0,0" VerticalAlignment="Top" Width="117" Height="47" Content="Create Table" FontSize="18" FontWeight="Bold" Click="createTableButton_Click" FontFamily="Arial"/>
         <Button x:Name="joinTableButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="302,290,0,0" VerticalAlignment="Top" Width="117" Height="47" Content="Join Table" FontSize="18" FontWeight="Bold" Click="joinTableButton_Click" FontFamily="Arial"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="371,458,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
 
     </Grid>

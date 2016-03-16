@@ -32,7 +32,7 @@ namespace Blackjack.GameReference {
         private string GuidField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Blackjack.GameReference.Card[] HandField;
+        private Blackjack.GameReference.BlackJackHand HandField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
@@ -96,7 +96,7 @@ namespace Blackjack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Blackjack.GameReference.Card[] Hand {
+        public Blackjack.GameReference.BlackJackHand Hand {
             get {
                 return this.HandField;
             }
@@ -156,6 +156,91 @@ namespace Blackjack.GameReference {
                 if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
                     this.UsernameField = value;
                     this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BlackJackHand", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
+    [System.SerializableAttribute()]
+    public partial class BlackJackHand : Blackjack.GameReference.Hand {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Hand", Namespace="http://schemas.datacontract.org/2004/07/Service.Models")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+    public partial class Hand : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Blackjack.GameReference.Card> CardsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GetSumOfHandField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Blackjack.GameReference.Card> Cards {
+            get {
+                return this.CardsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardsField, value) != true)) {
+                    this.CardsField = value;
+                    this.RaisePropertyChanged("Cards");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GetSumOfHand {
+            get {
+                return this.GetSumOfHandField;
+            }
+            set {
+                if ((this.GetSumOfHandField.Equals(value) != true)) {
+                    this.GetSumOfHandField = value;
+                    this.RaisePropertyChanged("GetSumOfHand");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((this.ValueField.Equals(value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
                 }
             }
         }
@@ -340,7 +425,7 @@ namespace Blackjack.GameReference {
         private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Blackjack.GameReference.PlayerData[] PlayersField;
+        private System.Collections.Generic.List<Blackjack.GameReference.PlayerData> PlayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PotField;
@@ -382,7 +467,7 @@ namespace Blackjack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Blackjack.GameReference.PlayerData[] Players {
+        public System.Collections.Generic.List<Blackjack.GameReference.PlayerData> Players {
             get {
                 return this.PlayersField;
             }
@@ -533,10 +618,10 @@ namespace Blackjack.GameReference {
         System.Threading.Tasks.Task<Blackjack.GameReference.PlayerData> GetPlayerInfoAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
-        Blackjack.GameReference.Table[] ListTables();
+        System.Collections.Generic.List<Blackjack.GameReference.Table> ListTables();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
-        System.Threading.Tasks.Task<Blackjack.GameReference.Table[]> ListTablesAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Blackjack.GameReference.Table>> ListTablesAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/CreateTable")]
         void CreateTable();
@@ -563,10 +648,16 @@ namespace Blackjack.GameReference {
         System.Threading.Tasks.Task LeaveAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Bet")]
-        void Bet(decimal amount);
+        void Bet(decimal amount, bool doubleBet);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Bet")]
-        System.Threading.Tasks.Task BetAsync(decimal amount);
+        System.Threading.Tasks.Task BetAsync(decimal amount, bool doubleBet);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Stand")]
+        void Stand();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Stand")]
+        System.Threading.Tasks.Task StandAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Deal")]
         void Deal();
@@ -592,107 +683,138 @@ namespace Blackjack.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnJoin", ReplyAction="http://tempuri.org/IGame/OnJoinResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         void OnJoin(object sender, Blackjack.GameReference.GameArgs e);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnLeave", ReplyAction="http://tempuri.org/IGame/OnLeaveResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         void OnLeave(object sender, Blackjack.GameReference.GameArgs e);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnHit", ReplyAction="http://tempuri.org/IGame/OnHitResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         void OnHit(object sender, Blackjack.GameReference.GameArgs e);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnBet", ReplyAction="http://tempuri.org/IGame/OnBetResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         void OnBet(object sender, Blackjack.GameReference.GameArgs e);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnFold", ReplyAction="http://tempuri.org/IGame/OnFoldResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         void OnFold(object sender, Blackjack.GameReference.GameArgs e);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnNextTurn", ReplyAction="http://tempuri.org/IGame/OnNextTurnResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
-        void OnNextTurn(object sender, Blackjack.GameReference.GameArgs e);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnDeal", ReplyAction="http://tempuri.org/IGame/OnDealResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         void OnDeal(object sender, Blackjack.GameReference.GameArgs e);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnNewTableCreated")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
-        void OnNewTableCreated(object sender, Blackjack.GameReference.Table[] tableList);
+        void OnNewTableCreated(object sender, System.Collections.Generic.List<Blackjack.GameReference.Table> tableList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnMyTurn", ReplyAction="http://tempuri.org/IGame/OnMyTurnResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnMyTurn(object sender, Blackjack.GameReference.GameArgs e);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/OnStand", ReplyAction="http://tempuri.org/IGame/OnStandResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Card>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.Table>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Blackjack.GameReference.PlayerData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Blackjack.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        void OnStand(object sender, Blackjack.GameReference.GameArgs e);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -747,11 +869,11 @@ namespace Blackjack.GameReference {
             return base.Channel.GetPlayerInfoAsync(username);
         }
         
-        public Blackjack.GameReference.Table[] ListTables() {
+        public System.Collections.Generic.List<Blackjack.GameReference.Table> ListTables() {
             return base.Channel.ListTables();
         }
         
-        public System.Threading.Tasks.Task<Blackjack.GameReference.Table[]> ListTablesAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Blackjack.GameReference.Table>> ListTablesAsync() {
             return base.Channel.ListTablesAsync();
         }
         
@@ -787,12 +909,20 @@ namespace Blackjack.GameReference {
             return base.Channel.LeaveAsync();
         }
         
-        public void Bet(decimal amount) {
-            base.Channel.Bet(amount);
+        public void Bet(decimal amount, bool doubleBet) {
+            base.Channel.Bet(amount, doubleBet);
         }
         
-        public System.Threading.Tasks.Task BetAsync(decimal amount) {
-            return base.Channel.BetAsync(amount);
+        public System.Threading.Tasks.Task BetAsync(decimal amount, bool doubleBet) {
+            return base.Channel.BetAsync(amount, doubleBet);
+        }
+        
+        public void Stand() {
+            base.Channel.Stand();
+        }
+        
+        public System.Threading.Tasks.Task StandAsync() {
+            return base.Channel.StandAsync();
         }
         
         public void Deal() {

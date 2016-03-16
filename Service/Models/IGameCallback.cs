@@ -32,10 +32,12 @@ namespace Service
         [OperationContract]
         void OnFold(object sender, GameArgs e);
         [OperationContract]
-        void OnNextTurn(object sender, GameArgs e);
-        [OperationContract]
         void OnDeal(object sender, GameArgs e);
         [OperationContract(IsOneWay = true)]
         void OnNewTableCreated(object sender, IList<Table> tableList);
+        [OperationContract]
+        void OnMyTurn(object sender, GameArgs e);
+        [OperationContract]
+        void OnStand(object sender, GameArgs e);
     }
 }

@@ -22,8 +22,6 @@ namespace Service
         [OperationContract]
         PlayerData GetPlayerInfo(string username);
 
-       
-
         [OperationContract]
         IEnumerable<Models.Table> ListTables();
 
@@ -31,16 +29,19 @@ namespace Service
         void CreateTable();
 
         [OperationContract]
-        Models.Table JoinTable(int tableIndex);
+        Table JoinTable(int tableIndex);
 
         [OperationContract]
-        Models.Table PlayerReady(string tableId);
+        Table PlayerReady(string tableId);
 
         [OperationContract(IsOneWay = true)]
         void Leave();
 
         [OperationContract(IsOneWay = true)]
-        void Bet(decimal amount);
+        void Bet(decimal amount,bool doubleBet = false);
+
+        [OperationContract(IsOneWay = true)]
+        void Stand();
 
         [OperationContract(IsOneWay = true)]
         void Deal();

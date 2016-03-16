@@ -23,18 +23,28 @@ namespace Service.Models
 
         [DataMember]
         public PlayerData Dealer { get; set; }
+        [DataMember]
+        public bool InGame
+        {
+            get
+            { return _inGame; }
+        }
 
+
+        private bool _inGame;
         private Deck _deck;
-        
+
+        private IEnumerator<PlayerData> _turn;
         #region Game Events
 
 
         event EventHandler<GameArgs> JoinHandler;
         event EventHandler<GameArgs> LeaveHandler;
         event EventHandler<GameArgs> HitHandler;
+        event EventHandler<GameArgs> StandHandler;
         event EventHandler<GameArgs> BetHandler;
         event EventHandler<GameArgs> FoldHandler;
-        event EventHandler<GameArgs> NextTurnHandler;
+        event EventHandler<GameArgs> PlayerTurnHandler;
         #endregion
 
         [DataMember]
@@ -45,7 +55,8 @@ namespace Service.Models
             Id = Guid.NewGuid().ToString();
             Players = new List<PlayerData>();
             Dealer = new PlayerData();
-           // Players.Add(Dealer); // Is the dealer one of the players?
+            _inGame = false;
+            // Players.Add(Dealer); // Is the dealer one of the players?
         }
 
 
@@ -62,9 +73,10 @@ namespace Service.Models
             JoinHandler += callback.OnJoin;
             LeaveHandler += callback.OnLeave;
             HitHandler += callback.OnHit;
+            StandHandler += callback.OnStand;
             BetHandler += callback.OnBet;
             FoldHandler += callback.OnFold;
-            NextTurnHandler += callback.OnNextTurn;
+            PlayerTurnHandler += callback.OnMyTurn;
         }
 
         void RemoveEvents(IGameCallback callback)
@@ -72,17 +84,15 @@ namespace Service.Models
             JoinHandler -= callback.OnJoin;
             LeaveHandler -= callback.OnLeave;
             HitHandler -= callback.OnHit;
+            StandHandler -= callback.OnStand;
             BetHandler -= callback.OnBet;
             FoldHandler -= callback.OnFold;
-            NextTurnHandler -= callback.OnNextTurn;
+            PlayerTurnHandler -= callback.OnMyTurn;
         }
 
-        void NextRound()
-        {
-
-        }
         public void DealNewGame()
         {
+            _turn = Players.GetEnumerator();
             // Create a new deck and then shuffle the deck
             _deck = new Deck();
             _deck.Shuffle();
@@ -102,7 +112,7 @@ namespace Service.Models
                     player.Hand.Cards.Add(c);
                 }
             }
-            
+
             Card d = _deck.Draw();
             // Set the dealer's second card to be facing down
             d.IsCardUp = false;
@@ -115,7 +125,8 @@ namespace Service.Models
                 player.CurrentDeck = _deck;
             }
             Dealer.CurrentDeck = _deck;
-            NextTurnHandler(null, new GameArgs() { Table = this });
+
+            PlayerTurnHandler(null, new GameArgs() { Player = _turn.Current });
         }
 
         internal void Hit(PlayerData player)
@@ -123,18 +134,37 @@ namespace Service.Models
             var c = d.Pop();
             //Players.Add(player);
             //player.Hand.Add(c);
+
+            // check for black jack / bust
+
+
             HitHandler(this, new GameArgs() { Player = player, Card = c });
         }
 
         internal void Leave(PlayerData player)
         {
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+            var _ref = Players.SingleOrDefault(p => p.Username.Equals(player.Username));
+            Players.Remove(_ref);
             RemoveEvents(cb);
+
+            var currentPlayer = _turn.Current;
+            if (player.Username == currentPlayer.Username)
+            {
+                _turn.MoveNext();
+                currentPlayer = _turn.Current;
+            }
+
+            _turn = Players.GetEnumerator();
+            while (_turn.Current != currentPlayer) _turn.MoveNext();
+            
+
             LeaveHandler(null, new GameArgs() { Player = player });
         }
 
-        internal void Bet(PlayerData player, decimal amount)
+        internal void Bet(PlayerData player, decimal amount, bool doubleBet)
         {
+            CheckLastTurn();
             BetHandler(null, new GameArgs() { Player = player, Amount = amount });
         }
 
@@ -149,17 +179,63 @@ namespace Service.Models
         /// </summary>
         internal void CheckReady()
         {
-           
-           foreach(var p in Players)
-           {
-                if (p.IsReady == false)
-                    return;
-           }
+            if(Players.FirstOrDefault(p => !p.IsReady) != null)
+                return;
 
             // Start The Game
-
+            _inGame = true;
             DealNewGame();
 
+        }
+
+        internal void Stand(PlayerData currentPlayer)
+        {
+            CheckLastTurn();
+            StandHandler(null, new GameArgs() { Player = currentPlayer });
+        }
+
+        void CheckLastTurn()
+        {
+            if (_turn.MoveNext())
+            {
+                PlayerTurnHandler(null, new GameArgs() { Player = _turn.Current });
+            }
+            else {
+                DealerPlay();
+                EndGame();
+            }
+        }
+
+        void DealerPlay()
+        {
+            while (Dealer.Hand.Value < 17)
+                Dealer.Hand.Cards.Add(_deck.Draw());
+        }
+
+        void EndGame()
+        {
+            foreach(var p in Players)
+            {
+                if (p.Hand.Value == Dealer.Hand.Value)      // player tie
+                { 
+                    p.Bank += decimal.ToDouble(p.Bet); 
+                }
+                else if(p.Hand.Value < Dealer.Hand.Value)   // player lose
+                {
+                    p.Bank -= decimal.ToDouble(p.Bet);
+                }
+                else if(p.Hand.Value > Dealer.Hand.Value)   // player win
+                {
+                    if (p.Hand.Value == 21) // player blackjack
+                        p.Bank += decimal.ToDouble(2.4m * p.Bet);
+                    else        // normal win
+                    {                                       
+                        p.Bank += decimal.ToDouble(2 * p.Bet);
+                    }
+                }
+            }
+
+            DealNewGame();
         }
     }
 }

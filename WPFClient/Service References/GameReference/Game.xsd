@@ -98,7 +98,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+        <xs:element minOccurs="0" name="doubleBet" type="xs:boolean" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Stand">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="Deal">
@@ -181,24 +187,11 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="OnNextTurn">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="e" nillable="true" type="q11:GameArgs" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OnNextTurnResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="OnDeal">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="e" nillable="true" type="q12:GameArgs" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="e" nillable="true" type="q11:GameArgs" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -211,8 +204,34 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="tableList" nillable="true" type="q13:ArrayOfTable" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Service.Models" minOccurs="0" name="tableList" nillable="true" type="q12:ArrayOfTable" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnMyTurn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="e" nillable="true" type="q13:GameArgs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnMyTurnResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnStand">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="e" nillable="true" type="q14:GameArgs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnStandResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

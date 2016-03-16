@@ -46,10 +46,9 @@ namespace Service
             }
         }
 
-        public void Bet( decimal amount)
+        public void Bet( decimal amount, bool doubleBet = false)
         {
-            var CurrentPlayer = sessions[OperationContext.Current.SessionId];
-            CurrentTable?.Bet(CurrentPlayer, amount);
+            CurrentTable?.Bet(CurrentPlayer, amount, doubleBet);
         }
 
         public void CreateTable()
@@ -106,6 +105,9 @@ namespace Service
         {
             ///////////////////////////////////////////////////TODO Is table full or already playing
             var table = Tables[tableIndex];
+            if (table.InGame)
+                return null;
+
             table?.Join(CurrentPlayer);
             CurrentPlayer.CurrentTable = table;
             return table;
@@ -203,6 +205,11 @@ namespace Service
         {
             CurrentPlayer.IsReady = true;
             CurrentTable.CheckReady();
+        }
+
+        public void Stand()
+        {
+            CurrentTable?.Stand(CurrentPlayer);
         }
     }
 }

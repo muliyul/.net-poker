@@ -556,16 +556,16 @@
 
 
         <!-- Win Status -->
-        <Label x:Name="WinStatus" Visibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="450,506,0,0"  Content="Dealer Won" VerticalAlignment="Top" Width="190" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Comic Sans MS" BorderThickness="1"/>
+        <Label x:Name="WinStatus" Visibility="Visible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="267,250,0,0"  Content="Dealer Won" VerticalAlignment="Top" Width="190" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Comic Sans MS" BorderThickness="1"/>
 
         <!-- Bet Button Elements -->
-        <Button x:Name="Bet10Btn" Style="{StaticResource TenButton}" Content="10" HorizontalAlignment="Left" Margin="115,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet10"/>
-        <Button x:Name="Bet25Btn" Style="{StaticResource TwentyFiveButton}" Content="25" HorizontalAlignment="Left" Margin="183,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet25"/>
-        <Button x:Name="Bet50Btn" Style="{StaticResource FiftyButton}" Content="50" HorizontalAlignment="Left" Margin="250,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet50"/>
-        <Button x:Name="Bet100Btn" Style="{StaticResource HundrendButton}" Content="100" HorizontalAlignment="Left" Margin="317,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet100"/>
+        <Button x:Name="Bet10Btn" Style="{StaticResource TenButton}" Content="10" HorizontalAlignment="Left" Margin="222,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet10"/>
+        <Button x:Name="Bet25Btn" Style="{StaticResource TwentyFiveButton}" Content="25" HorizontalAlignment="Left" Margin="290,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet25"/>
+        <Button x:Name="Bet50Btn" Style="{StaticResource FiftyButton}" Content="50" HorizontalAlignment="Left" Margin="357,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet50"/>
+        <Button x:Name="Bet100Btn" Style="{StaticResource HundrendButton}" Content="100" HorizontalAlignment="Left" Margin="424,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet100"/>
 
         <!-- Bet Status -->
-        <Label x:Name="current_bet_label" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="411,619,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer1BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="623,464,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -579,7 +579,6 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="34" Margin="411,584,0,0" Content="My Bet" VerticalAlignment="Top" Width="112" Background="{x:Null}" BorderBrush="Gold" Foreground="Gold" FontFamily="Arial" FontSize="14" FontWeight="Bold" BorderThickness="1"/>
 
         <!-- Bet Clear Button -->
         <Button x:Name="ClearBtn" Style="{StaticResource ClearButton}" Content="Clear" HorizontalAlignment="Left" Margin="544,604,0,0" VerticalAlignment="Top" Width="86" Height="32" Click="ClearBet" FontFamily="Arial"/>
@@ -590,17 +589,16 @@
         <Button x:Name="StandBtn" Style="{StaticResource ControlButton}" Content="Stand" HorizontalAlignment="Left" Margin="327,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Stand" FontFamily="Arial"/>
         <Button x:Name="DealBtn" Style="{StaticResource ControlButton}" Content="Deal" HorizontalAlignment="Left" Margin="438,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Deal" FontFamily="Arial"/>
         <Button Style="{StaticResource ControlButton}" Content="End Game" HorizontalAlignment="Left" Margin="550,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Button_Click" FontFamily="Arial"/>
-        <Button x:Name="ReadyBtn" Style="{StaticResource ControlButton}" Content="Ready" HorizontalAlignment="Left" Margin="52,587,0,0" VerticalAlignment="Top" Width="48" Height="65" Click="ReadyBtn_Click" FontFamily="Arial"/>
 
 
         <!-- Player Widget -->
         <!--<Image HorizontalAlignment="Left" Height="119" Margin="294,420,0,0" VerticalAlignment="Top" Width="113" Source="{Binding Source={x:Static properties:Settings.Default},Path=PlayerImage}" Stretch="Fill"/>-->
-        <Label  x:Name="Player1Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="283,506,0,0"  Content="{Binding Source={x:Static properties:Settings.Default},Path=PlayerName}" VerticalAlignment="Top" Width="135" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
+        <Label  x:Name="Player1Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="623,422,0,0"  Content="{Binding Source={x:Static properties:Settings.Default},Path=PlayerName}" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
 
-        <Label  x:Name="Player2Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="138,478,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
-        <Label  x:Name="Player3Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="469,478,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
-        <Label  x:Name="Player4Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="10,441,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
-        <Label  x:Name="Player5Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="623,441,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
+        <Label  x:Name="Player2Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="492,463,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
+        <Label  x:Name="Player3Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="309,482,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
+        <Label  x:Name="Player4Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="135,465,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
+        <Label  x:Name="Player5Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="0,441,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
         <Image x:Name="Player2Card0" HorizontalAlignment="Left" Height="82" Margin="117,310,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -841,7 +839,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Label x:Name="palyer2BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="138,521,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer2BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="492,506,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -855,7 +853,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Label x:Name="palyer3BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="469,519,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer3BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="309,523,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -869,7 +867,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Label x:Name="palyer4BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,482,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer4BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="135,506,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -883,7 +881,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Label x:Name="palyer5BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="623,482,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer5BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="0,482,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
