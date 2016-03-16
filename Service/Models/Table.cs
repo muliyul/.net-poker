@@ -62,9 +62,12 @@ namespace Service.Models
 
         internal void Join(PlayerData player)
         {
+            bool isFirst = Players.Count == 0;
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             RegisterEvents(cb);
             Players.Add(player);
+            if (isFirst)
+                _turn = Players.GetEnumerator();
             JoinHandler(null, new GameArgs() { Table = this });
         }
 
@@ -218,7 +221,8 @@ namespace Service.Models
             {
                 if (p.Hand.Value == Dealer.Hand.Value)      // player tie
                 { 
-                    p.Bank += decimal.ToDouble(p.Bet); 
+                    p.Bank += decimal.ToDouble(p.Bet);
+                     
                 }
                 else if(p.Hand.Value < Dealer.Hand.Value)   // player lose
                 {
@@ -233,8 +237,10 @@ namespace Service.Models
                         p.Bank += decimal.ToDouble(2 * p.Bet);
                     }
                 }
+                p.Bet = 0; 
             }
 
+            //
             DealNewGame();
         }
     }

@@ -33,10 +33,12 @@ namespace Blackjack
                 _player = value;
             }
         }
+
+        public GameClient Server { get; internal set; }
+
         private PlayerData _player;
         private GameReference.Table _currentTable;
         private List<GameReference.Table> _serverTableList;
-        private GameReference.GameClient _server;
 
         private GameWindow gameWindow;
 
@@ -51,26 +53,11 @@ namespace Blackjack
             PopulateTableList();
         }
 
-        public StartForm(PlayerData player, GameReference.GameClient server)
-        {
-            _server = server;
-            this._player = player;
-            InitializeComponent();
-            PopulateTableList();
-        }
-
         private async void PopulateTableList(bool updateFromServer = true)
         {
 
             if (updateFromServer)
-            {
-                var serverTableList = await _server.ListTablesAsync();
-                if (serverTableList == null)
-                    return;
-               _serverTableList = serverTableList.ToList();
-            }
-
-           
+                _serverTableList = await Server.ListTablesAsync();
             
             
             tablesList.Items.Clear();
@@ -118,7 +105,7 @@ namespace Blackjack
             this.Hide();
             var i = tablesList.SelectedIndex;
 
-            _currentTable = await _server.JoinTableAsync(i);
+            _currentTable = await Server.JoinTableAsync(i);
 
             if (_currentTable == null)
             {
@@ -126,7 +113,7 @@ namespace Blackjack
                 return;
             }
 
-            gameWindow = new GameWindow(_player, _currentTable, _server);
+            gameWindow = new GameWindow(_player, _currentTable, Server);
             gameWindow.ShowDialog();
             this.Show();
         }
@@ -134,7 +121,7 @@ namespace Blackjack
         private void createTableButton_Click(object sender, RoutedEventArgs e)
         {
 
-            _server.CreateTableAsync();
+            Server.CreateTableAsync();
 
         }
 

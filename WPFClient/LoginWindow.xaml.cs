@@ -22,7 +22,7 @@ namespace Blackjack
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public static GameReference.GameClient GameServer;
+        public static GameReference.GameClient Server;
         public static InstanceContext InstContext;
         private StartForm startForm;
         public LoginWindow()
@@ -30,13 +30,14 @@ namespace Blackjack
             InitializeComponent();
             startForm = new StartForm();
             InstContext = new InstanceContext(startForm);
-            GameServer = new GameReference.GameClient(InstContext);
+            Server = new GameReference.GameClient(InstContext);
+            startForm.Server = Server;
         }
 
         private async void BtLogin_Click(object sender, RoutedEventArgs e)
         {
            
-            var player = await GameServer.LoginAsync(TbUserName.Text, PbPassword.Password);
+            var player = await Server.LoginAsync(TbUserName.Text, PbPassword.Password);
             startForm.Player = player;
             if (player != null)
             {

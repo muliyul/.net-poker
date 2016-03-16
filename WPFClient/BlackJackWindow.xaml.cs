@@ -26,6 +26,26 @@ namespace Blackjack
             _server = server;
             game = new BlackJackGame(player);
             InitializeComponent();
+
+            _playerNameLabels.Add(Player1Lb);
+            _playerNameLabels.Add(Player2Lb);
+            _playerNameLabels.Add(Player3Lb);
+            _playerNameLabels.Add(Player4Lb);
+            _playerNameLabels.Add(Player5Lb);
+
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl1);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl2);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl3);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl4);
+            _playerLabelsTotalCardVal.Add(TotalCardValLbl5);
+
+            _playerBetAmountLabels.Add(palyer1BetLb);
+            _playerBetAmountLabels.Add(palyer2BetLb);
+            _playerBetAmountLabels.Add(palyer3BetLb);
+            _playerBetAmountLabels.Add(palyer4BetLb);
+            _playerBetAmountLabels.Add(palyer5BetLb);
+
+
             SetUpNewGame();
         }
 
@@ -277,32 +297,9 @@ namespace Blackjack
         /// </summary>
         private void SetUpNewGame()
         {
-            _playerNameLabels.Add(Player1Lb);
-            _playerNameLabels.Add(Player2Lb);
-            _playerNameLabels.Add(Player3Lb);
-            _playerNameLabels.Add(Player4Lb);
-            _playerNameLabels.Add(Player5Lb);
-
-            _playerLabelsTotalCardVal.Add(TotalCardValLbl1);
-            _playerLabelsTotalCardVal.Add(TotalCardValLbl2);
-            _playerLabelsTotalCardVal.Add(TotalCardValLbl3);
-            _playerLabelsTotalCardVal.Add(TotalCardValLbl4);
-            _playerLabelsTotalCardVal.Add(TotalCardValLbl5);
-
-            _playerBetAmountLabels.Add(palyer1BetLb);
-            _playerBetAmountLabels.Add(palyer2BetLb);
-            _playerBetAmountLabels.Add(palyer3BetLb);
-            _playerBetAmountLabels.Add(palyer4BetLb);
-            _playerBetAmountLabels.Add(palyer5BetLb);
-
-
-
-
-
+          
             UpdatePlayers();
             UpdatePlayersBet();
-
-
 
             DealBtn.IsEnabled = true;
             DoubleBetBtn.IsEnabled = false;
@@ -626,9 +623,9 @@ namespace Blackjack
             SetUpGameInPlay();
         }
 
-        void IGameCallback.OnStand(object sender, GameArgs e)
+        public void OnStand(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

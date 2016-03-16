@@ -23,9 +23,8 @@ namespace Service
         IDictionary<string, PlayerData> sessions = new Dictionary<string, PlayerData>();
         private static Dictionary<string, IGameCallback> clients =
                 new Dictionary<string, IGameCallback>();
-        IList<Table> Tables = new List<Table>();
+        static IList<Table> Tables = new List<Table>();
   
-        private static object locker = new object();
         PlayerData CurrentPlayer
         {
             get
@@ -55,18 +54,21 @@ namespace Service
         {
             var t = new Table();
             Tables.Add(t);
-            foreach (var s in sessions.Values)
+
+            var deadSessions = new List<string>();
+            foreach (var pair in sessions)
             {
                 try
                 {
-                    s.Callback.OnNewTableCreated(null, Tables);
+                    pair.Value.Callback.OnNewTableCreated(null, Tables);
                 }
-                catch (Exception )
+                catch (Exception)
                 {
-                    sessions.Remove(sessions.Keys.First(k => sessions[k] == s));
+                    deadSessions.Add(pair.Key);
                 }
             }
-
+            deadSessions.ForEach(s => sessions.Remove(s));
+            
         }
 
         public void Fold()
