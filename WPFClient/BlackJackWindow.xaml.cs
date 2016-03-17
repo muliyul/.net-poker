@@ -19,12 +19,31 @@ namespace Blackjack
 {
     public partial class GameWindow : Window, IGameCallback
     {
+
+        #region Fields
+
+        //Creates a new blackjack game with one player and an inital balance set through the settings designer
+
+
+        private bool _firstTurn;
+        private PlayerData _player;
+
+        private GameReference.Table _table;
+        private decimal _currentBet;
+        private List<Label> _playerNameLabels = new List<Label>();
+        private List<Label> _playerLabelsTotalCardVal = new List<Label>();
+        private List<Label> _playerBetAmountLabels = new List<Label>();
+        private List<Label> _playerWinStatusLabels = new List<Label>();
+        private GameReference.GameClient _server;
+       
+        #endregion
+
         public GameWindow(PlayerData player, GameReference.Table table, GameReference.GameClient server)
         {
-            this.player = player;
-            this.table = table;
+            this._player = player;
+            this._table = table;
             _server = server;
-            game = new BlackJackGame(player);
+       
             InitializeComponent();
 
             _playerNameLabels.Add(Player1Lb);
@@ -45,29 +64,29 @@ namespace Blackjack
             _playerBetAmountLabels.Add(palyer4BetLb);
             _playerBetAmountLabels.Add(palyer5BetLb);
 
+            _playerWinStatusLabels.Add(WinStatusPlayer1);
+            _playerWinStatusLabels.Add(WinStatusPlayer2);
+            _playerWinStatusLabels.Add(WinStatusPlayer3);
+            _playerWinStatusLabels.Add(WinStatusPlayer4);
+            _playerWinStatusLabels.Add(WinStatusPlayer5);
+
+          
+            ClearTable();
 
             SetUpNewGame();
         }
 
+      
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void EndGame_Click(object sender, RoutedEventArgs e)
         {
+            _server.Leave();
+            
             this.Close();
+            
         }
 
-        #region Fields
-
-        //Creates a new blackjack game with one player and an inital balance set through the settings designer
-        private BlackJackGame game;
-        private bool firstTurn;
-        private PlayerData player;
-        private GameReference.Table table;
-        private decimal _currentBet;
-        private List<Label> _playerNameLabels = new List<Label>();
-        private List<Label> _playerLabelsTotalCardVal = new List<Label>();
-        private List<Label> _playerBetAmountLabels = new List<Label>();
-        private GameReference.GameClient _server;
-        #endregion
+    
 
         #region Game Methods
 
@@ -83,8 +102,7 @@ namespace Blackjack
 
                 _currentBet += betValue;
 
-                _server.Bet(betValue, false);
-                //player.IncreaseBet(betValue);
+              
 
                 // Update the "My Bet" and "My Account" values
                 ShowBankValue();
@@ -102,8 +120,13 @@ namespace Blackjack
         private void ShowBankValue()
         {
             // Update the "My Account" value
-            total_sum_label.Content = "$" + (player.Bank - Convert.ToDouble(_currentBet));
-           // current_bet_label.Content = "$" + _currentBet.ToString();
+            total_sum_label.Content = "$" + (_player.Bank - Convert.ToDouble(_currentBet));
+
+            var player = _table.Players.SingleOrDefault(p => p.Username == _player.Username);
+            var playerIndex = _table.Players.IndexOf(player);
+
+            _playerBetAmountLabels[playerIndex].Content = _currentBet.ToString() + "$";
+            // current_bet_label.Content = "$" + _currentBet.ToString();
         }
 
         /// <summary>
@@ -111,6 +134,7 @@ namespace Blackjack
         /// </summary>
         private void ClearTable()
         {
+
             DealerCard0.Visibility = Visibility.Hidden;
             DealerCard1.Visibility = Visibility.Hidden;
             DealerCard2.Visibility = Visibility.Hidden;
@@ -153,7 +177,11 @@ namespace Blackjack
             Player5Card4.Visibility = Visibility.Hidden;
             Player5Card5.Visibility = Visibility.Hidden;
 
+            _playerWinStatusLabels.ForEach(p => p.Visibility = Visibility.Hidden);
+            WinStatusDealer.Visibility = Visibility.Hidden;
         }
+
+        
 
         /// <summary>
         /// Get the game result.  This returns an EndResult value
@@ -258,35 +286,36 @@ namespace Blackjack
             Bet50Btn.IsEnabled = false;
             Bet100Btn.IsEnabled = false;
             ClearBtn.IsEnabled = false;
-            StandBtn.IsEnabled = true;
-            HitBtn.IsEnabled = true;
+            StandBtn.IsEnabled = false; 
+            HitBtn.IsEnabled = false;
             WinStatus.Visibility = Visibility.Hidden;      ///////////  <-- should be on call back
 
-            for (int i = 0; i < table.Players.Count; ++i)
+            for (int i = 0; i < _table.Players.Count; ++i)
             {
                 _playerLabelsTotalCardVal[i].Visibility = Visibility.Visible; 
             }
 
             DealBtn.IsEnabled = false;
 
-            if (firstTurn)
-                DoubleBetBtn.IsEnabled = true;
+            if (_firstTurn)
+                DoubleBetBtn.IsEnabled = false;
         }
 
 
         public void UpdatePlayers()
         {
-            for (int i = 0; i < table.Players.Count; ++i)
+            for (int i = 0; i < _table.Players.Count; ++i)
             {
-                _playerNameLabels[i].Content = table.Players[i].Username;
+                _playerNameLabels[i].Content = _table.Players[i].Username;
             }
         }
 
         public void UpdatePlayersBet()
         {
-            for (int i = 1; i < table.Players.Count; ++i)
+            for (int i = 1; i < _table.Players.Count; ++i)
             {
-                _playerBetAmountLabels[i].Content = table.Players[i].Bet + "$";
+                _playerBetAmountLabels[i].Content = _table.Players[i].Bet + "$";
+
             }
 
         }
@@ -315,7 +344,7 @@ namespace Blackjack
 
             _playerLabelsTotalCardVal.ForEach(p => p.Visibility = Visibility.Hidden);
 
-            firstTurn = true;
+            _firstTurn = true;
             ShowBankValue();
         }
 
@@ -326,14 +355,14 @@ namespace Blackjack
         {
             //// Update the value of the hand
 
-            for (int i = 0; i < table.Players.Count; i++)
+            for (int i = 0; i < _table.Players.Count; i++)
             {
-                _playerLabelsTotalCardVal[i].Content = table.Players[i].Hand.Value;
-                List<GameReference.Card> playerCards = table.Players[i].Hand.Cards;
+                _playerLabelsTotalCardVal[i].Content = HandValue(_table.Players[i].Hand.Cards);
+                List<GameReference.Card> playerCards = _table.Players[i].Hand.Cards;
                 for (int j = 0; j < playerCards.Count; j++)
                 {
                     // Load each card from file
-                    Image card = (Image)rootV.FindName("Player" + i + "Card" + j);
+                    Image card = (Image)rootV.FindName("Player" + (i+1) + "Card" + j);
                     LoadCard(card, playerCards[j]);
                     card.Visibility = Visibility.Visible;
 
@@ -341,7 +370,9 @@ namespace Blackjack
             }
 
 
-            List<GameReference.Card> dealerCards = table.Dealer.Hand.Cards;
+            List<GameReference.Card> dealerCards = _table.Dealer.Hand.Cards;
+
+            WinStatusDealer.Content = HandValue(_table.Dealer.Hand.Cards);
 
             for (int i = 0; i < dealerCards.Count; i++)
             {
@@ -352,6 +383,14 @@ namespace Blackjack
         }
 
       
+        private int HandValue(List<GameReference.Card> cards)
+        {
+            int sum = cards.Sum(card => card.Value);
+            int aces = cards.Count(card => card.Face == Face.Ace);
+
+            while (sum > 21 && aces-- > 0) sum -= 10;
+            return sum;
+        }
 
         /// <summary>
         /// Takes the card value and loads the corresponding card image from file
@@ -360,6 +399,8 @@ namespace Blackjack
         /// <param name="c"></param>
         private void LoadCard(Image pb, GameReference.Card c)
         {
+            if (pb == null)
+                return;
             try
             {
                 StringBuilder image = new StringBuilder();
@@ -450,7 +491,7 @@ namespace Blackjack
             try
             {
                 // If the current bet is equal to 0, ask the player to place a bet
-                if ((_currentBet == 0) && (player.Bank > 0))
+                if ((_currentBet == 0) && (_player.Bank > 0))
                 {
                     MessageBox.Show("You must place a bet before the dealer deals.", "Error", MessageBoxButton.OK);
                 }
@@ -461,10 +502,11 @@ namespace Blackjack
                     // Place the bet
                     _server.Bet(_currentBet, false);
 
+                    _server.Deal();
                     // shoud be call back to it ShowBankValue();
 
                     // Clear the table, set up the UI for playing a game, and deal a new game
-                  
+
 
                     // Check see if the current player has blackjack
                     // if (player.HasBlackJack())
@@ -502,26 +544,19 @@ namespace Blackjack
         private void Stand(object sender, RoutedEventArgs e)
         {
             // Dealer should finish playing and the UI should be updated
-            // game.DealerPlay();
-            // UpdateUIPlayerCards();
+         
             _server.Stand();
-            // Check who won the game
-            //EndGame(GetGameResult());
+          
         }
 
         private void Hit(object sender, RoutedEventArgs e)
         {
-            // It is no longer the first turn, set this to false so that the cards will all be facing upwards
-            firstTurn = false;
-            // Hit once and update UI cards
+            _firstTurn = false;
+           
             _server.Hit();
            
 
-            // Check to see if player has bust
-            //if (game.CurrentPlayer.HasBust())
-            //{
-            //    EndGame(EndResult.PlayerBust);
-            //}
+        
         }
 
         private void DoubleBet(object sender, RoutedEventArgs e)
@@ -563,18 +598,13 @@ namespace Blackjack
         }
 
      
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-
-            Application.Current.Shutdown();
-        }
+       
 
         public void OnJoin(object sender, GameArgs e)
         {
             if (e.Table != null)
             {
-                table = e.Table;
+                _table = e.Table;
                 UpdatePlayers();
 
             }
@@ -582,34 +612,46 @@ namespace Blackjack
 
         public void OnLeave(object sender, GameArgs e)
         {
-            var player = table.Players.SingleOrDefault(p => p.Username == e.Player.Username);
-            table.Players.Remove(player);
+            var player = _table.Players.SingleOrDefault(p => p.Username == e.Player.Username);
+            _table.Players.Remove(player);
             UpdatePlayers();
 
         }
 
         public void OnHit(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            var player = _table.Players.SingleOrDefault(p => p.Username == e.Player.Username);
+            player.Hand.Cards.Add(e.Card);
+            UpdateUIPlayerCards();
         }
 
         public void OnBet(object sender, GameArgs e)
         {
-            var player = table.Players.SingleOrDefault(p => p.Username == e.Player.Username);
+            var player = _table.Players.SingleOrDefault(p => p.Username == e.Player.Username);
             player.Bet = e.Amount;
             UpdatePlayersBet();
         }
 
-        public void OnFold(object sender, GameArgs e)
+        public void OnStatus(object sender, GameArgs e)
         {
-           // throw new NotImplementedException();
+            var player = _table.Players.SingleOrDefault(p => p.Username == e.Player.Username);
+            var playerIndex = _table.Players.IndexOf(player);
+            _playerWinStatusLabels[playerIndex].Content = (string)sender;
+            _playerWinStatusLabels[playerIndex].Visibility = Visibility.Visible;
+
+            StandBtn.IsEnabled = false;
+            HitBtn.IsEnabled = false;
+            EndGameBtn.IsEnabled = true;
         }
 
         public void OnDeal(object sender, GameArgs e)
         {
-            table = e.Table;
+            _table = e.Table;
             ClearTable();
+            HitBtn.IsEnabled = false;
+            DoubleBetBtn.IsEnabled = false;
 
+            UpdatePlayersBet();
             UpdateUIPlayerCards();
         }
 
@@ -620,12 +662,42 @@ namespace Blackjack
 
         public void OnMyTurn(object sender, GameArgs e)
         {
-            SetUpGameInPlay();
+          
+
+            _table = e.Table;
+
+            StandBtn.IsEnabled = true;
+            HitBtn.IsEnabled = true;
+            EndGameBtn.IsEnabled = false;
+
+            UpdateUIPlayerCards();
         }
 
         public void OnStand(object sender, GameArgs e)
         {
             
+        }
+        public void OnDealerPlay(object sender, GameArgs e)
+        {
+            WinStatusDealer.Visibility = Visibility.Visible;
+            _table.Dealer.Hand = e.Player.Hand;
+            if(HandValue(_table.Dealer.Hand.Cards) <= 21)
+            {
+                
+                
+            } else
+            {
+                WinStatus.Content = "Dealer Bust!";
+            }
+            WinStatus.Visibility = Visibility.Visible;
+            UpdateUIPlayerCards();
+        }
+
+        public void OnResetTable(object sender, GameArgs e)
+        {
+
+            ClearTable();
+            SetUpNewGame();
         }
     }
 }

@@ -724,7 +724,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnFold_output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnStatus_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -747,7 +747,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnFold_Input_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnStatus_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -931,6 +931,98 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnDealerPlay_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnDealerPlay_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnResetTable_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_OnResetTable_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:51845/Game.svc?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -1021,11 +1113,11 @@
   <wsdl:message name="IGame_OnBet_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnBetResponse" />
   </wsdl:message>
-  <wsdl:message name="IGame_OnFold_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:OnFold" />
+  <wsdl:message name="IGame_OnStatus_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnStatus" />
   </wsdl:message>
-  <wsdl:message name="IGame_OnFold_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:OnFoldResponse" />
+  <wsdl:message name="IGame_OnStatus_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnStatusResponse" />
   </wsdl:message>
   <wsdl:message name="IGame_OnDeal_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnDeal" />
@@ -1047,6 +1139,18 @@
   </wsdl:message>
   <wsdl:message name="IGame_OnStand_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnStandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGame_OnDealerPlay_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnDealerPlay" />
+  </wsdl:message>
+  <wsdl:message name="IGame_OnDealerPlay_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnDealerPlayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGame_OnResetTable_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnResetTable" />
+  </wsdl:message>
+  <wsdl:message name="IGame_OnResetTable_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnResetTableResponse" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IGame">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Register">
@@ -1110,9 +1214,9 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnBet" message="tns:IGame_OnBet_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnBetResponse" message="tns:IGame_OnBet_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnFold">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnFold" message="tns:IGame_OnFold_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnFoldResponse" message="tns:IGame_OnFold_InputCallbackMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnStatus">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnStatus" message="tns:IGame_OnStatus_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnStatusResponse" message="tns:IGame_OnStatus_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnDeal">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnDeal" message="tns:IGame_OnDeal_OutputCallbackMessage" />
@@ -1128,6 +1232,14 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnStand">
       <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnStand" message="tns:IGame_OnStand_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnStandResponse" message="tns:IGame_OnStand_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnDealerPlay">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnDealerPlay" message="tns:IGame_OnDealerPlay_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnDealerPlayResponse" message="tns:IGame_OnDealerPlay_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnResetTable">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGame/OnResetTable" message="tns:IGame_OnResetTable_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGame/OnResetTableResponse" message="tns:IGame_OnResetTable_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IGame" type="tns:IGame">
@@ -1292,14 +1404,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="OnFold">
-      <soap12:operation soapAction="http://tempuri.org/IGame/OnFold" style="document" />
+    <wsdl:operation name="OnStatus">
+      <soap12:operation soapAction="http://tempuri.org/IGame/OnStatus" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnFold_Input_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnStatus_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnFold_output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnStatus_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1343,6 +1455,28 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="OnDealerPlay">
+      <soap12:operation soapAction="http://tempuri.org/IGame/OnDealerPlay" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnDealerPlay_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnDealerPlay_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnResetTable">
+      <soap12:operation soapAction="http://tempuri.org/IGame/OnResetTable" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnResetTable_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_OnResetTable_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Game">
     <wsdl:port name="WSDualHttpBinding_IGame" binding="tns:WSDualHttpBinding_IGame">
@@ -1350,7 +1484,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:51845/Game.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MULI-PC\muliy</Upn>
+          <Upn>KOSTA-PC\Kosta</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

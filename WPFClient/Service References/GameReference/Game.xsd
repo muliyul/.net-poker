@@ -174,7 +174,7 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="OnFold">
+  <xs:element name="OnStatus">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
@@ -182,7 +182,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="OnFoldResponse">
+  <xs:element name="OnStatusResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -230,6 +230,32 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="OnStandResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnDealerPlay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="e" nillable="true" type="q15:GameArgs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnDealerPlayResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnResetTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sender" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="e" nillable="true" type="q16:GameArgs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnResetTableResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

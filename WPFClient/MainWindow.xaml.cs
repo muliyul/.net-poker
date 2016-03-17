@@ -65,7 +65,8 @@ namespace Blackjack
             foreach (var tb in _serverTableList)
             {
                 var numOfPlayers = tb.Players == null ? 0 : tb.Players.Count;
-                var labelString = "Table #" + i++ + " | " + numOfPlayers + " / 6 | ";
+                var isOpen = tb.InGame ? " Closed " : "Waiting for players";
+                var labelString = "Table #" + i++ + " | " + numOfPlayers + " / 6 | " + isOpen;
                 var lb = new Label()
                 {
                     Content = labelString
@@ -105,17 +106,27 @@ namespace Blackjack
             this.Hide();
             var i = tablesList.SelectedIndex;
 
-            _currentTable = await Server.JoinTableAsync(i);
-
-            if (_currentTable == null)
+            if (i < 0)
             {
-                MessageBox.Show("Table in game or closed");
-                return;
+                MessageBox.Show("Select a room first");
+                this.Show();
             }
+            else
+            {
+                _currentTable = await Server.JoinTableAsync(i);
 
-            gameWindow = new GameWindow(_player, _currentTable, Server);
-            gameWindow.ShowDialog();
-            this.Show();
+                if (_currentTable == null)
+                {
+                    MessageBox.Show("Table in game or closed");
+                    this.Show();
+                }
+                else
+                {
+                    gameWindow = new GameWindow(_player, _currentTable, Server);
+                    gameWindow.ShowDialog();
+                    this.Show();
+                }
+            }
         }
 
         private void createTableButton_Click(object sender, RoutedEventArgs e)
@@ -124,7 +135,12 @@ namespace Blackjack
             Server.CreateTableAsync();
 
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
 
+            Application.Current.Shutdown();
+        }
         public void OnBet(object sender, GameArgs e)
         {
             //throw new NotImplementedException();
@@ -135,15 +151,13 @@ namespace Blackjack
 
         public void OnDeal(object sender, GameArgs e)
         {
-            //throw new NotImplementedException();
-            // game starts
-
+            gameWindow?.OnDeal( sender,  e);
             gameWindow?.SetUpGameInPlay();
         }
 
-        public void OnFold(object sender, GameArgs e)
+        public void OnStatus(object sender, GameArgs e)
         {
-            gameWindow?.OnFold(sender, e);
+            gameWindow?.OnStatus(sender, e);
         }
 
         public void OnHit(object sender, GameArgs e)
@@ -179,6 +193,16 @@ namespace Blackjack
         public void OnStand(object sender, GameArgs e)
         {
             gameWindow?.OnStand(sender, e);
+        }
+
+        public void OnDealerPlay(object sender, GameArgs e)
+        {
+            gameWindow?.OnDealerPlay(sender, e);
+        }
+
+        public void OnResetTable(object sender, GameArgs e)
+        {
+            gameWindow?.OnResetTable(sender, e);
         }
     }
 }

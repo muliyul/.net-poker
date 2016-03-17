@@ -496,7 +496,7 @@
         <Image HorizontalAlignment="Left" Height="82" Margin="527,127,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill"/>
 
         <!-- Dealer Cards -->
-        <Image x:Name="DealerCard0" HorizontalAlignment="Left" Height="82" Margin="145,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
+        <Image x:Name="DealerCard0" HorizontalAlignment="Left" Height="82" Margin="145,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible"/>
         <Image x:Name="DealerCard1" HorizontalAlignment="Left" Height="82" Margin="174,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
         <Image x:Name="DealerCard2" HorizontalAlignment="Left" Height="82" Margin="208,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
         <Image x:Name="DealerCard3" HorizontalAlignment="Left" Height="82" Margin="237,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
@@ -504,51 +504,114 @@
         <Image x:Name="DealerCard5" HorizontalAlignment="Left" Height="82" Margin="300,121,0,0" VerticalAlignment="Top" Width="59" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden"/>
 
         <!-- Player Cards -->
-        <Image x:Name="Player1Card0" HorizontalAlignment="Left" Height="82" Margin="286,337,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible"/>
-        <Image x:Name="Player1Card1" HorizontalAlignment="Left" Height="82" Margin="302,337,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible"/>
-        <Image x:Name="Player1Card2" HorizontalAlignment="Left" Height="82" Margin="326,337,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible"/>
-        <Image x:Name="Player1Card3" HorizontalAlignment="Left" Height="82" Margin="346,337,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible"/>
-        <Image x:Name="Player1Card4" HorizontalAlignment="Left" Height="82" Margin="362,337,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible"/>
-        <Image x:Name="Player1Card5" HorizontalAlignment="Left" Height="82" Margin="378,337,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible"/>
+        <Image x:Name="Player1Card0" HorizontalAlignment="Left" Height="71" Margin="607,212,0,0" VerticalAlignment="Top" Width="52" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-48.183"/>
+                    <TranslateTransform X="15.329" Y="34.283"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="Player1Card1" HorizontalAlignment="Left" Height="72" Margin="622,213,0,0" VerticalAlignment="Top" Width="52" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-48.183"/>
+                    <TranslateTransform X="9.997" Y="22.358"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="Player1Card2" HorizontalAlignment="Left" Height="71" Margin="644,216,0,0" VerticalAlignment="Top" Width="50" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-48.183"/>
+                    <TranslateTransform X="2.333" Y="5.217"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="Player1Card3" HorizontalAlignment="Left" Height="71" Margin="662,218,0,0" VerticalAlignment="Top" Width="50" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-48.183"/>
+                    <TranslateTransform X="-4.332" Y="-9.688"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="Player1Card4" HorizontalAlignment="Left" Height="71" Margin="677,219,0,0" VerticalAlignment="Top" Width="50" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-48.183"/>
+                    <TranslateTransform X="-9.664" Y="-21.613"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="Player1Card5" HorizontalAlignment="Left" Height="71" Margin="691,221,0,0" VerticalAlignment="Top" Width="52" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-48.183"/>
+                    <TranslateTransform X="-15.329" Y="-34.283"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
 
         <!-- Player Cards Status -->
-        <Label x:Name="TotalCardValLbl1" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="346,300,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible"/>
-        <Label x:Name="TotalCardValLbl2" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="203,272,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="TotalCardValLbl1" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="621,191,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="11.31"/>
+                    <RotateTransform Angle="-36.581"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="TotalCardValLbl3" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="508,279,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="TotalCardValLbl2" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="517,272,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-11.539"/>
+                    <RotateTransform Angle="-18.766"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="TotalCardValLbl4" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="91,188,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="TotalCardValLbl3" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="346,298,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="31.937"/>
+                    <RotateTransform Angle="-1.401"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="TotalCardValLbl5" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="630,186,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="TotalCardValLbl4" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="203,273,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-32.775"/>
+                    <RotateTransform Angle="23.608"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="TotalCardValLbl5" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="91,229,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="20.932"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Label.RenderTransform>
@@ -565,7 +628,7 @@
         <Button x:Name="Bet100Btn" Style="{StaticResource HundrendButton}" Content="100" HorizontalAlignment="Left" Margin="424,587,0,0" VerticalAlignment="Top" Width="63" Height="62" FontFamily="Arial" FontWeight="Bold" FontSize="22" Click="Bet100"/>
 
         <!-- Bet Status -->
-        <Label x:Name="palyer1BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="623,464,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer1BetLb" Content="0$" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="623,464,0,0" VerticalAlignment="Top" Width="112" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -588,7 +651,7 @@
         <Button x:Name="HitBtn" Style="{StaticResource ControlButton}" Content="Hit" HorizontalAlignment="Left" Margin="213,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Hit" FontFamily="Arial"/>
         <Button x:Name="StandBtn" Style="{StaticResource ControlButton}" Content="Stand" HorizontalAlignment="Left" Margin="327,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Stand" FontFamily="Arial"/>
         <Button x:Name="DealBtn" Style="{StaticResource ControlButton}" Content="Deal" HorizontalAlignment="Left" Margin="438,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Deal" FontFamily="Arial"/>
-        <Button Style="{StaticResource ControlButton}" Content="End Game" HorizontalAlignment="Left" Margin="550,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="Button_Click" FontFamily="Arial"/>
+        <Button x:Name="EndGameBtn" Style="{StaticResource ControlButton}" Content="End Game" HorizontalAlignment="Left" Margin="550,657,0,0" VerticalAlignment="Top" Width="100" Height="44" Click="EndGame_Click" FontFamily="Arial"/>
 
 
         <!-- Player Widget -->
@@ -599,247 +662,247 @@
         <Label  x:Name="Player3Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="309,482,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
         <Label  x:Name="Player4Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="135,465,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
         <Label  x:Name="Player5Lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="41" Margin="0,441,0,0"  Content="" VerticalAlignment="Top" Width="111" Background="{x:Null}" BorderBrush="Gold" Foreground="White" FontSize="24" FontFamily="Arial" BorderThickness="1"/>
-        <Image x:Name="Player2Card0" HorizontalAlignment="Left" Height="82" Margin="117,310,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player2Card0" HorizontalAlignment="Left" Height="78" Margin="476,308,0,0" VerticalAlignment="Top" Width="57" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="17.022"/>
-                    <TranslateTransform X="2.015" Y="-13.466"/>
+                    <RotateTransform Angle="-19.874"/>
+                    <TranslateTransform Y="15.638" X="2.739"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player2Card1" HorizontalAlignment="Left" Height="82" Margin="133,310,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player2Card1" HorizontalAlignment="Left" Height="79" Margin="491,308,0,0" VerticalAlignment="Top" Width="57" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="17.022"/>
-                    <TranslateTransform X="1.314" Y="-8.782"/>
+                    <RotateTransform Angle="-19.874"/>
+                    <TranslateTransform Y="10.199" X="1.787"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player2Card2" HorizontalAlignment="Left" Height="82" Margin="157,310,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player2Card2" HorizontalAlignment="Left" Height="78" Margin="514,309,0,0" VerticalAlignment="Top" Width="55" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="17.022"/>
-                    <TranslateTransform X="0.307" Y="-2.049"/>
+                    <RotateTransform Angle="-19.874"/>
+                    <TranslateTransform Y="2.38" X="0.417"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player2Card3" HorizontalAlignment="Left" Height="82" Margin="177,310,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player2Card3" HorizontalAlignment="Left" Height="78" Margin="533,309,0,0" VerticalAlignment="Top" Width="56" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="17.022"/>
-                    <TranslateTransform X="-0.57" Y="3.805"/>
+                    <RotateTransform Angle="-19.874"/>
+                    <TranslateTransform X="-0.775" Y="-4.42"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player2Card4" HorizontalAlignment="Left" Height="82" Margin="193,310,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player2Card4" HorizontalAlignment="Left" Height="78" Margin="548,309,0,0" VerticalAlignment="Top" Width="56" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="17.022"/>
-                    <TranslateTransform X="-1.271" Y="8.49"/>
+                    <RotateTransform Angle="-19.874"/>
+                    <TranslateTransform Y="-9.858" X="-1.727"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player2Card5" HorizontalAlignment="Left" Height="82" Margin="209,310,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player2Card5" HorizontalAlignment="Left" Height="79" Margin="564,309,0,0" VerticalAlignment="Top" Width="57" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="17.022"/>
-                    <TranslateTransform X="-2.015" Y="13.466"/>
+                    <RotateTransform Angle="-19.874"/>
+                    <TranslateTransform Y="-15.638" X="-2.739"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player3Card0" HorizontalAlignment="Left" Height="82" Margin="472,311,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player3Card0" HorizontalAlignment="Left" Height="82" Margin="290,339,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-12.877"/>
-                    <TranslateTransform X="1.157" Y="10.252"/>
+                    <RotateTransform Angle="-1.907"/>
+                    <TranslateTransform X="0.025" Y="1.531"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player3Card1" HorizontalAlignment="Left" Height="82" Margin="488,311,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player3Card1" HorizontalAlignment="Left" Height="82" Margin="306,339,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-12.877"/>
-                    <TranslateTransform X="0.754" Y="6.686"/>
+                    <RotateTransform Angle="-1.907"/>
+                    <TranslateTransform X="0.016" Y="0.998"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player3Card2" HorizontalAlignment="Left" Height="82" Margin="512,311,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player3Card2" HorizontalAlignment="Left" Height="82" Margin="330,339,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-12.877"/>
-                    <TranslateTransform X="0.176" Y="1.56"/>
+                    <RotateTransform Angle="-1.907"/>
+                    <TranslateTransform X="0.004" Y="0.233"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player3Card3" HorizontalAlignment="Left" Height="82" Margin="532,311,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player3Card3" HorizontalAlignment="Left" Height="82" Margin="350,339,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-12.877"/>
-                    <TranslateTransform X="-0.327" Y="-2.897"/>
+                    <RotateTransform Angle="-1.907"/>
+                    <TranslateTransform X="-0.007" Y="-0.432"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player3Card4" HorizontalAlignment="Left" Height="82" Margin="548,311,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player3Card4" HorizontalAlignment="Left" Height="82" Margin="366,339,0,0" VerticalAlignment="Top" Width="58" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-12.877"/>
-                    <TranslateTransform X="-0.729" Y="-6.463"/>
+                    <RotateTransform Angle="-1.907"/>
+                    <TranslateTransform X="-0.016" Y="-0.965"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player3Card5" HorizontalAlignment="Left" Height="82" Margin="564,311,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player3Card5" HorizontalAlignment="Left" Height="82" Margin="382,339,0,0" VerticalAlignment="Top" Width="60" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-12.877"/>
-                    <TranslateTransform X="-1.157" Y="-10.252"/>
+                    <RotateTransform Angle="-1.907"/>
+                    <TranslateTransform X="-0.025" Y="-1.531"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player4Card0" HorizontalAlignment="Left" Height="67" Margin="13,226,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player4Card0" HorizontalAlignment="Left" Height="67" Margin="138,316,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="35.397"/>
-                    <TranslateTransform X="8.503" Y="-26.645"/>
+                    <RotateTransform Angle="18.577"/>
+                    <TranslateTransform X="3.543" Y="-17.044"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player4Card1" HorizontalAlignment="Left" Height="66" Margin="26,225,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player4Card1" HorizontalAlignment="Left" Height="66" Margin="151,315,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="35.397"/>
-                    <TranslateTransform X="5.545" Y="-17.377"/>
+                    <RotateTransform Angle="18.577"/>
+                    <TranslateTransform X="2.403" Y="-11.014"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player4Card2" HorizontalAlignment="Left" Height="67" Margin="47,222,0,0" VerticalAlignment="Top" Width="47" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player4Card2" HorizontalAlignment="Left" Height="67" Margin="172,312,0,0" VerticalAlignment="Top" Width="47" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="35.397"/>
-                    <TranslateTransform X="1.294" Y="-4.055"/>
+                    <RotateTransform Angle="18.577"/>
+                    <TranslateTransform X="0.61" Y="-2.712"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player4Card3" HorizontalAlignment="Left" Height="66" Margin="64,220,0,0" VerticalAlignment="Top" Width="47" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player4Card3" HorizontalAlignment="Left" Height="66" Margin="189,310,0,0" VerticalAlignment="Top" Width="47" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="35.397"/>
-                    <TranslateTransform X="-2.403" Y="7.53"/>
+                    <RotateTransform Angle="18.577"/>
+                    <TranslateTransform X="-1.027" Y="4.635"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player4Card4" HorizontalAlignment="Left" Height="67" Margin="77,218,0,0" VerticalAlignment="Top" Width="47" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player4Card4" HorizontalAlignment="Left" Height="67" Margin="202,308,0,0" VerticalAlignment="Top" Width="47" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="35.397"/>
-                    <TranslateTransform X="-5.36" Y="16.798"/>
+                    <RotateTransform Angle="18.577"/>
+                    <TranslateTransform X="-2.166" Y="10.664"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player4Card5" HorizontalAlignment="Left" Height="67" Margin="91,216,0,0" VerticalAlignment="Top" Width="48" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player4Card5" HorizontalAlignment="Left" Height="67" Margin="216,306,0,0" VerticalAlignment="Top" Width="48" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="35.397"/>
-                    <TranslateTransform X="-8.503" Y="26.645"/>
+                    <RotateTransform Angle="18.577"/>
+                    <TranslateTransform X="-3.524" Y="16.889"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player5Card0" HorizontalAlignment="Left" Height="69" Margin="605,216,0,0" VerticalAlignment="Top" Width="51" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player5Card0" HorizontalAlignment="Left" Height="69" Margin="9,258,0,0" VerticalAlignment="Top" Width="51" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-35.609"/>
-                    <TranslateTransform X="8.602" Y="26.784"/>
+                    <RotateTransform Angle="23.758"/>
+                    <TranslateTransform X="4.502" Y="-11.273"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player5Card1" HorizontalAlignment="Left" Height="69" Margin="619,217,0,0" VerticalAlignment="Top" Width="50" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player5Card1" HorizontalAlignment="Left" Height="69" Margin="23,259,0,0" VerticalAlignment="Top" Width="50" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-35.609"/>
-                    <TranslateTransform X="5.61" Y="17.468"/>
+                    <RotateTransform Angle="23.758"/>
+                    <TranslateTransform X="3.512" Y="-7.469"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player5Card2" HorizontalAlignment="Left" Height="69" Margin="640,220,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player5Card2" HorizontalAlignment="Left" Height="69" Margin="44,262,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-35.609"/>
-                    <TranslateTransform X="1.309" Y="4.076"/>
+                    <RotateTransform Angle="23.758"/>
+                    <TranslateTransform X="0.207" Y="-1.826"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player5Card3" HorizontalAlignment="Left" Height="69" Margin="657,221,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player5Card3" HorizontalAlignment="Left" Height="69" Margin="61,263,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-35.609"/>
-                    <TranslateTransform X="-2.431" Y="-7.569"/>
+                    <RotateTransform Angle="23.758"/>
+                    <TranslateTransform X="-0.877" Y="3.16"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player5Card4" HorizontalAlignment="Left" Height="69" Margin="671,223,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player5Card4" HorizontalAlignment="Left" Height="69" Margin="75,265,0,0" VerticalAlignment="Top" Width="49" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-35.609"/>
-                    <TranslateTransform X="-5.423" Y="-16.885"/>
+                    <RotateTransform Angle="23.758"/>
+                    <TranslateTransform X="-2.973" Y="6.904"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="Player5Card5" HorizontalAlignment="Left" Height="68" Margin="685,225,0,0" VerticalAlignment="Top" Width="51" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="Player5Card5" HorizontalAlignment="Left" Height="68" Margin="89,267,0,0" VerticalAlignment="Top" Width="51" Source="Resources/cardSkin.PNG" Stretch="Fill" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-35.609"/>
-                    <TranslateTransform X="-8.602" Y="-26.784"/>
+                    <RotateTransform Angle="23.758"/>
+                    <TranslateTransform X="-4.722" Y="11.296"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Label x:Name="palyer2BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="492,506,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer2BetLb" Content="0$" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="492,506,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -853,7 +916,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Label x:Name="palyer3BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="309,523,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer3BetLb" Content="0$" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="309,523,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -867,7 +930,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Label x:Name="palyer4BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="135,506,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer4BetLb" Content="0$" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="135,506,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -881,7 +944,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Label x:Name="palyer5BetLb" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="0,482,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
+        <Label x:Name="palyer5BetLb" Content="0$" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="0,482,0,0" VerticalAlignment="Top" Width="111" BorderThickness="2" Foreground="Orange" FontFamily="Arial" >
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFFFD100" Offset="0"/>
@@ -894,6 +957,21 @@
                     <GradientStop Color="#FF5F5F5F" Offset="1" />
                 </LinearGradientBrush>
             </Label.Background>
+        </Label>
+        <Label x:Name="WinStatusPlayer1" Visibility="Visible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="35" Margin="615,226,0,0"  Content="BlackJack!" VerticalAlignment="Top" Width="105" Background="Black" BorderBrush="Gold" Foreground="White" FontSize="16" FontFamily="Comic Sans MS" BorderThickness="1"/>
+        <Label x:Name="WinStatusPlayer2" Visibility="Visible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="35" Margin="498,331,0,0"  Content="BlackJack!" VerticalAlignment="Top" Width="105" Background="Black" BorderBrush="Gold" Foreground="White" FontSize="16" FontFamily="Comic Sans MS" BorderThickness="1"/>
+        <Label x:Name="WinStatusPlayer3" Visibility="Visible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="35" Margin="315,361,0,0"  Content="BlackJack!" VerticalAlignment="Top" Width="105" Background="Black" BorderBrush="Gold" Foreground="White" FontSize="16" FontFamily="Comic Sans MS" BorderThickness="1"/>
+        <Label x:Name="WinStatusPlayer4" Visibility="Visible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="35" Margin="145,319,0,0"  Content="BlackJack!" VerticalAlignment="Top" Width="105" Background="Black" BorderBrush="Gold" Foreground="White" FontSize="16" FontFamily="Comic Sans MS" BorderThickness="1"/>
+        <Label x:Name="WinStatusPlayer5" Visibility="Visible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="35" Margin="21,265,0,0"  Content="BlackJack!" VerticalAlignment="Top" Width="105" Background="Black" BorderBrush="Gold" Foreground="White" FontSize="16" FontFamily="Comic Sans MS" BorderThickness="1"/>
+        <Label x:Name="WinStatusDealer" Content="21" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="109,141,0,0" VerticalAlignment="Top" Height="32" Width="30" Background="LightGray" BorderBrush="Gold" BorderThickness="1" FontWeight="Bold" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
         </Label>
 
     </Grid>
