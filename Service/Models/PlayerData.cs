@@ -68,7 +68,7 @@ namespace Service.Models
         /// <returns>Returns true if the current player has BlackJack</returns>
         public bool HasBlackJack()
         {
-            if (Hand.GetSumOfHand == 21)
+            if (Hand.Value == 21)
                 return true;
             else return false;
         }
@@ -79,7 +79,7 @@ namespace Service.Models
         /// <returns>returns true if the current player has bust</returns>
         public bool HasBust()
         {
-            if (Hand.GetSumOfHand > 21)
+            if (Hand.Value > 21)
                 return true;
             else return false;
         }

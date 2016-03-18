@@ -11,6 +11,7 @@ namespace Service
     {
         public Models.Table Table { get; set; }
         public Models.PlayerData Player { get; set; }
+        public Models.PlayerData Dealer { get; set; }
         public decimal  Amount { get; set; }
         public Card Card { get; set; }
     }

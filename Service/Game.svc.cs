@@ -53,8 +53,16 @@ namespace Service
         public void CreateTable()
         {
             var t = new Table();
+            t.MyGameServer = this;
             Tables.Add(t);
+            UpdateClientTablesLists();
 
+
+
+        }
+
+        public void UpdateClientTablesLists()
+        {
             var deadSessions = new List<string>();
             foreach (var pair in sessions)
             {
@@ -68,9 +76,7 @@ namespace Service
                 }
             }
             deadSessions.ForEach(s => sessions.Remove(s));
-            
         }
-
         public void Fold()
         {
             CurrentTable?.Fold(CurrentPlayer);
@@ -96,7 +102,7 @@ namespace Service
             }
             
         }
-
+        
 
         public void Hit()
         {
@@ -106,12 +112,16 @@ namespace Service
         public Table JoinTable( int tableIndex)
         {
             ///////////////////////////////////////////////////TODO Is table full or already playing
+            if (tableIndex < 0 || tableIndex > Tables.Count)
+                return null;
+
             var table = Tables[tableIndex];
             if (table.InGame)
                 return null;
 
             table?.Join(CurrentPlayer);
             CurrentPlayer.CurrentTable = table;
+            UpdateClientTablesLists();
             return table;
         }
 

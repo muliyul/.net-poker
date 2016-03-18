@@ -30,7 +30,7 @@ namespace Service
         [OperationContract]
         void OnBet(object sender, GameArgs e);
         [OperationContract]
-        void OnFold(object sender, GameArgs e);
+        void OnStatus(object sender, GameArgs e);
         [OperationContract]
         void OnDeal(object sender, GameArgs e);
         [OperationContract(IsOneWay = true)]
@@ -39,5 +39,10 @@ namespace Service
         void OnMyTurn(object sender, GameArgs e);
         [OperationContract]
         void OnStand(object sender, GameArgs e);
+        [OperationContract]
+        void OnDealerPlay(object sender, GameArgs e);
+        [OperationContract]
+        void OnResetTable(object sender, GameArgs e);
+
     }
 }

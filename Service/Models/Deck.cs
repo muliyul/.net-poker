@@ -29,9 +29,13 @@ namespace Service.Models
 
         public Card Draw()
         {
-            Card card = _cards[0];
-            _cards.RemoveAt(0);
-            return card;
+            if (_cards.Count > 0)
+            {
+                Card card = _cards[0];
+                _cards.RemoveAt(0);
+                return card;
+            }
+            return null;
         }
     }
 }

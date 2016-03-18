@@ -16,58 +16,34 @@ namespace Service.Models
         [DataMember]
         public List<Card> Cards { get { return cards; } }
 
-        [DataMember]
-        public int Value
-        {
+        
+        public int Value {
             get
             {
+
                 int sum = cards.Sum(card => card.Value);
                 int aces = cards.Count(card => card.Face == Face.Ace);
 
                 while (sum > 21 && aces-- > 0) sum -= 10;
                 return sum;
             }
+            private set { }
         }
-        /// <summary>
-        /// Gets the total value of a hand from BlackJack values
-        /// </summary>
-        /// <returns>int</returns>
-        [DataMember]
-        public int GetSumOfHand
+
+
+    
+        [OnSerializing]
+        void OnSerializing(StreamingContext context)
         {
-            get
-            {
 
-                int val = 0;
-                int numAces = 0;
+            int sum = cards.Sum(card => card.Value);
+            int aces = cards.Count(card => card.Face == Face.Ace);
 
-                foreach (Card c in cards)
-                {
-                    if (c.Face == Face.Ace)
-                    {
-                        numAces++;
-                        val += 11;
-                    }
-                    else if (c.Face == Face.Jack || c.Face == Face.Queen || c.Face == Face.King)
-                    {
-                        val += 10;
-                    }
-                    else
-                    {
-                        val += (int)c.Face;
-                    }
-                }
-
-                while (val > 21 && numAces > 0)
-                {
-                    val -= 10;
-                    numAces--;
-                }
-
-                return val;
-            }
+            while (sum > 21 && aces-- > 0) sum -= 10;
+            Value = sum;
+           
         }
-
+    
         /////*** copied from client 
 
     
@@ -88,6 +64,7 @@ namespace Service.Models
             return false;
         }
     }
+    [DataContract]
     public class BlackJackHand : Hand
     {
         /// <summary>
@@ -100,7 +77,7 @@ namespace Service.Models
             BlackJackHand aHand = otherHand as BlackJackHand;
             if (aHand != null)
             {
-                return this.GetSumOfHand.CompareTo(aHand.GetSumOfHand);
+                return this.Value.CompareTo(aHand.Value);
             }
             else
             {
