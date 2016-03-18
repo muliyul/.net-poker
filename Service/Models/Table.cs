@@ -5,19 +5,18 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Web;
 using System.Collections.Specialized;
-using System.Threading;
+using System.Timers;
 
 namespace Service.Models
 {
 
     public class Table
     {
-
         [DataMember]
         public IList<PlayerData> Players { get; set; }
 
         [DataMember]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [DataMember]
         public int Pot { get; set; }
@@ -33,7 +32,7 @@ namespace Service.Models
             }
             set
             {
-                
+
                 _inGame = value;
                 MyGameServer.UpdateClientTablesLists();
             }
@@ -68,7 +67,7 @@ namespace Service.Models
 
         public Table()
         {
-            Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid();
             Players = new List<PlayerData>();
             Dealer = new PlayerData();
             _inGame = false;
@@ -89,12 +88,12 @@ namespace Service.Models
             }
 
             JoinHandler(null, new GameArgs() { Table = this });
-            MyGameServer.UpdateClientTablesLists();
         }
 
         void RegisterEvents(IGameCallback callback)
         {
             JoinHandler += callback.OnJoin;
+            JoinHandler += (sender, args) => MyGameServer.UpdateClientTablesLists();
             LeaveHandler += callback.OnLeave;
             HitHandler += callback.OnHit;
             StandHandler += callback.OnStand;
@@ -109,6 +108,7 @@ namespace Service.Models
         void RemoveEvents(IGameCallback callback)
         {
             JoinHandler -= callback.OnJoin;
+            JoinHandler -= (sender, args) => MyGameServer.UpdateClientTablesLists();
             LeaveHandler -= callback.OnLeave;
             HitHandler -= callback.OnHit;
             StandHandler -= callback.OnStand;
@@ -133,7 +133,7 @@ namespace Service.Models
             {
                 player.NewHand();
             }
-            
+
 
             // Deal two cards to each person's hand
             foreach (var player in Players)
@@ -152,8 +152,8 @@ namespace Service.Models
             d.IsCardUp = false;
 
             Dealer.Hand.Cards.Add(d);
-            
-            
+
+
             // Give the player and the dealer a handle to the current deck
             foreach (var player in Players)
             {
@@ -163,7 +163,7 @@ namespace Service.Models
 
             DealHandler(null, new GameArgs() { Table = this });
 
-            PlayerTurnHandler(null, new GameArgs() { Table = this });
+            PlayerTurnHandler(null, new GameArgs() { Table = this, Player = _turn.Current });
         }
 
         internal void Hit(PlayerData player)
@@ -176,21 +176,22 @@ namespace Service.Models
 
             // check for black jack / bust
 
-           
+
 
             HitHandler(null, new GameArgs() { Player = pl, Card = c });
-            checkBlackJack(pl);
+            CheckBlackjack(pl);
         }
 
-        private void checkBlackJack(PlayerData pl)
+        private void CheckBlackjack(PlayerData pl)
         {
-            if(pl.Hand.Value == 21)
+            if (pl.Hand.Value == 21)
             {
-                StatusHandler("BlackJack!", new GameArgs() {Player = pl });
+                StatusHandler("BlackJack!", new GameArgs() { Player = pl });
                 CheckLastTurn();
-            } else if ( pl.Hand.Value > 21 )
+            }
+            else if (pl.Hand.Value > 21)
             {
-                StatusHandler("Bust!",  new GameArgs() { Player = pl });
+                StatusHandler("Bust!", new GameArgs() { Player = pl });
                 CheckLastTurn();
             }
         }
@@ -200,7 +201,7 @@ namespace Service.Models
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             var _ref = Players.SingleOrDefault(p => p.Username.Equals(player.Username));
             Players.Remove(_ref);
-            
+
             var currentPlayer = _turn.Current;
             //if (player.Username == currentPlayer.Username)
             //{
@@ -216,7 +217,7 @@ namespace Service.Models
 
             _turn = Players.GetEnumerator();
             while (_turn.Current != currentPlayer) _turn.MoveNext();
-            
+
 
             LeaveHandler(null, new GameArgs() { Player = player });
             RemoveEvents(cb);
@@ -241,12 +242,12 @@ namespace Service.Models
         /// </summary>
         internal void CheckReady()
         {
-            if(Players.FirstOrDefault(p => !p.IsReady) != null)
+            if (Players.FirstOrDefault(p => !p.IsReady) != null)
                 return;
 
             // Start The Game
             _inGame = true;
-          
+
             DealNewGame();
 
         }
@@ -264,8 +265,6 @@ namespace Service.Models
                 PlayerTurnHandler(null, new GameArgs() { Player = _turn.Current, Table = this });
             }
             else {
-                Dealer.Hand.Cards[1].IsCardUp = true;
-                DealerPlayHandler(null, new GameArgs() { Player = this.Dealer });
                 DealerPlay();
                 EndGame();
             }
@@ -273,58 +272,111 @@ namespace Service.Models
 
         void DealerPlay()
         {
-            
+            Dealer.Hand.Cards[1].IsCardUp = true;
+            DealerPlayHandler(null, new GameArgs() { Player = Dealer });
             while (Dealer.Hand.Value < 17)
             {
                 Dealer.Hand.Cards.Add(_deck.Draw());
-                DealerPlayHandler(null, new GameArgs() { Player = this.Dealer });
+                DealerPlayHandler(null, new GameArgs() { Player = Dealer });
             }
-
         }
 
-        void EndGame()
+        internal async void EndGame()
         {
-            foreach(var p in Players)
+            using (var db = new DBContainer())
             {
-                if (Dealer.Hand.Value <= 21)
+                foreach (var p in Players)
                 {
-                    if (p.Hand.Value == Dealer.Hand.Value)      // player tie
+                    if (Dealer.Hand.Value <= 21)
                     {
-                        p.Bank += decimal.ToDouble(p.Bet);
-                        StatusHandler("Tie!", new GameArgs() { Player = p });
-                    }
-                    else if (p.Hand.Value < Dealer.Hand.Value)   // player lose
-                    {
-                        p.Bank -= decimal.ToDouble(p.Bet);
-                        StatusHandler("Lose!", new GameArgs() { Player = p });
-                    }
-                    else if (p.Hand.Value > Dealer.Hand.Value)   // player win
-                    {
-                        if (p.Hand.Value == 21) // player blackjack
-                            p.Bank += decimal.ToDouble(2.4m * p.Bet);
-                        else        // normal win
+                        if (p.Hand.Value == Dealer.Hand.Value)      // player tie
                         {
-                            p.Bank += decimal.ToDouble(2 * p.Bet);
-                            StatusHandler("Win!", new GameArgs() { Player = p });
+                            p.Bank += p.Bet;
+                            StatusHandler("Tie!", new GameArgs() { Player = p });
+                        }
+                        else if (p.Hand.Value < Dealer.Hand.Value)   // player lose
+                        {
+                            p.LostHands++;
+                            p.Bank -= p.Bet;
+                            p.Winnings -= p.Bet;
+                            StatusHandler("Lose!", new GameArgs() { Player = p });
+                        }
+                        else if (p.Hand.Value > Dealer.Hand.Value)   // player win
+                        {
+                            p.WonHands++;
+                            p.Bank += p.Bet;
+                            
+                            if (p.Hand.Value == 21)
+                            { // player blackjack
+                                p.Blackjacks++;
+                                p.Bank +=  2.4m * p.Bet;
+                                p.Winnings += 1.4m * p.Bet;
+                            }
+                            else        // normal win
+                            {
+                                p.Bank += 2 * p.Bet;
+                                p.Winnings += p.Bet;
+                                StatusHandler("Win!", new GameArgs() { Player = p });
+                            }
                         }
                     }
-                } else
-                {
-                    if (p.Hand.Value <= 21)
+                    else
                     {
-                        p.Bank += decimal.ToDouble(2 * p.Bet);
+                        p.WonHands++;
+                        if (p.Hand.Value == 21)
+                        { // player blackjack
+                            p.Blackjacks++;
+                            p.Bank += 2.4m * p.Bet;
+                            p.Winnings += 1.4m * p.Bet;
+                        }
+                        else      // normal win
+                        {
+                            p.Bank += 2 * p.Bet;
+                            p.Winnings += p.Bet;
+                        }
                         StatusHandler("Win!", new GameArgs() { Player = p });
                     }
+                    p.Bet = 0;
+
+                    //Update DAL
+                    UpdateDALPlayer(db, p);
                 }
-                p.Bet = 0; 
+                //Batch save DAL
+                await db.SaveChangesAsync();
             }
 
             _inGame = false;
 
-            Thread.Sleep(10000);
-            ResetTableHandler(null, new GameArgs() { Table = this });
-            //
-            //DealNewGame();
+            //Let clients see the end results without blocking other tables
+            Timer t = new Timer(7000);
+            t.AutoReset = false;
+            t.Elapsed += (sender, e) =>
+            {
+                ResetTableHandler(null, new GameArgs() { Table = this });
+                t.Stop();
+            };
+            t.Start();
+        }
+
+        internal void UpdateDALPlayer(DBContainer db, PlayerData p)
+        {
+            var dalPlayer = db.Players.First(player => player.Username.Equals(p.Username));
+            //Update bank
+            dalPlayer.Bank = p.Bank;
+
+            var dalGame = dalPlayer.Games.FirstOrDefault(entry => entry.GameId == Id);
+            //Update table stats
+            if (dalGame == null)
+            {
+                dalGame = new Game();
+            }
+            dalGame.Player = dalPlayer;
+            dalGame.GameId = Id;
+            dalGame.Winnings = p.Winnings;
+            dalGame.Blackjacks = p.Blackjacks;
+            dalGame.PlayedOn = DateTime.UtcNow;
+            dalGame.LostHands = p.LostHands;
+            dalGame.WonHands = p.WonHands;
         }
     }
 }

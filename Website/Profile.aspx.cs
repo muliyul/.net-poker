@@ -11,12 +11,12 @@ namespace Website
     public partial class Profile : System.Web.UI.Page
     {
         GameClient gc;
-        public Player player;
+        public PlayerData player;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             gc = Session["GameClient"] as GameClient;
-            player = Session["User"] as Player;
+            player = Session["User"] as PlayerData;
             if (player == null)
                 Server.Transfer("login.aspx");
         }

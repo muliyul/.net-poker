@@ -20,10 +20,23 @@ namespace Service
         ConcurrencyMode = ConcurrencyMode.Reentrant)]
     public class Game : IGame
     {
+        static void Main()
+        {
+            var baseAddress = new Uri("http://localhost:51845/Game.svc");
+            using(var host = new ServiceHost(typeof(Game), baseAddress))
+            {
+                host.Open();
+                Console.WriteLine("Service listening on {0}", baseAddress);
+                Console.WriteLine("Press ENTER to stop the service", baseAddress);
+                Console.ReadLine();
+                host.Close();
+            }
+        }
+
         IDictionary<string, PlayerData> sessions = new Dictionary<string, PlayerData>();
-        private static Dictionary<string, IGameCallback> clients =
+        Dictionary<string, IGameCallback> clients =
                 new Dictionary<string, IGameCallback>();
-        static IList<Table> Tables = new List<Table>();
+        IList<Table> Tables = new List<Table>();
   
         PlayerData CurrentPlayer
         {
@@ -56,9 +69,6 @@ namespace Service
             t.MyGameServer = this;
             Tables.Add(t);
             UpdateClientTablesLists();
-
-
-
         }
 
         public void UpdateClientTablesLists()
@@ -77,12 +87,13 @@ namespace Service
             }
             deadSessions.ForEach(s => sessions.Remove(s));
         }
+
         public void Fold()
         {
             CurrentTable?.Fold(CurrentPlayer);
         }
 
-        public Models.PlayerData GetPlayerInfo(string username)
+        public PlayerData GetPlayerInfo(string username)
         {
             using (var db = new DBContainer())
             {
@@ -91,18 +102,14 @@ namespace Service
                 return new PlayerData()
                 {
                     Bank = player.Bank,
-                    Id = player.Id,
-                    //Hand = player.Hand,
                     MemberSince = player.MemberSince,
                     Username = player.Username,
                     Callback = OperationContext.Current.GetCallbackChannel<IGameCallback>()
-
                  };
 
             }
             
         }
-        
 
         public void Hit()
         {
@@ -142,24 +149,17 @@ namespace Service
                 try
                 {
                     var player = db.Players.SingleOrDefault(p => p.Username == username && p.Password == pass);
-                    var newGuid = Guid.NewGuid();
 
                     var retPlayer = new PlayerData()
                     {
                         Bank = player.Bank,
-                        Id = player.Id,
-                        // Hand =// player.Hand,
-                        // MemberSince = player.MemberSince,
+                        MemberSince = player.MemberSince,
                         Username = player.Username,
-                        
                         Callback = OperationContext.Current.GetCallbackChannel<IGameCallback>()
                     };
                     CurrentPlayer = retPlayer;
                  
                     return retPlayer;
-                } catch (InvalidOperationException)
-                {
-                    
                 }
                 catch (Exception ex)
                 {
@@ -187,9 +187,7 @@ namespace Service
                             Username = username,
                             Password = pass,
                             Bank = 4000,
-                            Guid ="",
                             MemberSince = DateTime.Now
-
                         });
                         db.SaveChanges();
                     }

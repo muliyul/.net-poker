@@ -15,15 +15,13 @@ namespace Service.Models
         private decimal _bet;
 
         [DataMember]
-        public int Id { get; set; }
-        [DataMember]
         public string Guid { get; set; }
         [DataMember]
         public string Username { get; set; }
         [DataMember]
         public string Password { get; set; }
         [DataMember]
-        public double Bank { get; set; }
+        public decimal Bank { get; set; }
         [DataMember]
         public DateTime MemberSince { get; set; }
         [DataMember]
@@ -48,6 +46,14 @@ namespace Service.Models
         public IGameCallback Callback { get; set; }
 
         public Table CurrentTable { get; set; }
+
+        #region Statistics
+        public decimal Winnings { get; set; }
+        public int Blackjacks { get; set; }
+        public int LostHands { get; internal set; }
+        public int WonHands { get; internal set; }
+        #endregion
+
         public BlackJackHand NewHand()
         {
             this.Hand = new BlackJackHand();

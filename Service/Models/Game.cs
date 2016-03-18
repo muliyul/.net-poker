@@ -14,11 +14,23 @@ namespace Service.Models
     
     public partial class Game
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Game()
+        {
+            this.Winnings = 0m;
+            this.Blackjacks = 0;
+            this.WonHands = 0;
+            this.LostHands = 0;
+        }
+    
         public int Id { get; set; }
         public int PlayerId { get; set; }
-        public double Winnings { get; set; }
-        public Nullable<int> Blackjacks { get; set; }
+        public decimal Winnings { get; set; }
+        public int Blackjacks { get; set; }
         public System.DateTime PlayedOn { get; set; }
+        public System.Guid GameId { get; set; }
+        public int WonHands { get; set; }
+        public int LostHands { get; set; }
     
         public virtual Player Player { get; set; }
     }

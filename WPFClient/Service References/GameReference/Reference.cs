@@ -23,7 +23,7 @@ namespace Blackjack.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double BankField;
+        private decimal BankField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal BetField;
@@ -33,9 +33,6 @@ namespace Blackjack.GameReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Blackjack.GameReference.BlackJackHand HandField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime MemberSinceField;
@@ -57,7 +54,7 @@ namespace Blackjack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Bank {
+        public decimal Bank {
             get {
                 return this.BankField;
             }
@@ -104,19 +101,6 @@ namespace Blackjack.GameReference {
                 if ((object.ReferenceEquals(this.HandField, value) != true)) {
                     this.HandField = value;
                     this.RaisePropertyChanged("Hand");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -390,7 +374,7 @@ namespace Blackjack.GameReference {
         private Blackjack.GameReference.PlayerData DealerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IdField;
+        private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool InGameField;
@@ -428,12 +412,12 @@ namespace Blackjack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Id {
+        public System.Guid Id {
             get {
                 return this.IdField;
             }
             set {
-                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
                 }

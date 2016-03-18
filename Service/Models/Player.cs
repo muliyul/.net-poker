@@ -23,9 +23,8 @@ namespace Service.Models
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public double Bank { get; set; }
+        public decimal Bank { get; set; }
         public System.DateTime MemberSince { get; set; }
-        public string Guid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }
