@@ -9,10 +9,11 @@ namespace Service
 {
     public class GameArgs : EventArgs
     {
-        public Models.Table Table { get; set; }
-        public Models.PlayerData Player { get; set; }
-        public Models.PlayerData Dealer { get; set; }
+        public Table Table { get; set; }
+        public PlayerData Player { get; set; }
+        public PlayerData Dealer { get; set; }
         public decimal  Amount { get; set; }
         public Card Card { get; set; }
+        public string Message { get; set; }
     }
 }

@@ -156,9 +156,9 @@ namespace Blackjack
             gameWindow?.SetUpGameInPlay();
         }
 
-        public void OnStatus(object sender, GameArgs e)
+        public void OnRoundResult(object sender, GameArgs e)
         {
-            gameWindow?.OnStatus(sender, e);
+            gameWindow?.OnRoundResult(sender, e);
         }
 
         public void OnHit(object sender, GameArgs e)

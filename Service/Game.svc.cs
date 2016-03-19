@@ -39,6 +39,8 @@ namespace Service
 
         event EventHandler<IList<Table>> TableListUpdatedHandler;
 
+        object locker = new object();
+
         PlayerData CurrentPlayer
         {
             get
@@ -47,7 +49,10 @@ namespace Service
             }
             set
             {
-                sessions[OperationContext.Current.SessionId] = value;
+                lock (locker)
+                {
+                    sessions[OperationContext.Current.SessionId] = value;
+                }
             }
         }
 
@@ -61,6 +66,7 @@ namespace Service
 
         public void Bet(decimal amount, bool doubleBet = false)
         {
+            CurrentPlayer.Bet = amount;
             CurrentTable?.Bet(CurrentPlayer, doubleBet);
         }
 
@@ -115,9 +121,10 @@ namespace Service
 
         public void Leave()
         {
-            CurrentTable?.Leave(CurrentPlayer);
-            if (CurrentTable?.Players.Count == 0)
-                Tables.Remove(CurrentTable);
+            var t = CurrentTable;
+            t?.Leave(CurrentPlayer);
+            if (t?.Players.Count == 0)
+                Tables.Remove(t);
             TableListUpdatedHandler(null, Tables);
         }
 
@@ -134,7 +141,10 @@ namespace Service
                 {
                     var player = db.Players.SingleOrDefault(p => p.Username.Equals(username) && p.Password.Equals(pass));
 
+                    if (player == null)
+                        return null;
                     var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+
                     var retPlayer = new PlayerData()
                     {
                         Bank = player.Bank,
@@ -194,7 +204,7 @@ namespace Service
         public void Deal()
         {
             CurrentPlayer.IsReady = true;
-            CurrentTable.CheckReady();
+            CurrentTable?.CheckReady();
         }
 
         public void Stand()

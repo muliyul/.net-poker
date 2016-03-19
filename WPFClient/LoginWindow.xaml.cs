@@ -36,8 +36,9 @@ namespace Blackjack
 
         private async void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-           
+            Spinner.Visibility = Visibility.Visible;
             var player = await Server.LoginAsync(TbUserName.Text, PbPassword.Password);
+            Spinner.Visibility = Visibility.Hidden;
             startForm.Player = player;
             if (player != null)
             {

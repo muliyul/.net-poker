@@ -18,12 +18,12 @@ namespace Service.Models
                     _cards.Add(new Card { Suit = s, Face = f });
         }
 
-        public Deck() : base(_cards.OrderBy(a => Guid.NewGuid())) { }
+        public Deck() : base(_cards.OrderBy(a => Guid.NewGuid().ToString())) { }
 
         public void Shuffle()
         {
             Clear();
-            foreach (Card c in _cards.OrderBy(a => Guid.NewGuid()))
+            foreach (Card c in _cards.OrderBy(a => Guid.NewGuid().ToString()))
                 Push(c);
         }
 
