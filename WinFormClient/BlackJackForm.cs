@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BlackJack.CardGameFramework;
+using BlackJack.GameReference;
 
 namespace BlackJack
 {
-    partial class BlackJackForm : Form
+    partial class BlackJackForm : Form , GameReference.IGameCallback
     {
         #region Fields
 
@@ -554,6 +555,61 @@ namespace BlackJack
             {
                 MessageBox.Show("Card images are not loading correctly.  Make sure all card images are in the right location.");
             }
+        }
+
+        public void OnJoin(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnLeave(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnHit(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnBet(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnStatus(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnDeal(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNewTableCreated(object sender, Table[] tableList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnMyTurn(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnStand(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnDealerPlay(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnResetTable(object sender, GameArgs e)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

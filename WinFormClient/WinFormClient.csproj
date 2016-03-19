@@ -163,6 +163,9 @@
     <Content Include="Documentation\Images\top-vc.gif" />
     <Content Include="EULA.txt" />
     <Content Include="Images\Cards\cardSkin.PNG" />
+    <None Include="Service References\GameReference\Game5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\GameReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

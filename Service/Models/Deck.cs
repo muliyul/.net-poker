@@ -10,6 +10,7 @@ namespace Service.Models
     public class Deck : Stack<Card>
     {
         static readonly IList<Card> _cards = new List<Card>();
+        private static Random rng = new Random();
 
         static Deck()
         {
@@ -18,12 +19,27 @@ namespace Service.Models
                     _cards.Add(new Card { Suit = s, Face = f });
         }
 
-        public Deck() : base(_cards.OrderBy(a => Guid.NewGuid().ToString())) { }
+        public Deck()
+        {
+            Shuffle();
+        }
+
 
         public void Shuffle()
         {
             Clear();
-            foreach (Card c in _cards.OrderBy(a => Guid.NewGuid().ToString()))
+
+            int n = _cards.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                var value = _cards[k];
+                _cards[k] = _cards[n];
+                _cards[n] = value;
+            }
+
+            foreach (Card c in _cards)
                 Push(c);
         }
 
