@@ -28,6 +28,7 @@
     <MetadataFile FileName="Game.wsdl" MetadataType="Wsdl" ID="c3d9d341-ccb1-4a0a-8bba-a7c1ce7b7877" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?wsdl" />
     <MetadataFile FileName="Game.disco" MetadataType="Disco" ID="5d97e9cd-d325-4fcf-9965-fada32ba3ee4" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?disco" />
     <MetadataFile FileName="Game1.xsd" MetadataType="Schema" ID="825a28cc-c06d-4612-bc03-a58ed4c4b4ec" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd2" />
+    <MetadataFile FileName="Game5.xsd" MetadataType="Schema" ID="47946203-4991-4fae-891b-09c2785b60de" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd5" />
     <MetadataFile FileName="Game2.xsd" MetadataType="Schema" ID="7a2b98ac-b415-49b7-96a3-2cc758855cef" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd1" />
     <MetadataFile FileName="Game3.xsd" MetadataType="Schema" ID="a95266f3-8334-4977-bdf2-23ccbd18eb02" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd3" />
     <MetadataFile FileName="Game4.xsd" MetadataType="Schema" ID="f42e17a6-a1fe-42bc-b112-80eb660cc5cb" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd4" />

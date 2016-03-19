@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3f39172b-ff9d-4814-93d9-025a079d771e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:51845/Game.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Game.xsd" MetadataType="Schema" ID="dc0a1698-8cc4-4dc3-9581-3ec8654ea064" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd0" />
+    <MetadataFile FileName="Game.wsdl" MetadataType="Wsdl" ID="3ffb2820-c913-49d7-9ada-d99b435e04f8" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?wsdl" />
+    <MetadataFile FileName="Game.disco" MetadataType="Disco" ID="257a5272-6671-47ea-a354-a25867debd21" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?disco" />
+    <MetadataFile FileName="Game1.xsd" MetadataType="Schema" ID="ca577956-a5a0-4b32-82fa-3ae61386701a" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd2" />
+    <MetadataFile FileName="Game2.xsd" MetadataType="Schema" ID="42086be9-3916-4db6-8c1c-a50c838970a6" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd1" />
+    <MetadataFile FileName="Game3.xsd" MetadataType="Schema" ID="c3f3ecbe-2b1c-4131-8b20-37c8168053b7" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd3" />
+    <MetadataFile FileName="Game4.xsd" MetadataType="Schema" ID="72f2df8e-96a3-41e0-a4c4-450b000053cb" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

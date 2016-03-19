@@ -114,6 +114,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Spinner.xaml.cs">
+      <DependentUpon>Spinner.xaml</DependentUpon>
+    </Compile>
     <Page Include="BlackJackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -138,6 +141,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Spinner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,6 +188,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\GameReference\Game4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameReference\Game5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="WPFClient_TemporaryKey.pfx" />

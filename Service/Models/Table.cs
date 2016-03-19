@@ -9,7 +9,7 @@ using System.Timers;
 
 namespace Service.Models
 {
-
+    [DataContract]
     public class Table
     {
         [DataMember]
@@ -23,6 +23,7 @@ namespace Service.Models
 
         [DataMember]
         public PlayerData Dealer { get; set; }
+
         [DataMember]
         public bool InGame
         {
@@ -32,9 +33,8 @@ namespace Service.Models
             }
             set
             {
-
                 _inGame = value;
-                MyGameServer.UpdateClientTablesLists();
+                Server.UpdateClientTablesLists();
             }
         }
 
@@ -45,17 +45,17 @@ namespace Service.Models
         private IEnumerator<PlayerData> _turn;
 
 
-        public Service.Game MyGameServer { set; get; }
+        private Service.Game Server { set; get; }
 
         #region Game Events
 
 
-        event EventHandler<GameArgs> JoinHandler;
-        event EventHandler<GameArgs> LeaveHandler;
+        internal event EventHandler<GameArgs> JoinHandler;
+        internal event EventHandler<GameArgs> LeaveHandler;
         event EventHandler<GameArgs> HitHandler;
         event EventHandler<GameArgs> StandHandler;
         event EventHandler<GameArgs> BetHandler;
-        event EventHandler<GameArgs> StatusHandler;
+        event EventHandler<GameArgs> RoundResultHandler;
         event EventHandler<GameArgs> PlayerTurnHandler;
         event EventHandler<GameArgs> DealHandler;
         event EventHandler<GameArgs> DealerPlayHandler;
@@ -65,8 +65,9 @@ namespace Service.Models
         [DataMember]
         Deck d = new Deck();
 
-        public Table()
+        public Table(Service.Game service)
         {
+            Server = service;
             Id = Guid.NewGuid();
             Players = new List<PlayerData>();
             Dealer = new PlayerData();
@@ -93,13 +94,13 @@ namespace Service.Models
         void RegisterEvents(IGameCallback callback)
         {
             JoinHandler += callback.OnJoin;
-            JoinHandler += (sender, args) => MyGameServer.UpdateClientTablesLists();
+            JoinHandler += (sender, args) => Server.UpdateClientTablesLists();
             LeaveHandler += callback.OnLeave;
             HitHandler += callback.OnHit;
             StandHandler += callback.OnStand;
             BetHandler += callback.OnBet;
-            StatusHandler += callback.OnStatus;
-            PlayerTurnHandler += callback.OnMyTurn;
+            RoundResultHandler += callback.OnRoundResult;
+            PlayerTurnHandler += callback.OnMyTurn; //Improve
             DealHandler += callback.OnDeal;
             DealerPlayHandler += callback.OnDealerPlay;
             ResetTableHandler += callback.OnResetTable;
@@ -108,12 +109,12 @@ namespace Service.Models
         void RemoveEvents(IGameCallback callback)
         {
             JoinHandler -= callback.OnJoin;
-            JoinHandler -= (sender, args) => MyGameServer.UpdateClientTablesLists();
+            JoinHandler -= (sender, args) => Server.UpdateClientTablesLists();
             LeaveHandler -= callback.OnLeave;
             HitHandler -= callback.OnHit;
             StandHandler -= callback.OnStand;
             BetHandler -= callback.OnBet;
-            StatusHandler -= callback.OnStatus;
+            RoundResultHandler -= callback.OnRoundResult;
             PlayerTurnHandler -= callback.OnMyTurn;
             ResetTableHandler -= callback.OnResetTable;
         }
@@ -168,32 +169,32 @@ namespace Service.Models
 
         internal void Hit(PlayerData player)
         {
-            var pl = this.Players.Single(p => p == player);
+            var pl = Players.Single(p => p == player);
             var c = d.Pop();
             //Players.Add(player);
 
             pl.Hand.Cards.Add(c);
 
             // check for black jack / bust
+            var args = new GameArgs();
+            args.Table = this;
+            args.Card = c;
+            args.Player = pl;
 
-
-
-            HitHandler(null, new GameArgs() { Player = pl, Card = c });
-            CheckBlackjack(pl);
-        }
-
-        private void CheckBlackjack(PlayerData pl)
-        {
             if (pl.Hand.Value == 21)
             {
-                StatusHandler("BlackJack!", new GameArgs() { Player = pl });
+                //StatusHandler("BlackJack!", new GameArgs() { Player = pl });
+                args.Message = "Blackjack!";
                 CheckLastTurn();
             }
             else if (pl.Hand.Value > 21)
             {
-                StatusHandler("Bust!", new GameArgs() { Player = pl });
+                //StatusHandler("Bust!", new GameArgs() { Player = pl });
+                args.Message = "Bust!";
                 CheckLastTurn();
             }
+
+            HitHandler(null, args);
         }
 
         internal void Leave(PlayerData player)
@@ -216,25 +217,23 @@ namespace Service.Models
             //}
 
             _turn = Players.GetEnumerator();
-            while (_turn.Current != currentPlayer) _turn.MoveNext();
+            do
+            {
+                _turn.MoveNext();
+            }
+            while (Players.Count > 0 && _turn.Current != currentPlayer);
 
 
-            LeaveHandler(null, new GameArgs() { Player = player });
+            LeaveHandler(null, new GameArgs() { Player = player, Table = this });
             RemoveEvents(cb);
-
         }
 
-        internal void Bet(PlayerData player, decimal amount, bool doubleBet)
+        internal void Bet(PlayerData player, bool doubleBet)
         {
-            var pl = this.Players.Single(p => p == player);
-            pl.Bet = amount;
-            BetHandler(null, new GameArgs() { Player = player, Amount = amount });
-        }
-
-
-        internal void Fold(PlayerData player)
-        {
-            StatusHandler(null, new GameArgs() { Player = player });
+            var pl = Players.First(p => p.Username.Equals(player.Username));
+            pl.Bet = doubleBet ? 2 * player.Bet : player.Bet;
+            pl = player;
+            BetHandler(null, new GameArgs() { Player = player, Amount = player.Bet, Table = this });
         }
 
         /// <summary>
@@ -242,7 +241,7 @@ namespace Service.Models
         /// </summary>
         internal void CheckReady()
         {
-            if (Players.FirstOrDefault(p => !p.IsReady) != null)
+            if (Players.Any(p => !p.IsReady))
                 return;
 
             // Start The Game
@@ -255,7 +254,7 @@ namespace Service.Models
         internal void Stand(PlayerData currentPlayer)
         {
             CheckLastTurn();
-            StandHandler(null, new GameArgs() { Player = currentPlayer });
+            StandHandler(null, new GameArgs() { Player = currentPlayer, Table = this });
         }
 
         void CheckLastTurn()
@@ -265,7 +264,10 @@ namespace Service.Models
                 PlayerTurnHandler(null, new GameArgs() { Player = _turn.Current, Table = this });
             }
             else {
-                DealerPlay();
+                if (Players.Any(p => p.Hand.Value < 21))
+                {
+                    DealerPlay();
+                }
                 EndGame();
             }
         }
@@ -287,56 +289,71 @@ namespace Service.Models
             {
                 foreach (var p in Players)
                 {
-                    if (Dealer.Hand.Value <= 21)
+                    var args = new GameArgs();
+                    args.Player = p;
+                    args.Table = this;
+                    if (p.Hand.Value <= 21)
                     {
-                        if (p.Hand.Value == Dealer.Hand.Value)      // player tie
+                        if (Dealer.Hand.Value <= 21)
                         {
-                            p.Bank += p.Bet;
-                            StatusHandler("Tie!", new GameArgs() { Player = p });
+                            if (p.Hand.Value == Dealer.Hand.Value)      // player tie
+                            {
+                                args.Message = "Tie!";
+                                p.Bank += p.Bet;
+                            }
+                            else if (p.Hand.Value < Dealer.Hand.Value)   // player lose
+                            {
+                                args.Message = "Lose!";
+                                p.LostHands++;
+                                p.Bank -= p.Bet;
+                                p.Winnings -= p.Bet;
+                            }
+                            else if (p.Hand.Value > Dealer.Hand.Value)   // player win
+                            {
+                                args.Message = "Win!";
+                                p.WonHands++;
+                                p.Bank += p.Bet;
+
+                                if (p.Hand.Value == 21)
+                                { // player blackjack
+                                    p.Blackjacks++;
+                                    p.Bank += 2.4m * p.Bet;
+                                    p.Winnings += 1.4m * p.Bet;
+                                }
+                                else        // normal win
+                                {
+                                    p.Bank += 2 * p.Bet;
+                                    p.Winnings += p.Bet;
+                                }
+                            }
                         }
-                        else if (p.Hand.Value < Dealer.Hand.Value)   // player lose
+                        else
                         {
-                            p.LostHands++;
-                            p.Bank -= p.Bet;
-                            p.Winnings -= p.Bet;
-                            StatusHandler("Lose!", new GameArgs() { Player = p });
-                        }
-                        else if (p.Hand.Value > Dealer.Hand.Value)   // player win
-                        {
+                            args.Message = "Win!";
                             p.WonHands++;
-                            p.Bank += p.Bet;
-                            
                             if (p.Hand.Value == 21)
                             { // player blackjack
                                 p.Blackjacks++;
-                                p.Bank +=  2.4m * p.Bet;
+                                p.Bank += 2.4m * p.Bet;
                                 p.Winnings += 1.4m * p.Bet;
                             }
-                            else        // normal win
+                            else      // normal win
                             {
-                                p.Bank += 2 * p.Bet;
+                                p.Bank += p.Bet;
                                 p.Winnings += p.Bet;
-                                StatusHandler("Win!", new GameArgs() { Player = p });
                             }
                         }
                     }
                     else
                     {
-                        p.WonHands++;
-                        if (p.Hand.Value == 21)
-                        { // player blackjack
-                            p.Blackjacks++;
-                            p.Bank += 2.4m * p.Bet;
-                            p.Winnings += 1.4m * p.Bet;
-                        }
-                        else      // normal win
-                        {
-                            p.Bank += 2 * p.Bet;
-                            p.Winnings += p.Bet;
-                        }
-                        StatusHandler("Win!", new GameArgs() { Player = p });
+                        args.Message = "Lose!";
+                        p.LostHands++;
+                        p.Bank -= p.Bet;
+                        p.Winnings -= p.Bet;
                     }
+                    RoundResultHandler(null, args);
                     p.Bet = 0;
+                    p.IsReady = false;
 
                     //Update DAL
                     UpdateDALPlayer(db, p);
@@ -347,7 +364,7 @@ namespace Service.Models
 
             _inGame = false;
 
-            //Let clients see the end results without blocking other tables
+            //Let see the end results without blocking other tables
             Timer t = new Timer(7000);
             t.AutoReset = false;
             t.Elapsed += (sender, e) =>

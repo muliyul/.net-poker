@@ -45,21 +45,21 @@ namespace Blackjack
         public StartForm()
         {
             InitializeComponent();
-            this.Loaded += StartForm_Loaded;
+            Loaded += StartForm_Loaded;
         }
 
         private void StartForm_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateTableList();
+            loggedInAsLbl.Content = _player.Username;
         }
 
         private async void PopulateTableList(bool updateFromServer = true)
         {
-
             if (updateFromServer)
                 _serverTableList = await Server.ListTablesAsync();
-            
-            
+
+
             tablesList.Items.Clear();
             int i = 0;
             foreach (var tb in _serverTableList)
@@ -77,7 +77,7 @@ namespace Blackjack
                 tablesList.Items.Add(li);
             }
 
-            
+
         }
 
         //private void NewGame(object sender, RoutedEventArgs e)
@@ -98,7 +98,9 @@ namespace Blackjack
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //TODO
+            //Server.Logout();
+            Close();
         }
 
         private async void joinTableButton_Click(object sender, RoutedEventArgs e)
@@ -131,10 +133,9 @@ namespace Blackjack
 
         private void createTableButton_Click(object sender, RoutedEventArgs e)
         {
-
-            Server.CreateTableAsync();
-
+            Server.CreateTable();
         }
+
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
@@ -151,13 +152,13 @@ namespace Blackjack
 
         public void OnDeal(object sender, GameArgs e)
         {
-            gameWindow?.OnDeal( sender,  e);
+            gameWindow?.OnDeal(sender, e);
             gameWindow?.SetUpGameInPlay();
         }
 
-        public void OnStatus(object sender, GameArgs e)
+        public void OnRoundResult(object sender, GameArgs e)
         {
-            gameWindow?.OnStatus(sender, e);
+            gameWindow?.OnRoundResult(sender, e);
         }
 
         public void OnHit(object sender, GameArgs e)
@@ -170,7 +171,7 @@ namespace Blackjack
             //throw new NotImplementedException();
             // update table ui
             gameWindow?.OnJoin(sender, e);
-            
+
         }
 
         public void OnLeave(object sender, GameArgs e)
@@ -178,11 +179,10 @@ namespace Blackjack
             gameWindow?.OnLeave(sender, e);
         }
 
-        public void OnNewTableCreated(object sender, List<GameReference.Table> tableList)
+        public void OnTableListUpdate(object sender, List<GameReference.Table> tableList)
         {
             _serverTableList = tableList;
             PopulateTableList(false);
-            
         }
 
         public void OnMyTurn(object sender, GameArgs e)
@@ -203,6 +203,11 @@ namespace Blackjack
         public void OnResetTable(object sender, GameArgs e)
         {
             gameWindow?.OnResetTable(sender, e);
+        }
+
+        private void RefreshTables(object sender, RoutedEventArgs e)
+        {
+            Server?.ListTablesAsync();
         }
     }
 }
