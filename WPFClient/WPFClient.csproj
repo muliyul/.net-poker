@@ -26,9 +26,11 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://localhost:50612/Install/</InstallUrl>
+    <TargetCulture>en</TargetCulture>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -70,11 +72,13 @@
     <ApplicationIcon>Resources\TemplateIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -174,23 +178,23 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\GameReference\Game.wsdl" />
-    <None Include="Service References\GameReference\Game.xsd">
+    <None Include="Service References\GameReference\Service.Models.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game1.xsd">
+    <None Include="Service References\GameReference\service.wsdl" />
+    <None Include="Service References\GameReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game2.xsd">
+    <None Include="Service References\GameReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game3.xsd">
+    <None Include="Service References\GameReference\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game4.xsd">
+    <None Include="Service References\GameReference\System.Collections.Generic.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game5.xsd">
+    <None Include="Service References\GameReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="WPFClient_TemporaryKey.pfx" />
@@ -352,9 +356,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\GameReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GameReference\Game.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\GameReference\configuration91.svcinfo" />

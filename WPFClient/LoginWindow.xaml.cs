@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
@@ -30,7 +31,9 @@ namespace Blackjack
             InitializeComponent();
             startForm = new StartForm();
             InstContext = new InstanceContext(startForm);
-            Server = new GameReference.GameClient(InstContext);
+            var bindings = ConfigurationManager.GetSection("system.serviceModel/bindings") as
+                        System.ServiceModel.Configuration.BindingsSection;
+            Server = new GameReference.GameClient(InstContext, bindings.NetTcpBinding.Bindings[0].Name);
             startForm.Server = Server;
         }
 

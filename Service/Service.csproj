@@ -114,7 +114,6 @@
     <Compile Include="Models\GameArgs.cs" />
     <Compile Include="Models\Hand.cs" />
     <Compile Include="Models\IGameCallback.cs" />
-    <Compile Include="CustomValidator.cs" />
     <Compile Include="Game.svc.cs">
       <DependentUpon>Game.svc</DependentUpon>
     </Compile>

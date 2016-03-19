@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
@@ -11,67 +12,63 @@ namespace Website
 {
     public partial class Master : System.Web.UI.MasterPage, IGameCallback
     {
-        #region Callbacks
+#region Callbacks
         public void OnBet(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
         }
 
         public void OnDeal(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
         }
 
         public void OnDealerPlay(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
         }
 
         public void OnHit(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
         }
 
         public void OnJoin(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
         }
 
         public void OnLeave(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
         }
 
         public void OnMyTurn(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        public void OnNewTableCreated(object sender, List<GameReference.Table> tableList)
-        {
-            throw new NotImplementedException();
         }
 
         public void OnResetTable(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+        }
+
+        public void OnRoundResult(object sender, GameArgs e)
+        {
         }
 
         public void OnStand(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
         }
 
-        public void OnStatus(object sender, GameArgs e)
+        public void OnTableListUpdate(object sender, List<GameReference.Table> tableList)
         {
-            throw new NotImplementedException();
         }
-        #endregion
+#endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            InstanceContext ctx = new InstanceContext(this);
-            Session["GameClient"] = new GameClient(ctx);
+            
+            if (Session["GameClient"] == null)
+            {
+                var bindings = ConfigurationManager.GetSection("system.serviceModel/bindings") as
+                        System.ServiceModel.Configuration.BindingsSection;
+                InstanceContext ctx = new InstanceContext(this);
+                Session["GameClient"] = new GameClient(ctx, bindings.WSDualHttpBinding.Bindings[0].Name);
+            }
+
             if (Session["User"] != null)
             {
                 loginProfileBtn.HRef = "profile.aspx";

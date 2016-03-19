@@ -33,6 +33,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -124,18 +126,22 @@
     <Resource Include="Images\Cards\spj.gif" />
     <Resource Include="Images\Cards\spk.gif" />
     <Resource Include="Images\Cards\spq.gif" />
-    <Content Include="play.aspx" />
+    <Content Include="Install\autorun.inf" />
     <Content Include="Install\publish.htm" />
     <Content Include="Install\setup.exe" />
+    <Content Include="js\jquery-2.2.2.min.js" />
+    <Content Include="Play.aspx" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
-    <Content Include="Install\BlackjackWPF.application" />
+    <Content Include="Install\WPFClient.application" />
     <None Include="Properties\PublishProfiles\dotnetfinal.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Profile.aspx" />
+    <Content Include="Register.aspx" />
     <None Include="Service References\GameReference\Game.wsdl" />
     <None Include="Service References\GameReference\Game.xsd">
       <SubType>Designer</SubType>
@@ -146,18 +152,19 @@
     <None Include="Service References\GameReference\Game2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Profile.aspx" />
-    <Content Include="Register.aspx" />
     <None Include="Service References\GameReference\Game3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\GameReference\Website.GameReference.Table.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\GameReference\Game4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\GameReference\Game5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Service References\GameReference\Website.GameReference.PlayerData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GameReference\Website.GameReference.Table.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
@@ -180,12 +187,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="play.aspx.cs">
-      <DependentUpon>play.aspx</DependentUpon>
+    <Compile Include="Play.aspx.cs">
+      <DependentUpon>Play.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="play.aspx.designer.cs">
-      <DependentUpon>play.aspx</DependentUpon>
+    <Compile Include="Play.aspx.designer.cs">
+      <DependentUpon>Play.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

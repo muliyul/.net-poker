@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <h2 class="text-center">Please sign in</h2>
-    <div role="form" class="col-xs-6 col-xs-offset-3">
+    <div role="form" class="col-xs-8 col-xs-offset-2">
         <small>Need an <a href="register.aspx">account</a>?</small>
 
         <div class="form-group">

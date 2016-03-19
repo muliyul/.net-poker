@@ -23,12 +23,15 @@ namespace Service
     {
         static void Main()
         {
-            var baseAddress = new Uri("http://localhost:51845/Game.svc");
-            using (var host = new ServiceHost(typeof(Game), baseAddress))
+            var bindings = new Uri[] { new Uri("http://localhost:51845/Game.svc"), new Uri("net.tcp://localhost:2305") };
+            using (var host = new ServiceHost(typeof(Game), bindings))
             {
                 host.Open();
-                Console.WriteLine("Service listening on {0}", baseAddress);
-                Console.WriteLine("Press ENTER to stop the service", baseAddress);
+                foreach(var b in bindings)
+                {
+                    Console.WriteLine("Service listening on {0}", b);
+                }
+                Console.WriteLine("Press ENTER to stop the service");
                 Console.ReadLine();
                 host.Close();
             }

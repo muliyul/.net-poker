@@ -248,6 +248,7 @@ namespace Blackjack
             Bet50Btn.IsEnabled = true;
             Bet100Btn.IsEnabled = true;
 
+            WinStatus.Content = string.Empty;
             WinStatus.Visibility = Visibility.Hidden;
 
             _playerLabelsTotalCardVal.ForEach(p => p.Visibility = Visibility.Hidden);
@@ -508,8 +509,9 @@ namespace Blackjack
         public void OnHit(object sender, GameArgs e)
         {
             bool myAction = e.Player.Username.Equals(_me.Username);
-            var player = _table.Players.SingleOrDefault(p => p.Username.Equals(e.Player.Username));
+            var player = _table.Players.Find(p => p.Username.Equals(e.Player.Username));
             var playerIndex = _table.Players.IndexOf(player);
+            e.Card.IsCardUp = true;
             player.Hand.Cards.Add(e.Card);
             UpdateUIPlayerCards();
 
