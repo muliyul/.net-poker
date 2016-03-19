@@ -29,9 +29,6 @@ namespace Website.GameReference {
         private decimal BetField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int BlackjacksField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string GuidField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -45,9 +42,6 @@ namespace Website.GameReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal WinningsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -81,19 +75,6 @@ namespace Website.GameReference {
                 if ((this.BetField.Equals(value) != true)) {
                     this.BetField = value;
                     this.RaisePropertyChanged("Bet");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Blackjacks {
-            get {
-                return this.BlackjacksField;
-            }
-            set {
-                if ((this.BlackjacksField.Equals(value) != true)) {
-                    this.BlackjacksField = value;
-                    this.RaisePropertyChanged("Blackjacks");
                 }
             }
         }
@@ -159,19 +140,6 @@ namespace Website.GameReference {
                 if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
                     this.UsernameField = value;
                     this.RaisePropertyChanged("Username");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Winnings {
-            get {
-                return this.WinningsField;
-            }
-            set {
-                if ((this.WinningsField.Equals(value) != true)) {
-                    this.WinningsField = value;
-                    this.RaisePropertyChanged("Winnings");
                 }
             }
         }
@@ -672,17 +640,24 @@ namespace Website.GameReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Login", ReplyAction="http://tempuri.org/IGame/LoginResponse")]
         System.Threading.Tasks.Task<Website.GameReference.PlayerData> LoginAsync(string username, string pass);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        Website.GameReference.PlayerData GetPlayerInfo(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/GetPlayerInfo", ReplyAction="http://tempuri.org/IGame/GetPlayerInfoResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.PlayerData> GetPlayerInfoAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.BlackJackHand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Hand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
+        object ListTables();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
-        Website.GameReference.Table[] ListTables();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.Table[]> ListTablesAsync();
+        System.Threading.Tasks.Task<object> ListTablesAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/CreateTable")]
         void CreateTable();
@@ -695,12 +670,6 @@ namespace Website.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/JoinTable", ReplyAction="http://tempuri.org/IGame/JoinTableResponse")]
         System.Threading.Tasks.Task<Website.GameReference.Table> JoinTableAsync(int tableIndex);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlayerReady", ReplyAction="http://tempuri.org/IGame/PlayerReadyResponse")]
-        Website.GameReference.Table PlayerReady(string tableId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlayerReady", ReplyAction="http://tempuri.org/IGame/PlayerReadyResponse")]
-        System.Threading.Tasks.Task<Website.GameReference.Table> PlayerReadyAsync(string tableId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Leave")]
         void Leave();
@@ -731,12 +700,6 @@ namespace Website.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Hit")]
         System.Threading.Tasks.Task HitAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Fold")]
-        void Fold();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/Fold")]
-        System.Threading.Tasks.Task FoldAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -750,9 +713,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -766,9 +729,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -782,9 +745,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -798,9 +761,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -814,9 +777,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -830,9 +793,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -846,9 +809,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -862,9 +825,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -878,9 +841,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -894,9 +857,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -910,9 +873,9 @@ namespace Website.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Table[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.Game))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Website.GameReference.GameArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
@@ -963,19 +926,11 @@ namespace Website.GameReference {
             return base.Channel.LoginAsync(username, pass);
         }
         
-        public Website.GameReference.PlayerData GetPlayerInfo(string username) {
-            return base.Channel.GetPlayerInfo(username);
-        }
-        
-        public System.Threading.Tasks.Task<Website.GameReference.PlayerData> GetPlayerInfoAsync(string username) {
-            return base.Channel.GetPlayerInfoAsync(username);
-        }
-        
-        public Website.GameReference.Table[] ListTables() {
+        public object ListTables() {
             return base.Channel.ListTables();
         }
         
-        public System.Threading.Tasks.Task<Website.GameReference.Table[]> ListTablesAsync() {
+        public System.Threading.Tasks.Task<object> ListTablesAsync() {
             return base.Channel.ListTablesAsync();
         }
         
@@ -993,14 +948,6 @@ namespace Website.GameReference {
         
         public System.Threading.Tasks.Task<Website.GameReference.Table> JoinTableAsync(int tableIndex) {
             return base.Channel.JoinTableAsync(tableIndex);
-        }
-        
-        public Website.GameReference.Table PlayerReady(string tableId) {
-            return base.Channel.PlayerReady(tableId);
-        }
-        
-        public System.Threading.Tasks.Task<Website.GameReference.Table> PlayerReadyAsync(string tableId) {
-            return base.Channel.PlayerReadyAsync(tableId);
         }
         
         public void Leave() {
@@ -1041,14 +988,6 @@ namespace Website.GameReference {
         
         public System.Threading.Tasks.Task HitAsync() {
             return base.Channel.HitAsync();
-        }
-        
-        public void Fold() {
-            base.Channel.Fold();
-        }
-        
-        public System.Threading.Tasks.Task FoldAsync() {
-            return base.Channel.FoldAsync();
         }
     }
 }

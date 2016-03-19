@@ -183,6 +183,9 @@
     <None Include="Service References\GameReference\Game4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\GameReference\Game5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="WPFClient_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

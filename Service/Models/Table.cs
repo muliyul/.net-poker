@@ -9,7 +9,7 @@ using System.Timers;
 
 namespace Service.Models
 {
-
+    [DataContract]
     public class Table
     {
         [DataMember]
@@ -32,9 +32,8 @@ namespace Service.Models
             }
             set
             {
-
                 _inGame = value;
-                MyGameServer.UpdateClientTablesLists();
+                Server.UpdateClientTablesLists();
             }
         }
 
@@ -45,13 +44,13 @@ namespace Service.Models
         private IEnumerator<PlayerData> _turn;
 
 
-        public Service.Game MyGameServer { set; get; }
+        private Service.Game Server { set; get; }
 
         #region Game Events
 
 
-        event EventHandler<GameArgs> JoinHandler;
-        event EventHandler<GameArgs> LeaveHandler;
+        internal event EventHandler<GameArgs> JoinHandler;
+        internal event EventHandler<GameArgs> LeaveHandler;
         event EventHandler<GameArgs> HitHandler;
         event EventHandler<GameArgs> StandHandler;
         event EventHandler<GameArgs> BetHandler;
@@ -65,8 +64,9 @@ namespace Service.Models
         [DataMember]
         Deck d = new Deck();
 
-        public Table()
+        public Table(Service.Game service)
         {
+            Server = service;
             Id = Guid.NewGuid();
             Players = new List<PlayerData>();
             Dealer = new PlayerData();
@@ -93,7 +93,7 @@ namespace Service.Models
         void RegisterEvents(IGameCallback callback)
         {
             JoinHandler += callback.OnJoin;
-            JoinHandler += (sender, args) => MyGameServer.UpdateClientTablesLists();
+            JoinHandler += (sender, args) => Server.UpdateClientTablesLists();
             LeaveHandler += callback.OnLeave;
             HitHandler += callback.OnHit;
             StandHandler += callback.OnStand;
@@ -108,7 +108,7 @@ namespace Service.Models
         void RemoveEvents(IGameCallback callback)
         {
             JoinHandler -= callback.OnJoin;
-            JoinHandler -= (sender, args) => MyGameServer.UpdateClientTablesLists();
+            JoinHandler -= (sender, args) => Server.UpdateClientTablesLists();
             LeaveHandler -= callback.OnLeave;
             HitHandler -= callback.OnHit;
             StandHandler -= callback.OnStand;
@@ -224,11 +224,12 @@ namespace Service.Models
 
         }
 
-        internal void Bet(PlayerData player, decimal amount, bool doubleBet)
+        internal void Bet(PlayerData player, bool doubleBet)
         {
-            var pl = this.Players.Single(p => p == player);
-            pl.Bet = amount;
-            BetHandler(null, new GameArgs() { Player = player, Amount = amount });
+            var pl = Players.Single(p => p == player);
+            //pl.Bet = amount;
+            pl = player;
+            BetHandler(null, new GameArgs() { Player = player, Amount = player.Bet });
         }
 
 
@@ -347,7 +348,7 @@ namespace Service.Models
 
             _inGame = false;
 
-            //Let clients see the end results without blocking other tables
+            //Let see the end results without blocking other tables
             Timer t = new Timer(7000);
             t.AutoReset = false;
             t.Elapsed += (sender, e) =>

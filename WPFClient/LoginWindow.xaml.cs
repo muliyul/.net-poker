@@ -42,7 +42,7 @@ namespace Blackjack
             if (player != null)
             {
                 startForm.Visibility = Visibility.Visible;
-                this.Hide();
+                Hide();
             }
             else
             {

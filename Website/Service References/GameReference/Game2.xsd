@@ -6,13 +6,11 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Bank" type="xs:decimal" />
       <xs:element minOccurs="0" name="Bet" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Blackjacks" type="xs:int" />
       <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Hand" nillable="true" type="tns:BlackJackHand" />
       <xs:element minOccurs="0" name="MemberSince" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Winnings" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerData" nillable="true" type="tns:PlayerData" />
@@ -144,12 +142,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Suit" nillable="true" type="tns:Suit" />
-  <xs:complexType name="ArrayOfTable">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfTable" nillable="true" type="tns:ArrayOfTable" />
   <xs:complexType name="Table">
     <xs:sequence>
       <xs:element minOccurs="0" name="Dealer" nillable="true" type="tns:PlayerData" />
@@ -167,4 +159,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfPlayerData" nillable="true" type="tns:ArrayOfPlayerData" />
+  <xs:complexType name="ArrayOfTable">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTable" nillable="true" type="tns:ArrayOfTable" />
 </xs:schema>

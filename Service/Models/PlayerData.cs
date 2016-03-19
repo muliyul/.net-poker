@@ -10,7 +10,7 @@ namespace Service.Models
     [DataContract]
     public class PlayerData
     {
-        
+
         private decimal _balance;
         private decimal _bet;
 
@@ -44,8 +44,7 @@ namespace Service.Models
 
 
         public IGameCallback Callback { get; set; }
-
-        public Table CurrentTable { get; set; }
+        
 
         #region Statistics
         public decimal Winnings { get; set; }

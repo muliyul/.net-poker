@@ -34,16 +34,19 @@ namespace Blackjack
         private List<Label> _playerLabelsTotalCardVal = new List<Label>();
         private List<Label> _playerBetAmountLabels = new List<Label>();
         private List<Label> _playerWinStatusLabels = new List<Label>();
-        private GameReference.GameClient _server;
-       
+        private GameReference.GameClient Server
+        {
+            get; set;
+        }
+
         #endregion
 
         public GameWindow(PlayerData player, GameReference.Table table, GameReference.GameClient server)
         {
             this._player = player;
             this._table = table;
-            _server = server;
-       
+            Server = server;
+
             InitializeComponent();
 
             _playerNameLabels.Add(Player1Lb);
@@ -70,23 +73,24 @@ namespace Blackjack
             _playerWinStatusLabels.Add(WinStatusPlayer4);
             _playerWinStatusLabels.Add(WinStatusPlayer5);
 
-          
+
             ClearTableCards();
 
             SetUpNewGame();
         }
 
-      
+
+
 
         private void EndGame_Click(object sender, RoutedEventArgs e)
         {
-            _server.Leave();
-            
+            Server.Leave();
+
             this.Close();
-            
+
         }
 
-    
+
 
         #region Game Methods
 
@@ -102,7 +106,7 @@ namespace Blackjack
 
                 _currentBet += betValue;
 
-              
+
 
                 // Update the "My Bet" and "My Account" values
                 ShowBankValue();
@@ -183,7 +187,7 @@ namespace Blackjack
             WinStatusDealer.Visibility = Visibility.Hidden;
         }
 
-        
+
 
         /// <summary>
         /// Get the game result.  This returns an EndResult value
@@ -288,13 +292,13 @@ namespace Blackjack
             Bet50Btn.IsEnabled = false;
             Bet100Btn.IsEnabled = false;
             ClearBtn.IsEnabled = false;
-            StandBtn.IsEnabled = false; 
+            StandBtn.IsEnabled = false;
             HitBtn.IsEnabled = false;
             WinStatus.Visibility = Visibility.Hidden;      ///////////  <-- should be on call back
 
             for (int i = 0; i < _table.Players.Count; ++i)
             {
-                _playerLabelsTotalCardVal[i].Visibility = Visibility.Visible; 
+                _playerLabelsTotalCardVal[i].Visibility = Visibility.Visible;
             }
 
             DealBtn.IsEnabled = false;
@@ -328,7 +332,7 @@ namespace Blackjack
         /// </summary>
         private void SetUpNewGame()
         {
-          
+
             UpdatePlayers();
             UpdatePlayersBet();
 
@@ -341,7 +345,7 @@ namespace Blackjack
             Bet25Btn.IsEnabled = true;
             Bet50Btn.IsEnabled = true;
             Bet100Btn.IsEnabled = true;
-           
+
             WinStatus.Visibility = Visibility.Hidden;
 
             _playerLabelsTotalCardVal.ForEach(p => p.Visibility = Visibility.Hidden);
@@ -364,7 +368,7 @@ namespace Blackjack
                 for (int j = 0; j < playerCards.Count; j++)
                 {
                     // Load each card from file
-                    Image card = (Image)rootV.FindName("Player" + (i+1) + "Card" + j);
+                    Image card = (Image)rootV.FindName("Player" + (i + 1) + "Card" + j);
                     LoadCard(card, playerCards[j]);
                     card.Visibility = Visibility.Visible;
 
@@ -384,7 +388,7 @@ namespace Blackjack
             }
         }
 
-      
+
         private int HandValue(GameReference.Hand hand)
         {
             int sum = hand.Cards.Sum(card => card.Value);
@@ -502,9 +506,12 @@ namespace Blackjack
 
 
                     // Place the bet
-                    _server.Bet(_currentBet, false);
+                    Server.Bet(_currentBet, false);
 
-                    _server.Deal();
+                    Server.Deal();
+
+                    DealBtn.IsEnabled = false;
+                    ClearBtn.IsEnabled = false;
                     // shoud be call back to it ShowBankValue();
 
                     // Clear the table, set up the UI for playing a game, and deal a new game
@@ -546,25 +553,31 @@ namespace Blackjack
         private void Stand(object sender, RoutedEventArgs e)
         {
             // Dealer should finish playing and the UI should be updated
-         
-            _server.Stand();
-          
+
+            Server.Stand();
+
         }
 
         private void Hit(object sender, RoutedEventArgs e)
         {
             _firstTurn = false;
-           
-            _server.Hit();
-           
 
-        
+            Server.Hit();
+
+
+
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Server.Leave();
         }
 
         private void DoubleBet(object sender, RoutedEventArgs e)
         {
 
-            _server.Bet(_currentBet, true);
+            Server.Bet(_currentBet, true);
             //try
             //{
             //    //Double the player's bet amount
@@ -655,7 +668,7 @@ namespace Blackjack
             UpdateUIPlayerCards();
         }
 
-        public void OnNewTableCreated(object sender, List<GameReference.Table> tableList)
+        public void OnTableListUpdate(object sender, List<GameReference.Table> tableList)
         {
             throw new NotImplementedException();
         }
@@ -676,14 +689,14 @@ namespace Blackjack
 
         public void OnStand(object sender, GameArgs e)
         {
-            
+
         }
 
         public void OnDealerPlay(object sender, GameArgs e)
         {
             WinStatusDealer.Visibility = Visibility.Visible;
             _table.Dealer.Hand = e.Player.Hand;
-            if(HandValue(_table.Dealer.Hand) > 21)
+            if (HandValue(_table.Dealer.Hand) > 21)
             {
                 WinStatus.Content = "Dealer Bust!";
             }
