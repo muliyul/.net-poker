@@ -47,7 +47,7 @@ namespace Website
             throw new NotImplementedException();
         }
 
-        public void OnNewTableCreated(object sender, GameReference.Table[] tableList)
+        public void OnNewTableCreated(object sender, List<GameReference.Table> tableList)
         {
             throw new NotImplementedException();
         }

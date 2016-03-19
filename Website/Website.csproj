@@ -71,6 +71,60 @@
   <ItemGroup>
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Resource Include="Images\Cards\cardSkin.PNG" />
+    <Resource Include="Images\Cards\cl1.gif" />
+    <Resource Include="Images\Cards\cl10.gif" />
+    <Resource Include="Images\Cards\cl2.gif" />
+    <Resource Include="Images\Cards\cl3.gif" />
+    <Resource Include="Images\Cards\cl4.gif" />
+    <Resource Include="Images\Cards\cl5.gif" />
+    <Resource Include="Images\Cards\cl6.gif" />
+    <Resource Include="Images\Cards\cl7.gif" />
+    <Resource Include="Images\Cards\cl8.gif" />
+    <Resource Include="Images\Cards\cl9.gif" />
+    <Resource Include="Images\Cards\clj.gif" />
+    <Resource Include="Images\Cards\clk.gif" />
+    <Resource Include="Images\Cards\clq.gif" />
+    <Resource Include="Images\Cards\di1.gif" />
+    <Resource Include="Images\Cards\di10.gif" />
+    <Resource Include="Images\Cards\di2.gif" />
+    <Resource Include="Images\Cards\di3.gif" />
+    <Resource Include="Images\Cards\di4.gif" />
+    <Resource Include="Images\Cards\di5.gif" />
+    <Resource Include="Images\Cards\di6.gif" />
+    <Resource Include="Images\Cards\di7.gif" />
+    <Resource Include="Images\Cards\di8.gif" />
+    <Resource Include="Images\Cards\di9.gif" />
+    <Resource Include="Images\Cards\dij.gif" />
+    <Resource Include="Images\Cards\dik.gif" />
+    <Resource Include="Images\Cards\diq.gif" />
+    <Resource Include="Images\Cards\he1.gif" />
+    <Resource Include="Images\Cards\he10.gif" />
+    <Resource Include="Images\Cards\he2.gif" />
+    <Resource Include="Images\Cards\he3.gif" />
+    <Resource Include="Images\Cards\he4.gif" />
+    <Resource Include="Images\Cards\he5.gif" />
+    <Resource Include="Images\Cards\he6.gif" />
+    <Resource Include="Images\Cards\he7.gif" />
+    <Resource Include="Images\Cards\he8.gif" />
+    <Resource Include="Images\Cards\he9.gif" />
+    <Resource Include="Images\Cards\hej.gif" />
+    <Resource Include="Images\Cards\hek.gif" />
+    <Resource Include="Images\Cards\heq.gif" />
+    <Resource Include="Images\Cards\sp1.gif" />
+    <Resource Include="Images\Cards\sp10.gif" />
+    <Resource Include="Images\Cards\sp2.gif" />
+    <Resource Include="Images\Cards\sp3.gif" />
+    <Resource Include="Images\Cards\sp4.gif" />
+    <Resource Include="Images\Cards\sp5.gif" />
+    <Resource Include="Images\Cards\sp6.gif" />
+    <Resource Include="Images\Cards\sp7.gif" />
+    <Resource Include="Images\Cards\sp8.gif" />
+    <Resource Include="Images\Cards\sp9.gif" />
+    <Resource Include="Images\Cards\spj.gif" />
+    <Resource Include="Images\Cards\spk.gif" />
+    <Resource Include="Images\Cards\spq.gif" />
+    <Content Include="play.aspx" />
     <Content Include="Install\publish.htm" />
     <Content Include="Install\setup.exe" />
     <Content Include="js\bootstrap.min.js" />
@@ -126,6 +180,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="play.aspx.cs">
+      <DependentUpon>play.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="play.aspx.designer.cs">
+      <DependentUpon>play.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
