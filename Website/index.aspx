@@ -3,12 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <div class="jumbotron text-center">
+    <div class="row jumbotron text-center">
         <h2>Welcome to Blackjack!</h2>
     </div>
 
     <h3 class="text-center">Top players</h3>
-    <div class="table-responsive">
+    <div class="row">
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" EmptyDataText="No players in the system. Be the first?" CssClass="table table-striped table-bordered table-hover text-center" DataSourceID="PlayerDataSource">
             <Columns>
                 <asp:TemplateField HeaderText="Rank">
@@ -21,7 +21,7 @@
                     <ItemStyle CssClass="col-xs-1"></ItemStyle>
 
                 </asp:TemplateField>
-                <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" >
+                <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username">
                     <HeaderStyle CssClass="text-center"></HeaderStyle>
 
                     <ItemStyle CssClass="col-xs-4"></ItemStyle>

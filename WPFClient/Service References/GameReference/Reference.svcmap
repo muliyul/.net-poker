@@ -27,8 +27,8 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="da0d8fb4-634d-48ce-ac42-ce8d15457b4a" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b7544412-59b3-4767-8e90-92a8a0103c06" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="cdd2006d-bb2d-4728-bddb-33fe97903aa2" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
-    <MetadataFile FileName="Service.Models.xsd" MetadataType="Schema" ID="b9353ef1-9432-4b5e-b358-15e553e4b512" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
-    <MetadataFile FileName="System.Collections.Generic.xsd" MetadataType="Schema" ID="ce95de3d-5614-4b33-b676-6d1d0b5c8e60" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="Service.Models1.xsd" MetadataType="Schema" ID="3d225758-09d9-4f34-869c-033defe39a9d" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="System.Collections.Generic1.xsd" MetadataType="Schema" ID="7eabb95a-72b5-44a0-be38-fcd828a1a477" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
     <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="1e6aa473-9617-4421-a9f5-587d0ded879d" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
     <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="8d057df6-dee5-47ed-a80f-14f6dc91ac5e" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
   </Metadata>

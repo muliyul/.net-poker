@@ -204,17 +204,6 @@ namespace Service.Models
             Players.Remove(_ref);
 
             var currentPlayer = _turn.Current;
-            //if (player.Username == currentPlayer.Username)
-            //{
-            //    try
-            //    {
-            //        _turn.MoveNext();
-            //    } catch (InvalidOperationException)
-            //    {
-            //        _turn = Players.GetEnumerator();
-            //    }
-            //    currentPlayer = _turn.Current;
-            //}
 
             _turn = Players.GetEnumerator();
             do
@@ -386,6 +375,7 @@ namespace Service.Models
             if (dalGame == null)
             {
                 dalGame = new Game();
+                db.Games.Add(dalGame);
             }
             dalGame.Player = dalPlayer;
             dalGame.GameId = Id;

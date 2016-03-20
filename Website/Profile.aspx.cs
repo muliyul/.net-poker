@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -18,13 +19,49 @@ namespace Website
             gc = Session["GameClient"] as GameClient;
             player = Session["User"] as PlayerData;
             if (player == null)
+            {
                 Server.Transfer("login.aspx");
+                return;
+            }
+            SqlDataSource1.SelectCommand =
+                string.Format("SELECT Games.PlayedOn, Games.Winnings, Games.Blackjacks, Games.WonHands, Games.LostHands " +
+                "FROM Games INNER JOIN Players ON Games.PlayerId = Players.Id AND Players.Username = '{0}'", player.Username);
+            SqlDataSource1.DataBind();
+            GridView1.DataBind();
+        }
+
+        protected string CalculateWinLoseRatio(int w, int l)
+        {
+            return "";
         }
 
         protected void Logout(object sender, EventArgs e)
         {
             Session["User"] = null;
             Server.Transfer("index.aspx");
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //Find the data row bound to the grid view row
+                DataRowView drv = (DataRowView)e.Row.DataItem;
+
+                //Find the label in question
+                Label lbl = e.Row.FindControl("wlr") as Label;
+
+                //Perform your needed calculation
+                try
+                {
+                    double v = (int)drv["WonHands"] / (double)drv["LostHands"];
+                    lbl.Text = string.Format("{0:0.00}", v);
+                }
+                catch
+                {
+
+                }
+            }
         }
     }
 }

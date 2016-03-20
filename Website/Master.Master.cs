@@ -12,7 +12,7 @@ namespace Website
 {
     public partial class Master : System.Web.UI.MasterPage, IGameCallback
     {
-#region Callbacks
+        #region Callbacks
         public void OnBet(object sender, GameArgs e)
         {
         }
@@ -56,11 +56,11 @@ namespace Website
         public void OnTableListUpdate(object sender, List<GameReference.Table> tableList)
         {
         }
-#endregion
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (Session["GameClient"] == null)
             {
                 var bindings = ConfigurationManager.GetSection("system.serviceModel/bindings") as
