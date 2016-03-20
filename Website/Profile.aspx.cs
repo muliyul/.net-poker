@@ -30,11 +30,6 @@ namespace Website
             GridView1.DataBind();
         }
 
-        protected string CalculateWinLoseRatio(int w, int l)
-        {
-            return "";
-        }
-
         protected void Logout(object sender, EventArgs e)
         {
             Session["User"] = null;
@@ -54,12 +49,13 @@ namespace Website
                 //Perform your needed calculation
                 try
                 {
-                    double v = (int)drv["WonHands"] / (double)drv["LostHands"];
-                    lbl.Text = string.Format("{0:0.00}", v);
+                    int wins = (int)drv["WonHands"];
+                    double total = wins + (int)drv["LostHands"];
+                    lbl.Text = string.Format("{0:0.00}%", wins / total);
                 }
                 catch
                 {
-
+                    lbl.Text = "Inf.";
                 }
             }
         }

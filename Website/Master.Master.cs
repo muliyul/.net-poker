@@ -68,11 +68,11 @@ namespace Website
                 InstanceContext ctx = new InstanceContext(this);
                 Session["GameClient"] = new GameClient(ctx, bindings.WSDualHttpBinding.Bindings[0].Name);
             }
-
-            if (Session["User"] != null)
+            var player = (Session["User"] as PlayerData)?.Username;
+            if (!string.IsNullOrEmpty(player))
             {
                 loginProfileBtn.HRef = "profile.aspx";
-                loginProfileBtn.InnerText = "Profile";
+                loginProfileBtn.InnerText = "Profile (" + player + ")";
             }
         }
     }

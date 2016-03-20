@@ -20,11 +20,12 @@ namespace Website.Views
 
         }
 
-        private void fillBlackJackTableList()
+        private async void fillBlackJackTableList()
         {
-            var tableList = gc.ListTables();
+            var tableList = await gc.ListTablesAsync();
 
             var tableHead = new TableHeaderRow();
+            tableHead.CssClass = "text-center";
             var cell = new TableHeaderCell();
             cell.Controls.Add(new Label() { Text = "Id" });
             tableHead.Controls.Add(cell);
@@ -37,7 +38,7 @@ namespace Website.Views
 
 
             blackJackTables.Controls.Add(tableHead);
-            blackJackTables.CssClass = "table";
+            blackJackTables.CssClass = "table table-striped table-bordered table-hover text-center table-condensed";
 
             int i = 1;
             foreach (var t in tableList)
