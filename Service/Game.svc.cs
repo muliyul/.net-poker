@@ -54,6 +54,7 @@ namespace Service
             {
                 lock (locker)
                 {
+                    
                     sessions[OperationContext.Current.SessionId] = value;
                 }
             }

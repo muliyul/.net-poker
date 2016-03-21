@@ -153,7 +153,7 @@ namespace Blackjack
         public void OnDeal(object sender, GameArgs e)
         {
             gameWindow?.OnDeal(sender, e);
-            gameWindow?.SetUpGameInPlay();
+           
         }
 
         public void OnRoundResult(object sender, GameArgs e)

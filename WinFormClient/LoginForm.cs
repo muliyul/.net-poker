@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -19,9 +20,13 @@ namespace BlackJack
             InitializeComponent();
             this.Text = WINDOW_TITLE;
 
-            _startForm = new StartForm(_server);
-            var contax = new System.ServiceModel.InstanceContext(_startForm);
-            _server = new GameReference.GameClient(contax);
+            var bindings = ConfigurationManager.GetSection("system.serviceModel/bindings") as
+                       System.ServiceModel.Configuration.BindingsSection;
+         
+            _startForm = new StartForm();
+            var instContext = new System.ServiceModel.InstanceContext(_startForm);
+            _server = new GameReference.GameClient(instContext, bindings.NetTcpBinding.Bindings[0].Name);
+            _startForm.Server = _server;
 
         }
 

@@ -101,6 +101,7 @@
             this.createTableButton.TabIndex = 4;
             this.createTableButton.Text = "Create Table";
             this.createTableButton.UseVisualStyleBackColor = false;
+            this.createTableButton.Click += new System.EventHandler(this.createTableButton_Click);
             // 
             // StartForm
             // 

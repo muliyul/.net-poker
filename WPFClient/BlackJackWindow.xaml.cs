@@ -1,18 +1,10 @@
-﻿using BlackJack;
-using BlackJack.CardGameFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Blackjack.GameReference;
 
 namespace Blackjack
@@ -46,6 +38,8 @@ namespace Blackjack
             this._me = player;
             this._table = table;
             Server = server;
+
+            Title += " :: Loged in as " + player.Username;
 
             InitializeComponent();
 
@@ -175,6 +169,7 @@ namespace Blackjack
             _playerWinStatusLabels.ForEach(p => p.Visibility = Visibility.Hidden);
             WinStatusDealer.Content = null;
             WinStatusDealer.Visibility = Visibility.Hidden;
+            _playerNameLabels.ForEach(pl => pl.Foreground = Brushes.White);
         }
         #endregion
 
@@ -217,13 +212,10 @@ namespace Blackjack
 
         public void UpdatePlayersBet()
         {
-            /*for (int i = 0; i < _table.Players.Count; ++i)
-            {
-                _playerBetAmountLabels[i].Content = _table.Players[i].Bet + "$";
-            }*/
+          
             foreach (var playerIdx in _table.Players.FindAll(p => !p.Username.Equals(_me.Username)).Select(p => _table.Players.IndexOf(p)))
             {
-                _playerBetAmountLabels[playerIdx].Content = _table.Players[playerIdx].Bet;
+                _playerBetAmountLabels[playerIdx].Content = _table.Players[playerIdx].Bet + "$";
             }
         }
 
@@ -274,7 +266,8 @@ namespace Blackjack
                     // Load each card from file
                     Image card = (Image)rootV.FindName("Player" + (i + 1) + "Card" + j);
                     LoadCard(card, playerCards[j]);
-                    card.Visibility = Visibility.Visible;
+                    if (card != null)
+                        card.Visibility = Visibility.Visible;
 
                 }
             }
@@ -413,16 +406,7 @@ namespace Blackjack
                     Server.Deal();
 
                     DealBtn.IsEnabled = ClearBtn.IsEnabled = false;
-                    // shoud be call back to it ShowBankValue();
-
-                    // Clear the table, set up the UI for playing a game, and deal a new game
-
-
-                    // Check see if the current player has blackjack
-                    // if (player.HasBlackJack())
-                    // {
-                    //     EndGame(EndResult.PlayerBlackJack);
-                    // }
+                  
                 }
             }
             catch (Exception NotEnoughMoneyException)
@@ -481,9 +465,7 @@ namespace Blackjack
 
         private void ClearBet(object sender, RoutedEventArgs e)
         {
-            //Clear the bet amount
-            //game.CurrentPlayer.ClearBet();
-            // await LoginWindow.GameServer.ClearBetAsync();
+            
             _currentBet = 0;
             ShowBankValue();
         }
@@ -538,11 +520,12 @@ namespace Blackjack
 
             UpdatePlayersBet();
             UpdateUIPlayerCards();
+            SetUpGameInPlay();
         }
 
         public void OnTableListUpdate(object sender, List<GameReference.Table> tableList)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnMyTurn(object sender, GameArgs e)
@@ -571,10 +554,7 @@ namespace Blackjack
         {
             WinStatusDealer.Visibility = Visibility.Visible;
             _table.Dealer.Hand = e.Player.Hand;
-            if (HandValue(_table.Dealer.Hand) > 21)
-            {
-                WinStatus.Content = "Dealer Bust!";
-            }
+           
             WinStatus.Visibility = Visibility.Visible;
             UpdateUIPlayerCards();
         }
@@ -585,6 +565,9 @@ namespace Blackjack
             var playerIndex = _table.Players.IndexOf(player);
 
             _playerWinStatusLabels[playerIndex].Content = e.Message;
+            WinStatus.Content = e.Message;
+            HitBtn.IsEnabled = false;
+            StandBtn.IsEnabled = false;
         }
 
         public void OnResetTable(object sender, GameArgs e)

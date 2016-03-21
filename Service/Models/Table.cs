@@ -170,31 +170,34 @@ namespace Service.Models
         internal void Hit(PlayerData player)
         {
             var pl = Players.Single(p => p == player);
-            var c = d.Pop();
-            //Players.Add(player);
-
-            pl.Hand.Cards.Add(c);
-
-            // check for black jack / bust
-            var args = new GameArgs();
-            args.Table = this;
-            args.Card = c;
-            args.Player = pl;
-
-            if (pl.Hand.Value == 21)
+            if (pl.Hand.Value < 21)
             {
-                //StatusHandler("BlackJack!", new GameArgs() { Player = pl });
-                args.Message = "Blackjack!";
-                CheckLastTurn();
-            }
-            else if (pl.Hand.Value > 21)
-            {
-                //StatusHandler("Bust!", new GameArgs() { Player = pl });
-                args.Message = "Bust!";
-                CheckLastTurn();
-            }
+                var c = d.Pop();
+                //Players.Add(player);
 
-            HitHandler(null, args);
+                pl.Hand.Cards.Add(c);
+
+                // check for black jack / bust
+                var args = new GameArgs();
+                args.Table = this;
+                args.Card = c;
+                args.Player = pl;
+            
+                if (pl.Hand.Value == 21)
+                {
+                    //StatusHandler("BlackJack!", new GameArgs() { Player = pl });
+                    args.Message = "Blackjack!";
+                    CheckLastTurn();
+                }
+                else if (pl.Hand.Value > 21)
+                {
+                    //StatusHandler("Bust!", new GameArgs() { Player = pl });
+                    args.Message = "Bust!";
+                    CheckLastTurn();
+                }
+            
+                HitHandler(null, args);
+            }
         }
 
         internal void Leave(PlayerData player)

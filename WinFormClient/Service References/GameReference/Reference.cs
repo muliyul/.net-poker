@@ -172,7 +172,7 @@ namespace BlackJack.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BlackJack.GameReference.Card[] CardsField;
+        private System.Collections.Generic.List<BlackJack.GameReference.Card> CardsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -185,7 +185,7 @@ namespace BlackJack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public BlackJack.GameReference.Card[] Cards {
+        public System.Collections.Generic.List<BlackJack.GameReference.Card> Cards {
             get {
                 return this.CardsField;
             }
@@ -380,7 +380,7 @@ namespace BlackJack.GameReference {
         private bool InGameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BlackJack.GameReference.PlayerData[] PlayersField;
+        private System.Collections.Generic.List<BlackJack.GameReference.PlayerData> PlayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PotField;
@@ -438,7 +438,7 @@ namespace BlackJack.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public BlackJack.GameReference.PlayerData[] Players {
+        public System.Collections.Generic.List<BlackJack.GameReference.PlayerData> Players {
             get {
                 return this.PlayersField;
             }
@@ -657,10 +657,10 @@ namespace BlackJack.GameReference {
         System.Threading.Tasks.Task<BlackJack.GameReference.PlayerData> LoginAsync(string username, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
-        BlackJack.GameReference.Table[] ListTables();
+        System.Collections.Generic.List<BlackJack.GameReference.Table> ListTables();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/ListTables", ReplyAction="http://tempuri.org/IGame/ListTablesResponse")]
-        System.Threading.Tasks.Task<BlackJack.GameReference.Table[]> ListTablesAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BlackJack.GameReference.Table>> ListTablesAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/CreateTable")]
         void CreateTable();
@@ -712,13 +712,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -729,13 +729,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -746,13 +746,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -763,13 +763,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -780,13 +780,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -797,13 +797,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -814,30 +814,30 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.GameArgs))]
-        void OnTableListUpdate(object sender, BlackJack.GameReference.Table[] tableList);
+        void OnTableListUpdate(object sender, System.Collections.Generic.List<BlackJack.GameReference.Table> tableList);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/OnMyTurn")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -848,13 +848,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -865,13 +865,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -882,13 +882,13 @@ namespace BlackJack.GameReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.BlackJackHand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Hand))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Card>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Card))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Face))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Suit))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.Table>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Table))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.PlayerData[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<BlackJack.GameReference.PlayerData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BlackJack.GameReference.Deck))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.EventArgs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Stack<BlackJack.GameReference.Card>))]
@@ -940,11 +940,11 @@ namespace BlackJack.GameReference {
             return base.Channel.LoginAsync(username, pass);
         }
         
-        public BlackJack.GameReference.Table[] ListTables() {
+        public System.Collections.Generic.List<BlackJack.GameReference.Table> ListTables() {
             return base.Channel.ListTables();
         }
         
-        public System.Threading.Tasks.Task<BlackJack.GameReference.Table[]> ListTablesAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BlackJack.GameReference.Table>> ListTablesAsync() {
             return base.Channel.ListTablesAsync();
         }
         
