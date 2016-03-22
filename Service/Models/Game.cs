@@ -31,6 +31,7 @@ namespace Service.Models
         public System.Guid GameId { get; set; }
         public int WonHands { get; set; }
         public int LostHands { get; set; }
+        public int TotalHands { get; set; }
     
         public virtual Player Player { get; set; }
     }

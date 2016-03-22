@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -26,8 +28,25 @@ namespace Website
             SqlDataSource1.SelectCommand =
                 string.Format("SELECT Games.PlayedOn, Games.Winnings, Games.Blackjacks, Games.WonHands, Games.LostHands " +
                 "FROM Games INNER JOIN Players ON Games.PlayerId = Players.Id AND Players.Username = '{0}'", player.Username);
+            /*
+            SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ToString());
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = string.Format("SELECT        ROW_NUMBER() OVER (ORDER BY Bank) Rank " +
+                                            "FROM Players " +
+                                            "WHERE Username = '{0}'", player.Username);
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = sqlCon;
+
+            SqlDataReader reader;
+            sqlCon.Open();
+
+            reader = cmd.ExecuteReader();
+            // Data is accessible through the DataReader object here.
+            rankLbl.Text = reader.GetValue(0).ToString();
+
+            sqlCon.Close();
             SqlDataSource1.DataBind();
-            GridView1.DataBind();
+            GridView1.DataBind();*/
         }
 
         protected void Logout(object sender, EventArgs e)
@@ -50,7 +69,7 @@ namespace Website
                 try
                 {
                     int wins = (int)drv["WonHands"];
-                    double total = wins + (int)drv["LostHands"];
+                    double total = (int)drv["TotalHands"];
                     lbl.Text = wins / total * 100 + "%";
                 }
                 catch

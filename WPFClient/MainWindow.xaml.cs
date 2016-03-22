@@ -196,10 +196,5 @@ namespace Blackjack
         {
             gameWindow?.OnResetTable(sender, e);
         }
-
-        private void RefreshTables(object sender, RoutedEventArgs e)
-        {
-            Server?.ListTablesAsync();
-        }
     }
 }

@@ -105,7 +105,6 @@
         <Button x:Name="joinTableButton" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="302,290,0,0" VerticalAlignment="Top" Width="117" Height="47" Content="Join Table" FontSize="18" FontWeight="Bold" Click="joinTableButton_Click" FontFamily="Arial"/>
         <Label x:Name="label" Content="Logged in as:" HorizontalAlignment="Left" Margin="208,218,0,0" VerticalAlignment="Top" Height="31" Width="130" FontFamily="Arial" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="loggedInAsLbl" Content="" HorizontalAlignment="Left" Margin="338,218,0,0" VerticalAlignment="Top" Width="114" FontFamily="Arial" FontWeight="Bold" FontSize="18"/>
-        <Button x:Name="refreshBtn" Style="{StaticResource InformButton}" HorizontalAlignment="Left" Margin="302,394,0,0" VerticalAlignment="Top" Width="117" Height="47" Content="Refresh" FontSize="18" FontWeight="Bold" Click="RefreshTables" FontFamily="Arial"/>
 
 
     </Grid>

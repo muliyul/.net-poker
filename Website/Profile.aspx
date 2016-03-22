@@ -7,6 +7,11 @@
         <h2 class="text-center">Welcome <%: player?.Username %></h2>
     </div>
 
+    <h2>Your rank:
+        <asp:Label runat="server" ID="rankLbl"></asp:Label>
+    </h2>
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>"></asp:SqlDataSource>
+
     <h2>Game History</h2>
 
     <div class="row">
@@ -61,7 +66,7 @@
     </div>
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>" SelectCommand="SELECT Games.PlayedOn, Games.Winnings, Games.Blackjacks, Games.WonHands, Games.LostHands FROM Games INNER JOIN Players ON Games.PlayerId = Players.Id" />
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>" />
 
 
     <div class="text-right">

@@ -16,12 +16,6 @@
                 Password</label>
             <asp:TextBox runat="server" ID="passwordTF" MaxLength="20" TextMode="Password" CssClass="form-control input-md glowing border" placeholder="password"></asp:TextBox>
         </div>
-        <div class="form-group checkbox">
-            <label>
-                <asp:CheckBox runat="server" ID="rememberMeCB" />
-                Remember me
-            </label>
-        </div>
 
         <asp:Label runat="server" ID="errorLbl"></asp:Label>
 
