@@ -21,17 +21,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:51845/Game.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:2305/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Game.xsd" MetadataType="Schema" ID="dc0a1698-8cc4-4dc3-9581-3ec8654ea064" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd0" />
-    <MetadataFile FileName="Game.wsdl" MetadataType="Wsdl" ID="3ffb2820-c913-49d7-9ada-d99b435e04f8" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?wsdl" />
-    <MetadataFile FileName="Game.disco" MetadataType="Disco" ID="257a5272-6671-47ea-a354-a25867debd21" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?disco" />
-    <MetadataFile FileName="Game1.xsd" MetadataType="Schema" ID="ca577956-a5a0-4b32-82fa-3ae61386701a" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd2" />
-    <MetadataFile FileName="Game5.xsd" MetadataType="Schema" ID="4e9b6221-5ef1-4683-9ca7-376ac26d9a17" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd5" />
-    <MetadataFile FileName="Game2.xsd" MetadataType="Schema" ID="42086be9-3916-4db6-8c1c-a50c838970a6" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd1" />
-    <MetadataFile FileName="Game3.xsd" MetadataType="Schema" ID="c3f3ecbe-2b1c-4131-8b20-37c8168053b7" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd3" />
-    <MetadataFile FileName="Game4.xsd" MetadataType="Schema" ID="72f2df8e-96a3-41e0-a4c4-450b000053cb" SourceId="1" SourceUrl="http://localhost:51845/Game.svc?xsd=xsd4" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="aa5e7249-87c8-4733-96f1-72a0bd4fe803" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7bcd8081-3f5c-4220-bf31-55db8519d752" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="f15a31cd-fab8-476c-bf70-e7c26aaf2dfa" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="Service.Models.xsd" MetadataType="Schema" ID="f18127b1-676c-45ae-8308-6e042f9f2df1" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="System.Collections.Generic.xsd" MetadataType="Schema" ID="ecf2e994-c4be-4bb5-bc1e-bbfa501fa1b9" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="99586ffa-be1c-4704-927f-595f41170710" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="6c9c50b6-2799-499c-8606-0b28a8ee7504" SourceId="1" SourceUrl="net.tcp://localhost:2305/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

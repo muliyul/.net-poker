@@ -209,13 +209,11 @@ namespace Service.Models
             {
                 //StatusHandler("BlackJack!", new GameArgs() { Player = pl });
                 args.Message = "Blackjack!";
-                CheckLastTurn();
             }
             else if (pl.Hand.Value > 21)
             {
                 //StatusHandler("Bust!", new GameArgs() { Player = pl });
                 args.Message = "Bust!";
-                CheckLastTurn();
             }
 
             HitHandler(null, args);
@@ -293,7 +291,7 @@ namespace Service.Models
         void DealerPlay()
         {
             Dealer.Hand.Cards[1].IsCardUp = true;
-            //DealerPlayHandler(null, new GameArgs() { Player = Dealer });
+            DealerPlayHandler(null, new GameArgs() { Player = Dealer });
             /*while (Dealer.Hand.Value < 17)
             {
                 Dealer.Hand.Cards.Add(_deck.Draw());
@@ -301,7 +299,7 @@ namespace Service.Models
             }*/
             int handToBeat = Players.Max(p => p.Hand.Value);
             int potentialWins = Players.Count(p => p.Hand.Value > 21 || p.Hand.Value < Dealer.Hand.Value);
-            while (Dealer.Hand.Value < handToBeat || potentialWins >= Players.Count / 2 && Dealer.Hand.Value < 21)
+            while (Dealer.Hand.Value < handToBeat && potentialWins <= Players.Count / 2 && Dealer.Hand.Value < 21)
             {
                 Dealer.Hand.Cards.Add(_deck.Draw());
                 DealerPlayHandler(null, new GameArgs() { Player = Dealer });
@@ -312,10 +310,9 @@ namespace Service.Models
         {
             using (var db = new DBContainer())
             {
-                foreach (var p in Players)
-                {
+                foreach(var p in Players.AsParallel())
                     SendResult(p, db);
-                }
+
                 //Batch save DAL
                 await db.SaveChangesAsync();
             }

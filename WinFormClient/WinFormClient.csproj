@@ -133,20 +133,23 @@
     <None Include="Service References\GameReference\BlackJack.GameReference.Table.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\GameReference\Game.wsdl" />
-    <None Include="Service References\GameReference\Game.xsd">
+    <None Include="Service References\GameReference\Service.Models.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game1.xsd">
+    <None Include="Service References\GameReference\service.wsdl" />
+    <None Include="Service References\GameReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game2.xsd">
+    <None Include="Service References\GameReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game3.xsd">
+    <None Include="Service References\GameReference\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\GameReference\Game4.xsd">
+    <None Include="Service References\GameReference\System.Collections.Generic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GameReference\System.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -158,16 +161,12 @@
     <Content Include="Documentation\Images\top-vc.gif" />
     <Content Include="EULA.txt" />
     <Content Include="Images\Cards\cardSkin.PNG" />
-    <None Include="Service References\GameReference\Game5.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\GameReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\GameReference\configuration.svcinfo" />
     <None Include="Service References\GameReference\configuration91.svcinfo" />
-    <None Include="Service References\GameReference\Game.disco" />
     <None Include="Resources\Blackjack11.jpg" />
     <None Include="Properties\app.manifest" />
     <Content Include="Images\Cards\cl1.gif" />

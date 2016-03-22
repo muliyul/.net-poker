@@ -563,13 +563,16 @@ namespace Blackjack
 
         public void OnRoundResult(object sender, GameArgs e)
         {
-            var playerIndex = _table.Players.FindIndex(p => p.Username.Equals(_me.Username));
+            _table = e.Table;
+            var player = _table.Players.Single(p => p.Username.Equals(_me.Username));
+            var playerIndex = _table.Players.IndexOf(player);
+
             _me.Bank = e.Table.Players[playerIndex].Bank;
             _me.Bet = e.Table.Players[playerIndex].Bet;
             _me.WonHands = e.Table.Players[playerIndex].WonHands;
             _me.Hand = e.Table.Players[playerIndex].Hand;
-
             _playerWinStatusLabels[playerIndex].Content = e.Message;
+
             wins_label.Content = e.Player.WonHands;
             loses_label.Content = e.Player.LostHands;
             if (e.Message.Contains("Tie"))

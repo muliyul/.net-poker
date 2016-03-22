@@ -27,7 +27,7 @@ namespace Service
             using (var host = new ServiceHost(typeof(Game), bindings))
             {
                 host.Open();
-                foreach(var b in bindings)
+                foreach (var b in bindings)
                 {
                     Console.WriteLine("Service listening on {0}", b);
                 }
@@ -54,7 +54,7 @@ namespace Service
             {
                 lock (locker)
                 {
-                    
+
                     sessions[OperationContext.Current.SessionId] = value;
                 }
             }
@@ -139,6 +139,9 @@ namespace Service
 
         public PlayerData Login(string username, string pass)
         {
+            if (sessions.Values.Any(p => p.Username.Equals(username)))
+                throw new Exception("User already logged in!");
+
             using (var db = new DBContainer())
             {
                 try
@@ -174,7 +177,6 @@ namespace Service
         {
             using (var db = new DBContainer())
             {
-
                 try
                 {
                     db.Players.Add(new Player()

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace BlackJack
 {
-    partial class BlackJackForm : Form , GameReference.IGameCallback
+    partial class BlackJackForm : Form, GameReference.IGameCallback
     {
         #region Fields
 
@@ -23,12 +23,13 @@ namespace BlackJack
         private List<TextBox> _playerBetAmountLabels = new List<TextBox>();
         private List<TextBox> _playerWinStatusLabels = new List<TextBox>();
         private Table _table;
-     
-        
+
+
         private GameClient _server;
         private decimal _currentBet;
         private PlayerData _me;
         private bool _firstTurn;
+        private int _ties = 0;
 
         #endregion
 
@@ -86,7 +87,7 @@ namespace BlackJack
         private void ClearTableCards()
         {
             ClearTable();
-           
+
             _playerWinStatusLabels.ForEach(p => p.Text = null);
             _playerWinStatusLabels.ForEach(p => p.Visible = false);
             _playerNameLabels.ForEach(pl => pl.ForeColor = Color.White);
@@ -96,7 +97,7 @@ namespace BlackJack
             WinStatus.Text = null;
             WinStatus.Visible = false;
         }
-        
+
 
 
         #endregion
@@ -268,7 +269,7 @@ namespace BlackJack
             var playerIndex = _table.Players.IndexOf(player);
 
             _playerBetAmountLabels[playerIndex].Text = _currentBet.ToString() + "$";
-            
+
 
         }
 
@@ -283,14 +284,14 @@ namespace BlackJack
                 dealerCards[i].Visible = false;
             }
 
-            foreach(var p in playerCards)
-            { 
+            foreach (var p in playerCards)
+            {
                 p.Image = null;
                 p.Visible = false;
             }
         }
 
-      
+
         #endregion
 
         #region Game UI Methods
@@ -373,7 +374,7 @@ namespace BlackJack
             clearBetButton.Enabled = false;
             standButton.Enabled = false;
             hitButton.Enabled = false;
-           
+
             dealButton.Enabled = false;
 
             for (int i = 0; i < _table.Players.Count; ++i)
@@ -406,6 +407,7 @@ namespace BlackJack
             twentyFiveButton.Enabled = true;
             fiftyButton.Enabled = true;
             hundredButton.Enabled = true;
+            endGameButton.Enabled = true;
 
             _playerLabelsTotalCardVal.ForEach(p => p.Visible = false);
             _playerBetAmountLabels.ForEach(l => l.Text = "0");
@@ -418,7 +420,7 @@ namespace BlackJack
         {
             foreach (var playerIdx in _table.Players.FindAll(p => !p.Username.Equals(_me.Username)).Select(p => _table.Players.IndexOf(p)))
             {
-                _playerBetAmountLabels[playerIdx].Text = _table.Players[playerIdx].Bet.ToString() +"$";
+                _playerBetAmountLabels[playerIdx].Text = _table.Players[playerIdx].Bet.ToString() + "$";
             }
         }
 
@@ -435,12 +437,12 @@ namespace BlackJack
                 for (int j = 0; j < pCards.Count; j++)
                 {
                     // Load each card from file
-                    LoadCard(playerCards[j + (i*6) ], pCards[j]);
+                    LoadCard(playerCards[j + (i * 6)], pCards[j]);
                     playerCards[j + (i * 6)].Visible = true;
                     playerCards[j + (i * 6)].BringToFront();
                 }
             }
-            List<Card> dcards = _table.Dealer.Hand.Cards; 
+            List<Card> dcards = _table.Dealer.Hand.Cards;
             WinStatusDealer.Text = HandValue(_table.Dealer.Hand).ToString();
 
             for (int i = 0; i < dcards.Count; i++)
@@ -560,7 +562,7 @@ namespace BlackJack
             }
         }
 
-      
+
 
         public void OnLeave(object sender, GameArgs e)
         {
@@ -594,7 +596,7 @@ namespace BlackJack
             UpdatePlayersBet();
         }
 
-     
+
         public void OnDeal(object sender, GameArgs e)
         {
             _table = e.Table;
@@ -608,7 +610,7 @@ namespace BlackJack
 
         public void OnNewTableCreated(object sender, List<Table> tableList)
         {
-            
+
         }
 
         public void OnMyTurn(object sender, GameArgs e)
@@ -630,36 +632,57 @@ namespace BlackJack
 
         public void OnStand(object sender, GameArgs e)
         {
-        
+
         }
 
         public void OnDealerPlay(object sender, GameArgs e)
         {
             WinStatusDealer.Visible = true;
             _table.Dealer.Hand = e.Player.Hand;
-           
+
             WinStatus.Visible = true;
             UpdateUIPlayerCards();
         }
 
         public void OnResetTable(object sender, GameArgs e)
         {
-            _me = e.Table.Players.Find(p => p.Username.Equals(_me.Username));
+            var xUser = e.Table.Players.Find(p => p.Username.Equals(_me.Username));
+
+            _me.Bank = xUser.Bank;
+            _me.Bet = xUser.Bet;
+            _me.WonHands = xUser.WonHands;
+            _me.Hand = xUser.Hand;
+
+
+            
             ShowBankValue();
             ClearTableCards();
             ClearBetBtn_Click(null, null);
             SetUpNewGame();
         }
-        
+
+        //Each player gets different result
         public void OnRoundResult(object sender, GameArgs e)
         {
-            var player = _table.Players.SingleOrDefault(p => p.Username.Equals(_me.Username));
+            _table = e.Table;
+            var player = _table.Players.Single(p=>p.Username.Equals(_me.Username));
             var playerIndex = _table.Players.IndexOf(player);
 
+            _me.Bank = e.Table.Players[playerIndex].Bank;
+            _me.Bet = e.Table.Players[playerIndex].Bet;
+            _me.WonHands = e.Table.Players[playerIndex].WonHands;
+            _me.Hand = e.Table.Players[playerIndex].Hand;
+
             _playerWinStatusLabels[playerIndex].Text = e.Message;
-            WinStatus.Text = e.Message; 
-            _playerWinStatusLabels[playerIndex].Visible = true;
-            _playerWinStatusLabels[playerIndex].BringToFront();
+            winTextBox.Text = e.Player.WonHands.ToString();
+            lossTextBox.Text = e.Player.LostHands.ToString();
+            if (e.Message.Contains("Tie"))
+                _ties++;
+            tiesTextBox.Text = _ties.ToString();
+            WinStatus.Text = e.Message;
+
+            hitButton.Enabled = false;
+            standButton.Enabled = false;
         }
 
         public void OnTableListUpdate(object sender, List<Table> tableList)
