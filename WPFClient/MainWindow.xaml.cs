@@ -80,14 +80,6 @@ namespace Blackjack
 
         }
 
-        //private void NewGame(object sender, RoutedEventArgs e)
-        //{
-        //    this.Hide();
-        //    GameWindow gameWindow = new GameWindow(player);
-        //    gameWindow.ShowDialog();
-        //    this.Show();
-        //}
-
         private void Options(object sender, RoutedEventArgs e)
         {
             this.Hide();
@@ -124,7 +116,7 @@ namespace Blackjack
                 }
                 else
                 {
-                    gameWindow = new GameWindow(_player, _currentTable, Server);
+                    gameWindow = new GameWindow(ref _player, _currentTable, Server);
                     gameWindow.ShowDialog();
                     this.Show();
                 }

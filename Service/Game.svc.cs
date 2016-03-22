@@ -126,7 +126,7 @@ namespace Service
         public void Leave()
         {
             var t = CurrentTable;
-            t?.Leave(CurrentPlayer);
+            var p = t?.Leave(CurrentPlayer);
             if (t?.Players.Count == 0)
                 Tables.Remove(t);
             TableListUpdatedHandler(null, Tables);

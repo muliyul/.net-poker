@@ -164,43 +164,66 @@ namespace Service.Models
 
             DealHandler(null, new GameArgs() { Table = this });
 
-            PlayerTurnHandler(null, new GameArgs() { Table = this, Player = _turn.Current });
+
+
+            if (Players.Any(p => p.Hand.Value < 21))
+            {
+
+                using (var db = new DBContainer())
+                {
+                    while (_turn.Current.Hand.Value >= 21)
+                    {
+                        SendResult(_turn.Current, db);
+                        _turn.MoveNext();
+                    }
+                    db.SaveChanges();
+                }
+                PlayerTurnHandler(null, new GameArgs() { Table = this, Player = _turn.Current });
+            }
+            else
+            {
+                while (_turn.Current != null) _turn.MoveNext();
+                CheckLastTurn();
+            }
         }
 
         internal void Hit(PlayerData player)
         {
-            var pl = Players.Single(p => p == player);
-            if (pl.Hand.Value < 21)
+            if (!_turn.Current.Username.Equals(player.Username))
+                return;
+
+            var pl = Players.First(p => p.Username.Equals(player.Username));
+
+            var c = d.Pop();
+            //Players.Add(player);
+
+            pl.Hand.Cards.Add(c);
+
+            // check for black jack / bust
+            var args = new GameArgs();
+            args.Table = this;
+            args.Card = c;
+            args.Player = pl;
+
+            if (pl.Hand.Value == 21)
             {
-                var c = d.Pop();
-                //Players.Add(player);
-
-                pl.Hand.Cards.Add(c);
-
-                // check for black jack / bust
-                var args = new GameArgs();
-                args.Table = this;
-                args.Card = c;
-                args.Player = pl;
-            
-                if (pl.Hand.Value == 21)
-                {
-                    //StatusHandler("BlackJack!", new GameArgs() { Player = pl });
-                    args.Message = "Blackjack!";
-                    CheckLastTurn();
-                }
-                else if (pl.Hand.Value > 21)
-                {
-                    //StatusHandler("Bust!", new GameArgs() { Player = pl });
-                    args.Message = "Bust!";
-                    CheckLastTurn();
-                }
-            
-                HitHandler(null, args);
+                //StatusHandler("BlackJack!", new GameArgs() { Player = pl });
+                args.Message = "Blackjack!";
+                CheckLastTurn();
             }
+            else if (pl.Hand.Value > 21)
+            {
+                //StatusHandler("Bust!", new GameArgs() { Player = pl });
+                args.Message = "Bust!";
+                CheckLastTurn();
+            }
+
+            HitHandler(null, args);
+            if (pl.Hand.Value >= 21)
+                CheckLastTurn();
         }
 
-        internal void Leave(PlayerData player)
+        internal PlayerData Leave(PlayerData player)
         {
             var cb = OperationContext.Current.GetCallbackChannel<IGameCallback>();
             var _ref = Players.SingleOrDefault(p => p.Username.Equals(player.Username));
@@ -215,14 +238,17 @@ namespace Service.Models
             }
             while (Players.Count > 0 && _turn.Current != currentPlayer);
 
-
+            player.Winnings = 0;
+            player.LostHands = 0;
+            player.WonHands = 0;
             LeaveHandler(null, new GameArgs() { Player = player, Table = this });
             RemoveEvents(cb);
+            return player;
         }
 
         internal void Bet(PlayerData player, bool doubleBet)
         {
-            var pl = Players.First(p => p.Username.Equals(player.Username));
+            var pl = Players.Single(p => p.Username.Equals(player.Username));
             pl.Bet = doubleBet ? 2 * player.Bet : player.Bet;
             pl = player;
             BetHandler(null, new GameArgs() { Player = player, Amount = player.Bet, Table = this });
@@ -281,74 +307,7 @@ namespace Service.Models
             {
                 foreach (var p in Players)
                 {
-                    var args = new GameArgs();
-                    args.Player = p;
-                    args.Table = this;
-                    if (p.Hand.Value <= 21)
-                    {
-                        if (Dealer.Hand.Value <= 21)
-                        {
-                            if (p.Hand.Value == Dealer.Hand.Value)      // player tie
-                            {
-                                args.Message = "Tie!";
-                                p.Bank += p.Bet;
-                            }
-                            else if (p.Hand.Value < Dealer.Hand.Value)   // player lose
-                            {
-                                args.Message = "Lose!";
-                                p.LostHands++;
-                                p.Bank -= p.Bet;
-                                p.Winnings -= p.Bet;
-                            }
-                            else if (p.Hand.Value > Dealer.Hand.Value)   // player win
-                            {
-                                args.Message = "Win!";
-                                p.WonHands++;
-                                p.Bank += p.Bet;
-
-                                if (p.Hand.Value == 21)
-                                { // player blackjack
-                                    p.Blackjacks++;
-                                    p.Bank += 2.4m * p.Bet;
-                                    p.Winnings += 1.4m * p.Bet;
-                                }
-                                else        // normal win
-                                {
-                                    p.Bank += 2 * p.Bet;
-                                    p.Winnings += p.Bet;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            args.Message = "Win!";
-                            p.WonHands++;
-                            if (p.Hand.Value == 21)
-                            { // player blackjack
-                                p.Blackjacks++;
-                                p.Bank += 2.4m * p.Bet;
-                                p.Winnings += 1.4m * p.Bet;
-                            }
-                            else      // normal win
-                            {
-                                p.Bank += p.Bet;
-                                p.Winnings += p.Bet;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        args.Message = "Lose!";
-                        p.LostHands++;
-                        p.Bank -= p.Bet;
-                        p.Winnings -= p.Bet;
-                    }
-                    RoundResultHandler(null, args);
-                    p.Bet = 0;
-                    p.IsReady = false;
-
-                    //Update DAL
-                    UpdateDALPlayer(db, p);
+                    SendResult(p, db);
                 }
                 //Batch save DAL
                 await db.SaveChangesAsync();
@@ -367,13 +326,86 @@ namespace Service.Models
             t.Start();
         }
 
+        private void SendResult(PlayerData p, DBContainer db, string customMessage = null)
+        {
+            var args = new GameArgs();
+            args.Player = p;
+            args.Table = this;
+            if (p.Hand.Value <= 21)
+            {
+                if (Dealer.Hand.Value <= 21)
+                {
+                    if (p.Hand.Value == Dealer.Hand.Value)      // player tie
+                    {
+                        args.Message = "Tie!";
+                        p.Bank += p.Bet;
+                    }
+                    else if (p.Hand.Value < Dealer.Hand.Value)   // player lose
+                    {
+                        args.Message = "Lose!";
+                        p.LostHands++;
+                        p.Bank -= p.Bet;
+                        p.Winnings -= p.Bet;
+                    }
+                    else if (p.Hand.Value > Dealer.Hand.Value)   // player win
+                    {
+                        args.Message = "Win!";
+                        p.WonHands++;
+                        p.Bank += p.Bet;
+
+                        if (p.Hand.Value == 21)
+                        { // player blackjack
+                            p.Blackjacks++;
+                            p.Bank += 2.4m * p.Bet;
+                            p.Winnings += 1.4m * p.Bet;
+                        }
+                        else        // normal win
+                        {
+                            p.Bank += 2 * p.Bet;
+                            p.Winnings += p.Bet;
+                        }
+                    }
+                }
+                else
+                {
+                    args.Message = "Win!";
+                    p.WonHands++;
+                    if (p.Hand.Value == 21)
+                    { // player blackjack
+                        p.Blackjacks++;
+                        p.Bank += 2.4m * p.Bet;
+                        p.Winnings += 1.4m * p.Bet;
+                    }
+                    else      // normal win
+                    {
+                        p.Bank += p.Bet;
+                        p.Winnings += p.Bet;
+                    }
+                }
+            }
+            else
+            {
+                args.Message = "Lose!";
+                p.LostHands++;
+                p.Bank -= p.Bet;
+                p.Winnings -= p.Bet;
+            }
+            args.Message += " " + customMessage;
+            RoundResultHandler(null, args);
+            p.Bet = 0;
+            p.IsReady = false;
+
+            //Update DAL
+            UpdateDALPlayer(db, p);
+        }
+
         internal void UpdateDALPlayer(DBContainer db, PlayerData p)
         {
-            var dalPlayer = db.Players.First(player => player.Username.Equals(p.Username));
+            var dalPlayer = db.Players.Single(player => player.Username.Equals(p.Username));
             //Update bank
             dalPlayer.Bank = p.Bank;
 
-            var dalGame = dalPlayer.Games.FirstOrDefault(entry => entry.GameId == Id);
+            var dalGame = dalPlayer.Games.SingleOrDefault(entry => entry.GameId == Id);
             //Update table stats
             if (dalGame == null)
             {

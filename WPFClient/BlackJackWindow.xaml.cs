@@ -20,12 +20,14 @@ namespace Blackjack
         private bool _firstTurn;
         private PlayerData _me;
 
-        private GameReference.Table _table;
+        private Table _table;
         private decimal _currentBet = 0;
         private List<Label> _playerNameLabels = new List<Label>();
         private List<Label> _playerLabelsTotalCardVal = new List<Label>();
         private List<Label> _playerBetAmountLabels = new List<Label>();
         private List<Label> _playerWinStatusLabels = new List<Label>();
+        private int _ties = 0;
+
         private GameClient Server
         {
             get; set;
@@ -33,13 +35,13 @@ namespace Blackjack
 
         #endregion
 
-        public GameWindow(PlayerData player, GameReference.Table table, GameReference.GameClient server)
+        public GameWindow(ref PlayerData player, GameReference.Table table, GameReference.GameClient server)
         {
-            this._me = player;
-            this._table = table;
+            _table = table;
+            _me = player;
             Server = server;
 
-            Title += " :: Loged in as " + player.Username;
+            Title += " :: Logged in as " + player.Username;
 
             InitializeComponent();
 
@@ -110,7 +112,7 @@ namespace Blackjack
             // Update the "My Account" value
             total_sum_label.Content = "$" + (_me.Bank - _currentBet);
 
-            var player = _table.Players.SingleOrDefault(p => p.Username.Equals(_me.Username));
+            var player = _table.Players.Single(p => p.Username.Equals(_me.Username));
             var playerIndex = _table.Players.IndexOf(player);
 
             _playerBetAmountLabels[playerIndex].Content = _currentBet.ToString() + "$";
@@ -482,7 +484,7 @@ namespace Blackjack
 
         public void OnLeave(object sender, GameArgs e)
         {
-            var player = _table.Players.SingleOrDefault(p => p.Username.Equals(e.Player.Username));
+            var player = _table.Players.Single(p => p.Username.Equals(e.Player.Username));
             _table.Players.Remove(player);
             UpdatePlayers();
 
@@ -507,7 +509,7 @@ namespace Blackjack
 
         public void OnBet(object sender, GameArgs e)
         {
-            var player = _table.Players.SingleOrDefault(p => p.Username.Equals(e.Player.Username));
+            var player = _table.Players.Single(p => p.Username.Equals(e.Player.Username));
             player.Bet = e.Amount;
             UpdatePlayersBet();
         }
@@ -561,11 +563,17 @@ namespace Blackjack
 
         public void OnRoundResult(object sender, GameArgs e)
         {
-            var player = _table.Players.SingleOrDefault(p => p.Username.Equals(_me.Username));
-            var playerIndex = _table.Players.IndexOf(player);
+            var playerIndex = _table.Players.FindIndex(p => p.Username.Equals(_me.Username));
+            _me = e.Table.Players[playerIndex];
 
             _playerWinStatusLabels[playerIndex].Content = e.Message;
+            wins_label.Content = e.Player.WonHands;
+            loses_label.Content = e.Player.LostHands;
+            if (e.Message.Contains("Tie"))
+                _ties++;
+            ties_label.Content = _ties;
             WinStatus.Content = e.Message;
+
             HitBtn.IsEnabled = false;
             StandBtn.IsEnabled = false;
         }

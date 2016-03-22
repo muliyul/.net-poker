@@ -51,7 +51,7 @@ namespace Website
                 {
                     int wins = (int)drv["WonHands"];
                     double total = wins + (int)drv["LostHands"];
-                    lbl.Text = string.Format("{0:0.00}%", wins / total);
+                    lbl.Text = wins / total * 100 + "%";
                 }
                 catch
                 {

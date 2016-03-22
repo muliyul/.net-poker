@@ -42,7 +42,7 @@ namespace BlackJack
             this._me = player;
             this._table = _currentTable;
             this._server = _server;
-            Text += " :: Loged in as " + player.Username;
+            Text += " :: Logged in as " + player.Username;
 
             FormClosed += BlackJackForm_FormClosed;
             InitializeComponent();

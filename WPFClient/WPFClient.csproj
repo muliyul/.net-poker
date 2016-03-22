@@ -99,12 +99,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BlackJackGame\BlackJackGame.cs" />
-    <Compile Include="BlackJackGame\Player.cs" />
-    <Compile Include="BlackJackGame\State.cs" />
-    <Compile Include="CardGameFramework\Card.cs" />
-    <Compile Include="CardGameFramework\Deck.cs" />
-    <Compile Include="CardGameFramework\Hand.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>

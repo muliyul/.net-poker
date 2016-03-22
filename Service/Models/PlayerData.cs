@@ -39,6 +39,7 @@ namespace Service.Models
             }
         }
 
+
         public bool IsReady { get; set; }
         public Deck CurrentDeck { get; set; }
 
@@ -49,14 +50,16 @@ namespace Service.Models
         #region Statistics
         public decimal Winnings { get; set; }
         public int Blackjacks { get; set; }
+        [DataMember]
         public int LostHands { get; internal set; }
+        [DataMember]
         public int WonHands { get; internal set; }
         #endregion
 
         public BlackJackHand NewHand()
         {
-            this.Hand = new BlackJackHand();
-            return this.Hand;
+            Hand = new BlackJackHand();
+            return Hand;
         }
 
         /// <summary>
