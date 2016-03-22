@@ -28,7 +28,7 @@ namespace Website
             SqlDataSource1.SelectCommand =
                 string.Format("SELECT Games.PlayedOn, Games.Winnings, Games.Blackjacks, Games.WonHands, Games.LostHands " +
                 "FROM Games INNER JOIN Players ON Games.PlayerId = Players.Id AND Players.Username = '{0}'", player.Username);
-            /*
+
             SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ToString());
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = string.Format("SELECT        ROW_NUMBER() OVER (ORDER BY Bank) Rank " +
@@ -36,16 +36,11 @@ namespace Website
                                             "WHERE Username = '{0}'", player.Username);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = sqlCon;
-
-            SqlDataReader reader;
             sqlCon.Open();
-
-            reader = cmd.ExecuteReader();
-            // Data is accessible through the DataReader object here.
-            rankLbl.Text = reader.GetValue(0).ToString();
-
+            var reader = cmd.ExecuteReader();
+            if (reader.Read())
+                rankLbl.Text = "#" + reader.GetValue(0)?.ToString();
             sqlCon.Close();
-            */
             SqlDataSource1.DataBind();
             GridView1.DataBind();
         }

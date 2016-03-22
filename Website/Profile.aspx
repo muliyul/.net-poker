@@ -7,9 +7,9 @@
         <h2 class="text-center">Welcome <%: player?.Username %></h2>
     </div>
 
-    <h2>Your rank:
+    <h3>Your rank:
         <asp:Label runat="server" ID="rankLbl"></asp:Label>
-    </h2>
+    </h3>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>"></asp:SqlDataSource>
 
     <h2>Game History</h2>
