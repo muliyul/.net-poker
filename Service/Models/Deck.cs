@@ -9,22 +9,49 @@ namespace Service.Models
     [DataContract]
     public class Deck : Stack<Card>
     {
-        static readonly IList<Card> CARDS = new List<Card>();
+        static readonly IList<Card> _cards = new List<Card>();
+        private static Random rng = new Random();
 
         static Deck()
         {
             foreach (Suit s in Enum.GetValues(typeof(Suit)))
                 foreach (Face f in Enum.GetValues(typeof(Face)))
-                    CARDS.Add(new Card { Suit = s, Face = f });
+                    _cards.Add(new Card { Suit = s, Face = f });
         }
 
-        public Deck() : base(CARDS.OrderBy(a => Guid.NewGuid())) { }
+        public Deck()
+        {
+            Shuffle();
+        }
+
 
         public void Shuffle()
         {
             Clear();
-            foreach (Card c in CARDS.OrderBy(a => Guid.NewGuid()))
+
+            int n = _cards.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                var value = _cards[k];
+                _cards[k] = _cards[n];
+                _cards[n] = value;
+            }
+
+            foreach (Card c in _cards)
                 Push(c);
+        }
+
+        public Card Draw()
+        {
+            if (_cards.Count > 0)
+            {
+                Card card = _cards[0];
+                _cards.RemoveAt(0);
+                return card;
+            }
+            return null;
         }
     }
 }

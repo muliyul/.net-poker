@@ -4,49 +4,52 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Blackjack.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Games">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PlayerId" Type="int" Nullable="false" />
-          <Property Name="Winnings" Type="float" Nullable="false" />
-          <Property Name="Blackjacks" Type="int" />
-          <Property Name="PlayedOn" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Players">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Bank" Type="float" Nullable="false" />
-          <Property Name="MemberSince" Type="datetime" Nullable="false" />
-          <Property Name="Guid" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_PlayerGame">
-          <End Role="Players" Type="Self.Players" Multiplicity="1" />
-          <End Role="Games" Type="Self.Games" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Players">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Games">
-              <PropertyRef Name="PlayerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="BlackjackStoreContainer">
-          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_PlayerGame" Association="Self.FK_PlayerGame">
-            <End Role="Players" EntitySet="Players" />
-            <End Role="Games" EntitySet="Games" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="Blackjack.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BlackjackStoreContainer">
+    <EntitySet Name="Games" EntityType="Blackjack.Store.Games" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Players" EntityType="Blackjack.Store.Players" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_PlayerGame" Association="Blackjack.Store.FK_PlayerGame">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlayerId" Type="int" Nullable="false" />
+    <Property Name="Winnings" Type="decimal" Nullable="false" DefaultValue="0" />
+    <Property Name="Blackjacks" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="PlayedOn" Type="datetime" Nullable="false" />
+    <Property Name="GameId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WonHands" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="LostHands" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="TotalHands" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bank" Type="decimal" Nullable="false" />
+    <Property Name="MemberSince" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PlayerGame">
+    <End Role="Players" Type="Blackjack.Store.Players" Multiplicity="1" />
+    <End Role="Games" Type="Blackjack.Store.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Blackjack" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -57,9 +60,13 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PlayerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Player" Relationship="Self.FK_PlayerGame" FromRole="Games" ToRole="Players" />
-          <Property Name="Winnings" Type="Double" Nullable="false" ConcurrencyMode="None" />
-          <Property Name="Blackjacks" Type="Int32" Nullable="true" />
+          <Property Name="Winnings" Type="Decimal" Nullable="false" ConcurrencyMode="None" DefaultValue="0" />
+          <Property Name="Blackjacks" Type="Int32" Nullable="false" DefaultValue="0" />
           <Property Name="PlayedOn" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="None" Precision="3" />
+          <Property Name="GameId" Type="Guid" Nullable="false" />
+          <Property Name="WonHands" Type="Int32" Nullable="false" DefaultValue="0" />
+          <Property Name="LostHands" Type="Int32" Nullable="false" DefaultValue="0" />
+          <Property Name="TotalHands" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -68,10 +75,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Bank" Type="Double" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Bank" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="MemberSince" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="Games" Relationship="Self.FK_PlayerGame" FromRole="Players" ToRole="Games" />
-          <Property Name="Guid" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <Association Name="FK_PlayerGame">
           <End Role="Players" Type="Self.Player" Multiplicity="1" />
@@ -107,6 +113,10 @@
           <ScalarProperty Name="Winnings" ColumnName="Winnings" />
           <ScalarProperty Name="Blackjacks" ColumnName="Blackjacks" />
           <ScalarProperty Name="PlayedOn" ColumnName="PlayedOn" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="WonHands" ColumnName="WonHands" />
+          <ScalarProperty Name="LostHands" ColumnName="LostHands" />
+          <ScalarProperty Name="TotalHands" ColumnName="TotalHands" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -118,7 +128,6 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Bank" ColumnName="Bank" />
           <ScalarProperty Name="MemberSince" ColumnName="MemberSince" />
-          <ScalarProperty Name="Guid" ColumnName="Guid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

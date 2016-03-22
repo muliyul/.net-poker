@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Blackjack.GameReference;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Threading;
-using Blackjack.Service;
 
 namespace Blackjack
 {
 
-    public partial class StartForm : Service.IGameServiceCallback
+    public partial class StartForm : IGameCallback
     {
-        public Player Player
+        public PlayerData Player
         {
             get
             {
@@ -33,8 +33,14 @@ namespace Blackjack
                 _player = value;
             }
         }
-        private Player _player;
-        private List<Service.Table> _serverTableList;
+
+        public GameClient Server { get; internal set; }
+
+        private PlayerData _player;
+        private GameReference.Table _currentTable;
+        private List<GameReference.Table> _serverTableList;
+
+        private GameWindow gameWindow;
 
         public StartForm()
         {
@@ -45,50 +51,34 @@ namespace Blackjack
         private void StartForm_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateTableList();
+            loggedInAsLbl.Content = _player.Username;
         }
 
-        public StartForm(Player player)
+        private async void PopulateTableList(bool updateFromServer = true)
         {
-            _player = player;
-            InitializeComponent();
-            PopulateTableList();
-        }
+            if (updateFromServer)
+                _serverTableList = await Server.ListTablesAsync();
 
-        private void PopulateTableList()
-        {
-            Dispatcher.Invoke(async () =>
+
+            tablesList.Items.Clear();
+            int i = 0;
+            foreach (var tb in _serverTableList)
             {
-                var serverTableList = await LoginWindow.GameServer.ListTablesAsync();
-                tablesList.Items.Clear();
-                int i = 0;
-                foreach (var tb in serverTableList)
+                var numOfPlayers = tb.Players == null ? 0 : tb.Players.Count;
+                var isOpen = tb.InGame ? " Closed " : "Waiting for players";
+                var labelString = "Table #" + i++ + " | " + numOfPlayers + " / 6 | " + isOpen;
+                var lb = new Label()
                 {
+                    Content = labelString
+                };
+                var li = new ListBoxItem();
+                li.Content = lb;
 
-                    var numOfPlayers = tb.Players == null ? 0 : tb.Players.Length;
-                    var labelString = "Table #" + i++ + " | " + numOfPlayers + " / 6 | ";
-                    var lb = new Label()
-                    {
-                        Content = labelString
-                    };
-                    var li = new ListBoxItem();
-                    li.Content = lb;
+                tablesList.Items.Add(li);
+            }
 
-                    tablesList.Items.Add(li);
-                }
 
-                tablesList.UpdateLayout();
-            });
         }
-
-
-
-        //private void NewGame(object sender, RoutedEventArgs e)
-        //{
-        //    this.Hide();
-        //    GameWindow gameWindow = new GameWindow(player);
-        //    gameWindow.ShowDialog();
-        //    this.Show();
-        //}
 
         private void Options(object sender, RoutedEventArgs e)
         {
@@ -100,64 +90,111 @@ namespace Blackjack
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //TODO
+            //Server.Logout();
+            Close();
         }
 
-        private void joinTableButton_Click(object sender, RoutedEventArgs e)
+        private async void joinTableButton_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             var i = tablesList.SelectedIndex;
 
-            GameWindow gameWindow = new GameWindow(_player, _serverTableList[i] as Service.Table);
-            gameWindow.ShowDialog();
-            this.Show();
+            if (i < 0)
+            {
+                MessageBox.Show("Select a room first");
+                this.Show();
+            }
+            else
+            {
+                _currentTable = await Server.JoinTableAsync(i);
+
+                if (_currentTable == null)
+                {
+                    MessageBox.Show("Table in game or closed");
+                    this.Show();
+                }
+                else
+                {
+                    gameWindow = new GameWindow(_player, _currentTable, Server);
+                    gameWindow.ShowDialog();
+                    this.Show();
+                }
+            }
         }
 
         private void createTableButton_Click(object sender, RoutedEventArgs e)
         {
-
-            LoginWindow.GameServer.CreateTableAsync();
-
+            Server.CreateTable();
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }
         public void OnBet(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            // update table bets
+            gameWindow?.OnBet(sender, e);
         }
 
         public void OnDeal(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnDeal(sender, e);
+           
         }
 
-        public void OnFold(object sender, GameArgs e)
+        public void OnRoundResult(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnRoundResult(sender, e);
         }
 
         public void OnHit(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnHit(sender, e);
         }
 
         public void OnJoin(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            // update table ui
+            gameWindow?.OnJoin(sender, e);
+
         }
 
         public void OnLeave(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnLeave(sender, e);
         }
 
-        public void OnNewTableCreated(object sender, GameArgs e)
+        public void OnTableListUpdate(object sender, List<GameReference.Table> tableList)
         {
-            PopulateTableList();
+            _serverTableList = tableList;
+            PopulateTableList(false);
         }
 
-        public void OnNextTurn(object sender, GameArgs e)
+        public void OnMyTurn(object sender, GameArgs e)
         {
-            throw new NotImplementedException();
+            gameWindow?.OnMyTurn(sender, e);
+        }
+
+        public void OnStand(object sender, GameArgs e)
+        {
+            gameWindow?.OnStand(sender, e);
+        }
+
+        public void OnDealerPlay(object sender, GameArgs e)
+        {
+            gameWindow?.OnDealerPlay(sender, e);
+        }
+
+        public void OnResetTable(object sender, GameArgs e)
+        {
+            gameWindow?.OnResetTable(sender, e);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Blackjack.Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
@@ -23,23 +23,26 @@ namespace Blackjack
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public static GameServiceClient GameServer;
+        public static GameReference.GameClient Server;
         public static InstanceContext InstContext;
         private StartForm startForm;
-
         public LoginWindow()
         {
             InitializeComponent();
             startForm = new StartForm();
             InstContext = new InstanceContext(startForm);
-            GameServer = new GameServiceClient(InstContext);
+            var bindings = ConfigurationManager.GetSection("system.serviceModel/bindings") as
+                        System.ServiceModel.Configuration.BindingsSection;
+            Server = new GameReference.GameClient(InstContext, bindings.NetTcpBinding.Bindings[0].Name);
+            startForm.Server = Server;
         }
 
         private async void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-
-            var player = await GameServer.LoginAsync(TbUserName.Text, PbPassword.Password);
-            startForm.Player = player as Player;
+            Spinner.Visibility = Visibility.Visible;
+            var player = await Server.LoginAsync(TbUserName.Text, PbPassword.Password);
+            Spinner.Visibility = Visibility.Hidden;
+            startForm.Player = player;
             if (player != null)
             {
                 startForm.Visibility = Visibility.Visible;
@@ -49,7 +52,7 @@ namespace Blackjack
             {
                 LbWrongPass.Visibility = Visibility.Visible;
             }
-
+            
         }
 
 

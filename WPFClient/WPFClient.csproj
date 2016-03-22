@@ -26,9 +26,11 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://localhost:50612/Install/</InstallUrl>
+    <TargetCulture>en</TargetCulture>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -64,17 +66,19 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\TemplateIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -103,10 +107,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Service References\Service\Reference.cs">
+    <Compile Include="Service References\GameReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Spinner.xaml.cs">
+      <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
     <Page Include="BlackJackWindow.xaml">
       <SubType>Designer</SubType>
@@ -132,6 +139,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Spinner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,23 +172,25 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\Service\GameService.wsdl" />
-    <None Include="Service References\Service\GameService.xsd">
+    <None Include="Service References\GameReference\Service.Models1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\GameService1.xsd">
+    <None Include="Service References\GameReference\service.wsdl" />
+    <None Include="Service References\GameReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\GameService2.xsd">
+    <None Include="Service References\GameReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\GameService3.xsd">
+    <None Include="Service References\GameReference\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\GameService4.xsd">
+    <None Include="Service References\GameReference\System.Collections.Generic1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="WPFClient_TemporaryKey.pfx" />
+    <None Include="Service References\GameReference\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cards\cardSkin.PNG" />
@@ -335,22 +348,25 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\Service\" />
+    <WCFMetadataStorage Include="Service References\GameReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Service\GameService.disco" />
+    <None Include="Service References\GameReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Service\configuration91.svcinfo" />
+    <None Include="Service References\GameReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Service\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\Service\Reference.svcmap">
+    <None Include="Service References\GameReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Blackjack11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

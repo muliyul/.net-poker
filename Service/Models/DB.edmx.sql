@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/11/2016 18:54:58
--- Generated from EDMX file: D:\Kosta\git\.net-final-project\Service\Models\DB.edmx
+-- Date Created: 03/22/2016 20:20:26
+-- Generated from EDMX file: C:\projects\Blackjack\Service\Models\DB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -40,9 +40,13 @@ GO
 CREATE TABLE [dbo].[Games] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PlayerId] int  NOT NULL,
-    [Winnings] float  NOT NULL,
-    [Blackjacks] int  NULL,
-    [PlayedOn] datetime  NOT NULL
+    [Winnings] decimal(18,0)  NOT NULL,
+    [Blackjacks] int  NOT NULL,
+    [PlayedOn] datetime  NOT NULL,
+    [GameId] uniqueidentifier  NOT NULL,
+    [WonHands] int  NOT NULL,
+    [LostHands] int  NOT NULL,
+    [TotalHands] int  NOT NULL
 );
 GO
 
@@ -51,9 +55,8 @@ CREATE TABLE [dbo].[Players] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Username] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [Bank] float  NOT NULL,
-    [MemberSince] datetime  NOT NULL,
-    [Guid] nvarchar(max)  NOT NULL
+    [Bank] decimal(18,0)  NOT NULL,
+    [MemberSince] datetime  NOT NULL
 );
 GO
 

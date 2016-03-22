@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <h2 class="text-center">Registration</h2>
 
-    <div role="form" class="col-xs-6 col-xs-offset-3">
+    <div role="form" class="col-xs-8 col-xs-offset-2">
 
         <div class="form-group">
             <asp:TextBox runat="server" ID="usernameTF" MaxLength="20" CssClass="form-control input-md glowing border" placeholder="username"></asp:TextBox>
