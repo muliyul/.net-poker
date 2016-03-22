@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Service
+namespace Service.Models
 {
     using System;
     using System.Data.Entity;
