@@ -45,8 +45,9 @@ namespace Website
             rankLbl.Text = reader.GetValue(0).ToString();
 
             sqlCon.Close();
+            */
             SqlDataSource1.DataBind();
-            GridView1.DataBind();*/
+            GridView1.DataBind();
         }
 
         protected void Logout(object sender, EventArgs e)
