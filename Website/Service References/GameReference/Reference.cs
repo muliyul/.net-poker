@@ -35,6 +35,9 @@ namespace Website.GameReference {
         private Website.GameReference.BlackJackHand HandField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int LostHandsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime MemberSinceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -42,6 +45,9 @@ namespace Website.GameReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int WonHandsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -106,6 +112,19 @@ namespace Website.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int LostHands {
+            get {
+                return this.LostHandsField;
+            }
+            set {
+                if ((this.LostHandsField.Equals(value) != true)) {
+                    this.LostHandsField = value;
+                    this.RaisePropertyChanged("LostHands");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime MemberSince {
             get {
                 return this.MemberSinceField;
@@ -140,6 +159,19 @@ namespace Website.GameReference {
                 if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
                     this.UsernameField = value;
                     this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int WonHands {
+            get {
+                return this.WonHandsField;
+            }
+            set {
+                if ((this.WonHandsField.Equals(value) != true)) {
+                    this.WonHandsField = value;
+                    this.RaisePropertyChanged("WonHands");
                 }
             }
         }

@@ -1176,7 +1176,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:51845/Game.svc/+</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MULI-NOTEBOOK\Muli</Upn>
+          <Upn>MULI-PC\muliy</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1185,7 +1185,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:2305/+</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MULI-NOTEBOOK\Muli</Upn>
+          <Upn>MULI-PC\muliy</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
