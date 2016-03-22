@@ -564,7 +564,10 @@ namespace Blackjack
         public void OnRoundResult(object sender, GameArgs e)
         {
             var playerIndex = _table.Players.FindIndex(p => p.Username.Equals(_me.Username));
-            _me = e.Table.Players[playerIndex];
+            _me.Bank = e.Table.Players[playerIndex].Bank;
+            _me.Bet = e.Table.Players[playerIndex].Bet;
+            _me.WonHands = e.Table.Players[playerIndex].WonHands;
+            _me.Hand = e.Table.Players[playerIndex].Hand;
 
             _playerWinStatusLabels[playerIndex].Content = e.Message;
             wins_label.Content = e.Player.WonHands;
@@ -580,8 +583,14 @@ namespace Blackjack
 
         public void OnResetTable(object sender, GameArgs e)
         {
-            _me = e.Table.Players.Find(p => p.Username.Equals(_me.Username));
-            ShowBankValue();
+            var xUser = e.Table.Players.Find(p => p.Username.Equals(_me.Username));
+
+            _me.Bank        = xUser.Bank;
+            _me.Bet         = xUser.Bet;
+            _me.WonHands    = xUser.WonHands;
+            _me.Hand        = xUser.Hand;
+
+            ShowBankValue();  
             ClearTableCards();
             ClearBet(null, null);
             SetUpNewGame();
