@@ -18,6 +18,7 @@ namespace BlackJack
         public LoginForm()
         {
             InitializeComponent();
+            tBpassword.KeyPress += TBpassword_KeyPress;
             this.Text = WINDOW_TITLE;
 
             var bindings = ConfigurationManager.GetSection("system.serviceModel/bindings") as
@@ -28,6 +29,12 @@ namespace BlackJack
             _server = new GameReference.GameClient(instContext, bindings.NetTcpBinding.Bindings[0].Name);
             _startForm.Server = _server;
 
+        }
+
+        private void TBpassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar.Equals(Keys.Enter))
+                submitButton_Click(sender, e);
         }
 
         private async void submitButton_Click(object sender, EventArgs e)

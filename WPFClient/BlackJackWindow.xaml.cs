@@ -35,15 +35,16 @@ namespace Blackjack
 
         #endregion
 
-        public GameWindow(ref PlayerData player, GameReference.Table table, GameReference.GameClient server)
+        public GameWindow(PlayerData player, GameReference.Table table, GameReference.GameClient server)
         {
+            InitializeComponent();
             _table = table;
             _me = player;
             Server = server;
 
             Title += " :: Logged in as " + player.Username;
 
-            InitializeComponent();
+
 
             _playerNameLabels.Add(Player1Lb);
             _playerNameLabels.Add(Player2Lb);
@@ -214,7 +215,7 @@ namespace Blackjack
 
         public void UpdatePlayersBet()
         {
-          
+
             foreach (var playerIdx in _table.Players.FindAll(p => !p.Username.Equals(_me.Username)).Select(p => _table.Players.IndexOf(p)))
             {
                 _playerBetAmountLabels[playerIdx].Content = _table.Players[playerIdx].Bet + "$";
@@ -408,7 +409,7 @@ namespace Blackjack
                     Server.Deal();
 
                     DealBtn.IsEnabled = ClearBtn.IsEnabled = false;
-                  
+
                 }
             }
             catch (Exception NotEnoughMoneyException)
@@ -467,7 +468,7 @@ namespace Blackjack
 
         private void ClearBet(object sender, RoutedEventArgs e)
         {
-            
+
             _currentBet = 0;
             ShowBankValue();
         }
@@ -499,8 +500,16 @@ namespace Blackjack
             player.Hand.Cards.Add(e.Card);
             UpdateUIPlayerCards();
 
-            if (myAction)
+            if (myAction && !(e.Message?.Contains("Bust")).GetValueOrDefault())
+            {
                 HitBtn.IsEnabled = true;
+                StandBtn.IsEnabled = true;
+            }
+            else
+            {
+                HitBtn.IsEnabled =
+                StandBtn.IsEnabled = false;
+            }
 
 
             _playerWinStatusLabels[playerIndex].Content = e.Message;
@@ -556,29 +565,34 @@ namespace Blackjack
         {
             WinStatusDealer.Visibility = Visibility.Visible;
             _table.Dealer.Hand = e.Player.Hand;
-           
+
             WinStatus.Visibility = Visibility.Visible;
             UpdateUIPlayerCards();
         }
 
         public void OnRoundResult(object sender, GameArgs e)
         {
-            _table = e.Table;
-            var player = _table.Players.Single(p => p.Username.Equals(_me.Username));
+            var player = _table.Players.Single(p => p.Username.Equals(e.Player.Username));
             var playerIndex = _table.Players.IndexOf(player);
 
-            _me.Bank = e.Table.Players[playerIndex].Bank;
-            _me.Bet = e.Table.Players[playerIndex].Bet;
-            _me.WonHands = e.Table.Players[playerIndex].WonHands;
-            _me.Hand = e.Table.Players[playerIndex].Hand;
-            _playerWinStatusLabels[playerIndex].Content = e.Message;
+            if (e.Player.Username.Equals(_me.Username))
+            {
+                _me.Bank = e.Table.Players[playerIndex].Bank;
+                _me.Bet = e.Table.Players[playerIndex].Bet;
+                _me.WonHands = e.Table.Players[playerIndex].WonHands;
+                _me.Hand = e.Table.Players[playerIndex].Hand;
+                wins_label.Content = e.Player.WonHands;
+                loses_label.Content = e.Player.LostHands;
+                if (e.Message.Contains("Tie"))
+                    _ties++;
+                ties_label.Content = _ties;
+                WinStatus.Content = e.Message;
+            }
 
-            wins_label.Content = e.Player.WonHands;
-            loses_label.Content = e.Player.LostHands;
-            if (e.Message.Contains("Tie"))
-                _ties++;
-            ties_label.Content = _ties;
-            WinStatus.Content = e.Message;
+            _playerWinStatusLabels[playerIndex].Content = e.Message;
+            _playerWinStatusLabels[playerIndex].Visibility = Visibility.Visible;
+
+
 
             HitBtn.IsEnabled = false;
             StandBtn.IsEnabled = false;
@@ -588,12 +602,12 @@ namespace Blackjack
         {
             var xUser = e.Table.Players.Find(p => p.Username.Equals(_me.Username));
 
-            _me.Bank        = xUser.Bank;
-            _me.Bet         = xUser.Bet;
-            _me.WonHands    = xUser.WonHands;
-            _me.Hand        = xUser.Hand;
+            _me.Bank = xUser.Bank;
+            _me.Bet = xUser.Bet;
+            _me.WonHands = xUser.WonHands;
+            _me.Hand = xUser.Hand;
 
-            ShowBankValue();  
+            ShowBankValue();
             ClearTableCards();
             ClearBet(null, null);
             SetUpNewGame();

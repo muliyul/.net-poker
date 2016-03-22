@@ -239,6 +239,7 @@ namespace Service.Models
             player.Winnings = 0;
             player.LostHands = 0;
             player.WonHands = 0;
+            player.IsReady = false;
             LeaveHandler(null, new GameArgs() { Player = player, Table = this });
             RemoveEvents(cb);
             return player;
@@ -281,10 +282,9 @@ namespace Service.Models
             }
             else {
                 if (Players.Any(p => p.Hand.Value < 21))
-                {
                     DealerPlay();
-                }
-                EndGame();
+                else
+                    EndGame();
             }
         }
 
@@ -296,25 +296,52 @@ namespace Service.Models
             {
                 Dealer.Hand.Cards.Add(_deck.Draw());
                 DealerPlayHandler(null, new GameArgs() { Player = Dealer });
-            }*/
+            }
+
             int handToBeat = Players.Max(p => p.Hand.Value);
             int potentialWins = Players.Count(p => p.Hand.Value > 21 || p.Hand.Value < Dealer.Hand.Value);
             while (Dealer.Hand.Value < handToBeat && potentialWins <= Players.Count / 2 && Dealer.Hand.Value < 21)
             {
                 Dealer.Hand.Cards.Add(_deck.Draw());
                 DealerPlayHandler(null, new GameArgs() { Player = Dealer });
-            }
+                potentialWins = Players.Count(p => p.Hand.Value > 21 || p.Hand.Value < Dealer.Hand.Value);
+            }*/
+            
+            //Smart dealer
+            int handToBeat = Players.Max(p => p.Hand.Value);
+            int potentialWins = Players.Count(p => p.Hand.Value > 21 || p.Hand.Value <= Dealer.Hand.Value);
+            Timer t = new Timer(500);
+            t.AutoReset = true;
+            t.Elapsed += (sender, args) =>
+            {
+                if (Dealer.Hand.Value > handToBeat || potentialWins >= Math.Ceiling(Players.Count / 2f) || Dealer.Hand.Value >= 21)
+                {
+                    t.Stop();
+                    EndGame();
+                    return;
+                }
+                Dealer.Hand.Cards.Add(_deck.Draw());
+                DealerPlayHandler(null, new GameArgs() { Player = Dealer });
+                potentialWins = Players.Count(p => p.Hand.Value > 21 || p.Hand.Value <= Dealer.Hand.Value);
+            };
+            t.Start();
         }
 
         internal async void EndGame()
         {
             using (var db = new DBContainer())
             {
-                foreach(var p in Players.AsParallel())
+                foreach (var p in Players.AsParallel())
                     SendResult(p, db);
 
                 //Batch save DAL
                 await db.SaveChangesAsync();
+            }
+
+            foreach (var p in Players)
+            {
+                p.IsReady = false;
+                p.Bet = 0;
             }
 
             _inGame = false;
@@ -346,6 +373,7 @@ namespace Service.Models
                     }
                     else if (p.Hand.Value < Dealer.Hand.Value)   // player lose
                     {
+
                         args.Message = "Lose!";
                         p.LostHands++;
                         p.Bank -= p.Bet;
@@ -353,7 +381,10 @@ namespace Service.Models
                     }
                     else if (p.Hand.Value > Dealer.Hand.Value)   // player win
                     {
-                        args.Message = "Win!";
+                        if (p.Hand.Value == 21)
+                            args.Message = "Blackjack!";
+                        else
+                            args.Message = "Win!";
                         p.WonHands++;
                         p.Bank += p.Bet;
 
@@ -372,16 +403,17 @@ namespace Service.Models
                 }
                 else
                 {
-                    args.Message = "Win!";
                     p.WonHands++;
                     if (p.Hand.Value == 21)
                     { // player blackjack
+                        args.Message = "Blackjack!";
                         p.Blackjacks++;
                         p.Bank += 2.4m * p.Bet;
                         p.Winnings += 1.4m * p.Bet;
                     }
                     else      // normal win
                     {
+                        args.Message = "Win!";
                         p.Bank += p.Bet;
                         p.Winnings += p.Bet;
                     }
@@ -389,7 +421,7 @@ namespace Service.Models
             }
             else
             {
-                args.Message = "Lose!";
+                args.Message = "Bust!";
                 p.LostHands++;
                 p.Bank -= p.Bet;
                 p.Winnings -= p.Bet;

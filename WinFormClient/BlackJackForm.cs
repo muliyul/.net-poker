@@ -40,13 +40,12 @@ namespace BlackJack
         /// </summary>
         public BlackJackForm(PlayerData player, Table _currentTable, GameClient _server)
         {
+            InitializeComponent();
             this._me = player;
             this._table = _currentTable;
             this._server = _server;
             Text += " :: Logged in as " + player.Username;
-
             FormClosed += BlackJackForm_FormClosed;
-            InitializeComponent();
 
             _playerNameLabels.Add(playerNameLabel1);
             _playerNameLabels.Add(playerNameLabel2);
@@ -82,6 +81,10 @@ namespace BlackJack
         private void BlackJackForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             _server.Leave();
+            _me.Bet = 0;
+            _me.WonHands = 0;
+            _me.LostHands = 0;
+
         }
 
         private void ClearTableCards()
@@ -583,9 +586,11 @@ namespace BlackJack
             if (myAction)
                 hitButton.Enabled = true;
 
-
-            _playerWinStatusLabels[playerIndex].Text = e.Message;
-            _playerWinStatusLabels[playerIndex].Visible = e.Message != null ? true : false;
+            if (e.Message != null)
+            {
+                _playerWinStatusLabels[playerIndex].Text = e.Message;
+                _playerWinStatusLabels[playerIndex].Visible = true;
+            }
 
         }
 
@@ -653,34 +658,34 @@ namespace BlackJack
             _me.WonHands = xUser.WonHands;
             _me.Hand = xUser.Hand;
 
-
-            
             ShowBankValue();
             ClearTableCards();
             ClearBetBtn_Click(null, null);
             SetUpNewGame();
         }
 
-        //Each player gets different result
         public void OnRoundResult(object sender, GameArgs e)
         {
-            _table = e.Table;
-            var player = _table.Players.Single(p=>p.Username.Equals(_me.Username));
+            var player = _table.Players.Single(p => p.Username.Equals(e.Player.Username));
             var playerIndex = _table.Players.IndexOf(player);
 
-            _me.Bank = e.Table.Players[playerIndex].Bank;
-            _me.Bet = e.Table.Players[playerIndex].Bet;
-            _me.WonHands = e.Table.Players[playerIndex].WonHands;
-            _me.Hand = e.Table.Players[playerIndex].Hand;
+            if (e.Player.Username.Equals(_me.Username))
+            {
+                _me.Bank = e.Table.Players[playerIndex].Bank;
+                _me.Bet = e.Table.Players[playerIndex].Bet;
+                _me.WonHands = e.Table.Players[playerIndex].WonHands;
+                _me.Hand = e.Table.Players[playerIndex].Hand;
+                winTextBox.Text = e.Player.WonHands.ToString();
+                lossTextBox.Text = e.Player.LostHands.ToString();
+                if (e.Message.Contains("Tie"))
+                    _ties++;
+                tiesTextBox.Text = _ties.ToString();
+                WinStatus.Text = e.Message;
+            }
 
             _playerWinStatusLabels[playerIndex].Text = e.Message;
-            winTextBox.Text = e.Player.WonHands.ToString();
-            lossTextBox.Text = e.Player.LostHands.ToString();
-            if (e.Message.Contains("Tie"))
-                _ties++;
-            tiesTextBox.Text = _ties.ToString();
-            WinStatus.Text = e.Message;
-
+            _playerWinStatusLabels[playerIndex].Visible = true;
+            
             hitButton.Enabled = false;
             standButton.Enabled = false;
         }

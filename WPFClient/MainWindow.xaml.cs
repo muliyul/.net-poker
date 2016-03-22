@@ -116,7 +116,7 @@ namespace Blackjack
                 }
                 else
                 {
-                    gameWindow = new GameWindow(ref _player, _currentTable, Server);
+                    gameWindow = new GameWindow(_player, _currentTable, Server);
                     gameWindow.ShowDialog();
                     this.Show();
                 }

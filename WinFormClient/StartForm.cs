@@ -61,6 +61,7 @@ namespace BlackJack
                     _blackJackForm = new BlackJackForm(Player, _currentTable, Server);
                     _blackJackForm.ShowDialog();
                     this.Show();
+                    _blackJackForm.Dispose();
                 }
             }
         }
